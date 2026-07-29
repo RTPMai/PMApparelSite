@@ -698,6 +698,13 @@ def all_services():
 <p>Embroidery stitches your logo directly into the fabric with thread. It reads as quality from across the room, which is why it's the standard for company polos, quarter-zips, jackets, caps, and bags. It doesn't crack, fade, or peel. It just lasts.</p>
 <h2>one piece minimum.</h2>
 <p>Unlike screen printing, embroidery has no real minimum. Order one jacket or one hundred. There's a one-time $35 setup fee to digitize your logo, and after that it's on file with us forever.</p>
+<h2>the techniques.</h2>
+<div class="steps">
+  <div class="step"><h3>flat embroidery.</h3><p>The classic: a tight, slightly raised weave stitched into the garment. We digitize every design in-house so we control where each stitch hits.</p></div>
+  <div class="step"><h3>3d puff embroidery.</h3><p>A layer of foam under the thread pops the design off the garment for a tactile, dramatic look. Especially popular on caps and team gear. Probably helps you win more games.</p></div>
+  <div class="step"><h3>applique.</h3><p>Fabric stitched onto the garment with an embroidered border, like you see on baseball jerseys and retro sweatshirts. Try glitter material for a dance or cheer stunner, go patch-style on hats, or leave edges raw for a frayed look.</p></div>
+  <div class="step"><h3>mixed media.</h3><p>Screen printing plus embroidery in one multi-layered design, or embroidery with rhinestones for a platinum-level look. Precision work, which is convenient, because so are we.</p></div>
+</div>
 <h2>bring your own garments.</h2>
 <p>Already have jackets, hats, or sweaters you love? Bring them in. We decorate customer-supplied garments all the time; we just ask you to sign a simple waiver first, and our team will double-check that your items are a good fit for the machine. Read the full guide: <a href="/customer-supplied-garments/">customer-supplied garments</a>.</p>
 <h2>the details.</h2>
@@ -706,6 +713,7 @@ def all_services():
             ("Is there a minimum order for embroidery?", "No. Embroidery is a one-piece minimum, so you can order a single jacket or hat."),
             ("What does embroidery setup cost?", "There's a one-time $35 setup fee to digitize your logo. Once it's digitized, it stays on file for all future orders."),
             ("Can you embroider items I already own?", "Yes. We welcome customer-supplied garments. We ask you to fill out a short waiver first, and our staff will happily double-check your items before we run them."),
+            ("What is 3D or puff embroidery?", "3D (puff) embroidery places a layer of foam under the thread so the design pops off the garment with a raised, tactile look. It's especially popular on caps and team apparel. We also offer applique (stitched-on fabric with an embroidered border) and mixed-media designs that combine embroidery with screen printing or rhinestones."),
             ("Can you embroider hats?", "Yes, though hats are the trickiest canvas. Full-fabric caps can often take side embroidery, trucker caps with plastic mesh cannot, and small panels may require simplifying fine details. Bring your hat in and we'll tell you exactly what's possible."),
         ], img="/assets/photos/emb-worker-hat-machine-close.jpg", img_alt="Hooping a hat on the embroidery machine at P&M Apparel")
 
@@ -754,10 +762,16 @@ def all_services():
 <p>Live printing is exactly what it sounds like: we bring the press to your event and print shirts on-site while your guests watch. Instead of taking home a giveaway they'll forget, they leave with a custom shirt made just for them. It's an experience people remember long after the event is over.</p>
 <h2>events it's built for.</h2>
 <p>Grand openings, company celebrations, trade shows, conferences, community festivals, school events, sporting events, fundraisers, product launches, employee appreciation days, and customer appreciation events. If you want to draw a crowd, start conversations, and hand people something they'll actually wear, this is one of the most memorable ways to do it.</p>
+<h2>two ways to price it.</h2>
+<div class="steps">
+  <div class="step"><h3>you pay.</h3><p>Guests get an unforgettable keepsake that makes them think of you every time they wear it. We keep track of everything printed and bill you the total. Perfect for giveaways, grand openings, and employee or customer appreciation.</p></div>
+  <div class="step"><h3>they pay.</h3><p>We act as your in-house merch vendor with none of the inventory overhead. Guests buy their own shirts, we take out our costs, and we cut you a check for the profits. A unique fundraiser with genuinely low overhead.</p></div>
+</div>
 <h2>we handle everything.</h2>
 <p>Equipment, setup, production, and cleanup are all on us. You enjoy the event while your guests watch their shirts come to life.</p>""",
         faqs=[
             ("How does live printing work at an event?", "We bring a screen printing press, blank garments, and our crew to your venue, set up a printing station, and print shirts on the spot as guests watch and pick theirs up warm off the press."),
+            ("How does live printing pricing work?", "One of two ways. You pay: we track everything printed at your event and bill you the total, ideal for giveaways. Or they pay: guests buy their own shirts, we act as your merch vendor, deduct our costs, and cut you a check for the profits, which makes a great low-overhead fundraiser."),
             ("What do I need to provide for live printing?", "Just the space and the crowd. We handle equipment, setup, production, and cleanup, and we'll work with you ahead of time on designs and garment choices."),
         ])
 
@@ -788,12 +802,20 @@ def all_services():
         "Your team punched their ticket to state. Now everyone needs the shirt, and they need it fast. That's our specialty.",
         f"""
 <h2>you made it to state. now look like it.</h2>
-<p>When your team qualifies for a state tournament, the window between "we're in!" and game day is tiny. State shirts are our rush specialty: our in-house art department turns your school, your sport, and your bracket run into gear that fans, players, and parents actually want to wear, on a timeline that works.</p>
+<p>When your team qualifies for a state tournament, the window between "we're in!" and game day is tiny. State shirts are our rush specialty: quick turnarounds, online store capabilities, and <b>no rush fees</b>. Whether it's a state tournament or the Drake Relays, it's never too early to start preparing, and it has never been easier.</p>
 <h2>how it works.</h2>
-<p>Call us the moment you qualify. We'll have art moving the same day, and because we print in our own shop in Polk City, we control the schedule. Pair it with a quick <a href="/services/e-commerce/">online store</a> so parents and fans order their own sizes and pay online, with nothing for the booster club to collect or sort.</p>
+<div class="steps">
+  <div class="step"><h3>reach out.</h3><p>Use the <a href="{QUOTE_URL}" style="color:inherit">quote form</a> the moment you qualify (or before). It collects everything at once so you can turn your focus back to preparation, not the shirts.</p></div>
+  <div class="step"><h3>we handle the art.</h3><p>With 30 minutes of free art time, the possibilities are endless. Our in-house art department turns your school, sport, and bracket run into a design; your approval is all we need.</p></div>
+  <div class="step"><h3>store goes live when you win.</h3><p>If your sport's timeline allows, we build the <a href="/services/e-commerce/" style="color:inherit">online store</a> ahead of time and open it the day of your qualifying competition, ready for your team, families, fans, and school community. Store windows close quickly, so having it ready helps everyone.</p></div>
+  <div class="step"><h3>we produce and pack.</h3><p>Once the store closes we get to work, producing everything and packaging it individually by order to make distribution easy. Pick up individually at our shop, send a representative for the whole batch, or ask about delivery options.</p></div>
+  <div class="step"><h3>show up proud.</h3><p>Your team, families, fans, and school community rep your colors as you take the court, pitch, field, track, pool, or mat.</p></div>
+</div>
+<p>Some sports have tighter windows than others between qualifying and the state tournament (looking at you, soccer), but we have processes in place to get those done too.</p>
 <p>Every sport, every season, every level. Football, volleyball, wrestling, basketball, soccer, track, cheer, dance, esports. If they're headed to state, we can do that.</p>""",
         faqs=[
-            ("How fast can you turn state tournament shirts?", "This is our rush specialty. Call the moment you qualify and we'll have art moving the same day. If we have the garments in stock we can turn an order same day; if we need to order them, generally next day. Rush fees depend on the timeline."),
+            ("How fast can you turn state tournament shirts?", "This is our rush specialty, and state tournament orders carry no rush fees. Reach out the moment you qualify and we'll have art moving the same day; if we have the garments in stock we can turn an order same day, generally next day if we need to order them."),
+            ("Do you do Drake Relays shirts?", "Yes. The same quick-turnaround, no-rush-fee process covers the Drake Relays and other qualifying meets, with an online store ready to open the moment your athletes punch their ticket."),
             ("Can fans and parents order their own shirts?", "Yes. We can spin up a quick online store so fans and parents pick their own sizes and pay online, with nothing for the booster club to collect, sort, or front."),
             ("Do you design the shirt for us?", "Yes. Our in-house art department turns your school, sport, and bracket run into a custom design. The first 30 minutes of art time is free when your order includes production."),
         ])
@@ -845,6 +867,8 @@ def csg_page():
     write(path, layout(path, title, desc, body, [faq_schema(faqs), breadcrumbs([("Home", "/"), ("Customer-Supplied Garments", path)])]))
 
 # ---------------------------------------------------------------- OTHER PAGES
+TEAM = [('Megan Griffith', 'art director + owner'), ('Ryan Toney', 'grand poobah of many hats + owner'), ('Jacob Whitman', 'sales director'), ('Kim Taylor', 'production manager, embroidery'), ('Margo Niemeyer', 'production manager, screen printing'), ('Amanda Clark', 'finance manager'), ('Hannah Posey', 'account manager'), ('Alexis Davis', 'account manager'), ('Abby Penton', 'account manager'), ('Alex Hernandez', 'graphic designer'), ('Maggie Barbour', 'press operator'), ('Bailee Bishop', 'press operator'), ('Taylor Price', 'embroidery tech'), ('Nicole Printy', 'embroidery tech'), ('Tess Collins', 'shipping specialist'), ('Quinn Taylor', 'production assistant')]
+
 def about():
     path = "/about-us/"
     body = f"""
@@ -875,8 +899,8 @@ def about():
 <section>
   <div class="wrap">
     <h2>the crew.</h2>
-    <p style="max-width:60ch">Sixteen people who print it, stitch it, pack it, and answer the phone when you call. Faces and names coming soon.</p>
-    <!-- TEAM: when ready, add real cards here — name, role, photo with alt — then Person schema. -->
+    <p style="max-width:60ch;margin-bottom:26px">Sixteen people who print it, stitch it, pack it, and answer the phone when you call. In their own words:</p>
+    <div class="teamgrid"><div class="teamcard"><div class="avatar">MG</div><h3>megan griffith.</h3><p><b>art director + owner</b></p><p>All things art, and I can dip into most of the production, administrative, and financial things as necessary.</p></div><div class="teamcard"><div class="avatar">RT</div><h3>ryan toney.</h3><p><b>grand poobah of many hats + owner</b></p><p>Webstores, social media, production, sales, a little bit of everything. Plus show tunes, performed without request.</p></div><div class="teamcard"><div class="avatar">JW</div><h3>jacob whitman.</h3><p><b>sales director</b></p><p>People and process wrangler.</p></div><div class="teamcard"><div class="avatar">KT</div><h3>kim taylor.</h3><p><b>production manager, embroidery</b></p><p>The wizard at the embroidery machine and the fixer around here. The needle and thread is my home.</p></div><div class="teamcard"><div class="avatar">MN</div><h3>margo niemeyer.</h3><p><b>production manager, screen printing</b></p><p>If you order a single item from P&M, it touches my hands. I manage intake and keep production moving from start to finish.</p></div><div class="teamcard"><div class="avatar">AC</div><h3>amanda clark.</h3><p><b>finance manager</b></p><p>I help folks narrow down thousands of options to what best suits them, and come up with ideas they never knew were possible.</p></div><div class="teamcard"><div class="avatar">HP</div><h3>hannah posey.</h3><p><b>account manager</b></p><p>I work with schools and sports organizations on apparel and uniforms they can pride themselves on.</p></div><div class="teamcard"><div class="avatar">AD</div><h3>alexis davis.</h3><p><b>account manager</b></p><p>I help individuals and companies get apparel and swag they enjoy wearing.</p></div><div class="teamcard"><div class="avatar">AP</div><h3>abby penton.</h3><p><b>account manager</b></p><p>I work with dance studios, churches, and all types of personal orders.</p></div><div class="teamcard"><div class="avatar">AH</div><h3>alex hernandez.</h3><p><b>graphic designer</b></p><p>I design custom artwork and mockup proofs, plus video and social media design for P&M marketing.</p></div><div class="teamcard"><div class="avatar">MB</div><h3>maggie barbour.</h3><p><b>press operator</b></p><p>I reclaim screens, coat them, and burn films. I also help on the embroidery side when needed.</p></div><div class="teamcard"><div class="avatar">BB</div><h3>bailee bishop.</h3><p><b>press operator</b></p><p>Reclaiming, coating, and rinsing screens, plus pulling and boxing orders.</p></div><div class="teamcard"><div class="avatar">TP</div><h3>taylor price.</h3><p><b>embroidery tech</b></p><p>I hoop garments and put them on a machine to get a brand new design.</p></div><div class="teamcard"><div class="avatar">NP</div><h3>nicole printy.</h3><p><b>embroidery tech</b></p><p>I work with the embroidery team to get the best designs onto each piece.</p></div><div class="teamcard"><div class="avatar">TC</div><h3>tess collins.</h3><p><b>shipping specialist</b></p><p>In charge of checking in orders, compiling, and shipping them out.</p></div><div class="teamcard"><div class="avatar">QT</div><h3>quinn taylor.</h3><p><b>production assistant</b></p><p>I help make shirts.</p></div></div>
   </div>
 </section>
 <section class="imgband"><img src="/assets/photos/building-sign-close.jpg" alt="The P&M Apparel building and sign in Polk City" loading="lazy"></section>
@@ -894,7 +918,7 @@ def about():
         "@context": "https://schema.org", "@type": "AboutPage",
         "url": BASE + path, "about": {"@id": BASE + "/#business"},
     }
-    write(path, layout(path, title, desc, body, [schema, breadcrumbs([("Home", "/"), ("About Us", path)])]))
+    write(path, layout(path, title, desc, body, [{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": BASE + "/#business", "employee": [{"@type": "Person", "name": n, "jobTitle": r, "worksFor": {"@id": BASE + "/#business"}} for n, r in TEAM]}] + [schema, breadcrumbs([("Home", "/"), ("About Us", path)])]))
 
 def iowa_on_demand():
     path = "/iowa-on-demand/"
@@ -932,8 +956,9 @@ def scholarships():
 <section>
   <div class="wrap prose">
     <h2>shirts for scholarships.</h2>
-    <p>Every year, we award need-based scholarships to graduating seniors in the school districts we serve, helping them take the next step toward a two-year or four-year college, university, or trade program.</p>
-    <p>This isn't a one-time promotion. It's an ongoing commitment to investing in local students. Applicants submit an application, recipients are selected based on need and other program criteria, and scholarship funds are awarded after proof of enrollment.</p>
+    <p>The P&amp;M Apparel Shirts for Scholarships Fund is dedicated to helping youth in the <b>North Polk</b>, <b>Ankeny</b>, <b>Woodward-Granger</b>, and <b>Saydel</b> community school districts attend and succeed in the educational arena. Its vision: empowering Central Iowa youth with need-based educational resources.</p>
+    <p>Each year we award need-based scholarships to deserving graduating high school seniors pursuing a course of study at a two-year or four-year college, university, or trade program. Recipients are selected on need and program criteria, and funds are awarded after proof of enrollment.</p>
+    <p><b>For 2026:</b> the fund's award ceiling is <b>$2,000</b>, with an individual maximum award of <b>$1,000</b>. Applications are due before <b>May 22 at 5:00 pm</b>. <a href="https://drive.google.com/file/d/1VTxwOn9fDHrAfLU10RGA2es_fbgbmrGE/view" rel="noopener">Download the application.</a></p>
     <h2>sponsorships and donations.</h2>
     <p>Teams, events, fundraisers, and organizations can submit a <a href="{SPONSOR_URL}">sponsorship request</a> any time. We review every request and support as many as we can. We're always grateful to support the people who support our community.</p>
   </div>
@@ -1030,24 +1055,66 @@ def blog():
     path = "/blog/"
     posts = [
         ("it's just a shirt.", "/blog/its-just-a-shirt/",
-         "A short riff on the phrase 'it's just a shirt' — and why the shirt is never really the point."),
+         "An ode to the easy stuff: why keeping the 'it's just a shirt' mentality keeps our heads cool and your order fixable.",
+         """
+<p class="lead"><em>an ode to the easy stuff.</em></p>
+<p>If there's one thing we are definitely not great at, it's brain surgery. We've tried, get queasy just holding the scalpel, we don't even know what we'd do if we actually got to the brain part.</p>
+<p>We've officially decided to give up the brain surgeon dream and keep printing shirts.</p>
+<p>The thing is, shirts are important to your story and that makes them important to us. But we also know they're not as important as your brain; we're slinging ink on shirts, not brain surgery. So we try not to take ourselves too seriously or make too big a deal out of what we do, while also making sure we're delivering a superior product.</p>
+<p>Keeping the mentality of "It's Just a Shirt" helps keep our head cool if we've got an angry customer. It's just a shirt, it can be replaced. It's just a shirt, we can make it right. We've had customers tell us we've ruined Christmas because the shirt they want is not in stock from our manufacturer, but it's just a shirt. We don't actually have the power to ruin Christmas, at least not with shirts. I'm sure trying to start up a political discussion at the holiday dinner or attempting brain surgery under the tree might do it.</p>
+<p>It's just a shirt, so when our team, that's very passionate and meticulous about everything they produce, has a human moment and messes up an order, it's not going to be life or death like on the operating table. We can simply order another shirt and fix it. May set us back and cost more, but it's just not too serious, there's an easy solution.</p>
+<p>Now that I've convinced you it's just a shirt, let's talk about when a shirt is not just a shirt. Hang tight, there's a <a href="/blog/its-not-just-a-shirt/">part 2</a>.</p>"""),
         ("it's not just a shirt.", "/blog/its-not-just-a-shirt/",
-         "The other half of the argument: what a shirt actually carries — school pride, team identity, belonging."),
+         "An ode to the hard stuff: the teams, businesses, battles, and fundraisers a shirt can carry — and why we care so much.",
+         """
+<p class="lead"><em>an ode to the hard stuff.</em></p>
+<p>Okay but as soon as I convince you it's just a t-shirt, I'm flipping the switch. Because sometimes, a shirt is not just a shirt. And this is where our passion for this business shines.</p>
+<p>Sometimes, a shirt is actually a representation of the little league team you dreamed of your kid one day playing on. Sometimes a shirt is a symbol of the business you poured all your blood, sweat, and tears into for countless late nights and weekends to get it off the ground. Sometimes a shirt is a stand in unity for someone you love fighting a battle against cancer. Sometimes a shirt is a rally for funds to help a family get through a hard time.</p>
+<p>Sometimes, a shirt is SO much more than just a shirt.</p>
+<p>And this is where our drive to be meticulous and to care too much about our product comes in handy. Because we want you to feel like we care about your project as much as you care about your project. In my time here, I've seen our staff cry over a shirt because the message was so heartbreaking, I've seen my team volunteer for events just because they resonated so much with the ethos. We've donated tens of thousands of dollars, bought bikes for kids, we've stayed at the shop until all hours making sure a project gets finished. We become friends with our clients, recommend and promote their endeavors on our social media and off time, we've invited some of them to weddings.</p>
+<p>It's not just a shirt, it's a relationship, built with trust and an understanding that we aren't just looking to turn a buck, we care about your success. Sometimes the jobs we're working on are full of heavy content or very personal to our client. We want to embrace the hard stuff and honor how much a shirt can mean to you.</p>
+<p><a href="https://vimeo.com/658752386" rel="noopener">Watch: it's not just a shirt (video)</a></p>"""),
         ("what your print location says about you.", "/blog/what-your-print-location-says-about-you/",
-         "Chest, sleeve, full back, pocket: what each print placement signals and how to pick the right one."),
+         "Chest, sleeve, full back, pocket, hood: a tongue-in-cheek personality read on every print placement, plus why unique locations make gear people keep wearing.",
+         """
+<h3>full front.</h3><p>You're classic and traditional. You know what works and are sticking to it. You're a little bit leery of change, but that's not a bad thing in most cases. You think about dying your hair a lot, but have never gone through with it.</p>
+<h3>right sleeve.</h3><p>You need people to know you're cool. Are you cool? Maybe. You probably have three other locations already on your shirt. You definitely have told us about that hunting trip, or your boat, or how your neighbor's grass is always too long.</p>
+<h3>left sleeve.</h3><p>You're not sure if you need this print, but don't want to offend your friend Tyler by leaving it off the shirt. You're a little bit extra sometimes, but in a fun and quirky way. You've been told to shush during a movie in the last 3 months.</p>
+<h3>locker tag.</h3><p>You're one classy dude. You know that subtlety can bring a lot of attention. You've probably had a mai tai somewhere tropical, but you don't brag about it.</p>
+<h3>on the pocket.</h3><p>You've got calluses on your hands and you worked hard for them. You know that sometimes you need to prioritize function over form. Practical and hard working, we love to see it.</p>
+<h3>right side.</h3><p>You definitely identified with some sort of "counter culture" while growing up. You've got some good ideas and a creative feather in your cap. You think about dying your hair a lot, and always go through with it.</p>
+<h3>left side.</h3><p>You had a sibling who identified with some sort of "counter culture" while growing up, and you haven't stopped thinking about how cool they were. Also a creative person, but in a more refined, almost bureaucratic way.</p>
+<h3>full back.</h3><p>You understand that what sells is location, location, location. You've got big ideas and need big ways to share that idea. You're the type to strike up conversations with strangers and make them feel like an old friend.</p>
+<h3>left front.</h3><p>You're a consummate professional, always ready to discuss your brand. You don't need something loud and attention seeking to get your ideas across because you have your elevator pitch down pat.</p>
+<h3>right front.</h3><p>You're into name brands and won't settle for less. You probably brought this item in to us from your favorite retail store and made sure to tell us how good of a deal you got on it. Learning popcorn is considered a health snack when not drowned in butter was one of the top ten best days of your life.</p>
+<h3>right sleeve, long.</h3><p>Sometimes subtlety is important, but not to you. You want your message to be seen, heard, felt, smelt, and much more. You've probably seen all of the Die Hard movies, including the bad ones.</p>
+<h3>left sleeve, long.</h3><p>You specifically chose a long sleeved item so you could print here. You have a cool saying or catch phrase with two of your friends. Sometimes you can be a bit too much but the people who love you look past it.</p>
+<h3>right wrist.</h3><p>You're right-handed and know the value of a firm handshake in a first impression. You want to be unique without having to say it. You probably only have one other location printed on this shirt.</p>
+<h3>left wrist.</h3><p>You appreciate subtlety more than that "flashy old locker tag". You're nostalgic for a specific restaurant from your youth that closed down at least 5 years ago.</p>
+<h3>hood.</h3><p>You ooze cool. You know a thing or two about a thing or two when it comes to alternative branding. Life has thrown you curveballs and you've either crushed them or dodged out of the way.</p>
+<h3>lower back.</h3><p>Yes. We see your butt.</p>
+<h3>okay, joking aside.</h3>
+<p>We specialize in making sure every project that leaves our doors is unique and leaves a lasting impression. An easy way to do this is to change up the location of where we are printing. And moreover, people are more likely to keep wearing the gear you create if it's more retail focused. Think unique decoration styles and locations, fashion focused garments, and trendy colors.</p>
+<p>If your customers keep wearing the gear past the event or intended use, that's free billboards walking around sharing your message. Apparel that transitions from the office to evening activities seamlessly is free marketing. If your giveaway race tee becomes a runner's favorite workout gear, that's zero-cost advertising for next year's race aimed right at the audience you want to bring in. Your cost per touch marketing does not apply to just social media and traditional advertising, but also the branded apparel and promotional products you're already investing in. Might as well make it do work for you too.</p>"""),
         ("shirts in sync.", "/blog/shirts-in-sync/",
-         "Notes on matching gear: getting a whole team, staff, or crew into shirts that look right together."),
+         "Why marching band season is a graphic designer's dream: set lists, costume inspiration, and special effects from glow-in-the-dark to 3D puff.",
+         """
+<p>There's something about band season that is always exciting for me. Unlike normal band folk, I'm not excited about it for the early morning marching practice (wait. Are some of you excited about early morning marching?) or even the half time performances and competitions.</p>
+<p>I, naturally, am in it for the shirts.</p>
+<p>We get to work on a lot of really fun projects throughout the year, but when it's marching season, I typically get to really stretch my creative muscles. Frankly, it's almost anytime a client in the educational arts comes to me, whether it's choir or drama, fine arts, dance, you name it. They typically hand over the reins and give me creative freedom. It's a graphic designer's dream.</p>
+<p>With marching bands, I ask for a set list, costume inspiration, and then spend hours listening to the music, researching the background for their theme, and really tailoring the design to something personal. I want to pick out details of the way the music moves and communicates that the musicians who have invested so many hours memorizing and performing would recognize.</p>
+<p>I also like to play with a lot of special effects, if the theme calls for it. We've done glow in the dark, UV responsive ink (changes colors in the sun), foil, 3D puff, raised gloss, glitter, all kinds of fun effects that we don't get to tap into often enough. In a world where I've got a lot of constraints in the design being more reserved or the constraint of the garment itself, these projects tend to blow that out of the water and give my artist heart joy.</p>"""),
     ]
     tiles = "".join(
-        f'<a class="cell" href="{u}"><h3>{esc(t)}</h3><p class="cellsub">Read the post</p></a>'
-        for t, u, d in posts)
+        f'<a class="cell" href="{u}"><h3>{esc(t)}</h3><p class="cellsub">{esc(d)}</p></a>'
+        for t, u, d, b in posts)
     blog_schema = {
         "@context": "https://schema.org", "@type": "Blog",
         "@id": BASE + path + "#blog", "url": BASE + path,
         "name": "P&M Apparel Blog",
         "publisher": {"@id": BASE + "/#business"},
         "blogPost": [{"@type": "BlogPosting", "headline": t.rstrip('.'),
-                      "url": BASE + u, "description": d} for t, u, d in posts],
+                      "url": BASE + u, "description": d} for t, u, d, b in posts],
     }
     body = f"""
 <section class="texture hero" style="padding:84px 0 72px">
@@ -1064,21 +1131,28 @@ def blog():
     desc = "Notes from the P&M Apparel shop floor: thoughts on custom shirts, print methods, and the people who wear them."
     write(path, layout(path, title, desc, body,
                        [blog_schema, breadcrumbs([("Home", "/"), ("Blog", path)])]))
-    # Post stubs: noindexed until the migrated copy is pasted in. When a post is
-    # published, remove noindex=True below and add its path back to PAGE_PATHS.
-    tcase = lambda s: " ".join(w[:1].upper() + w[1:] for w in s.split())
-    for t, u, d in posts:
-        stub = f"""
+    for t, u, d, b in posts:
+        post_schema = {
+            "@context": "https://schema.org", "@type": "BlogPosting",
+            "headline": t.rstrip('.'), "url": BASE + u, "description": d,
+            "dateModified": TODAY,
+            "author": {"@type": "Organization", "name": "P&M Apparel"},
+            "publisher": {"@id": BASE + "/#business"},
+        }
+        page = f"""
 <section class="texture hero" style="padding:84px 0 60px">
-  <div class="wrap"><h1>{esc(t)}</h1></div>
+  <div class="wrap">
+    <nav class="crumbs" style="color:#bbb" aria-label="Breadcrumb"><a style="color:#bbb" href="/">home</a> &rsaquo; <a style="color:#bbb" href="/blog/">blog</a></nav>
+    <h1>{esc(t)}</h1>
+  </div>
 </section>
-<section><div class="wrap prose">
-<!-- MIGRATE: paste the original post text from the old Google Site here before launch -->
-<p><em>This post is being migrated from our old site. Check back soon.</em></p>
+<section><div class="wrap prose" style="max-width:760px">
+{b}
 </div></section>
 {cta_band()}"""
-        write(u, layout(u, f"{tcase(t.rstrip('.'))} | P&M Apparel Blog",
-                        d, stub, og_type="article", noindex=True))
+        tcase = " ".join(w[:1].upper() + w[1:] for w in t.rstrip('.').split())
+        write(u, layout(u, f"{tcase} | P&M Apparel Blog", d, page, extra_schema=[post_schema,
+              breadcrumbs([("Home", "/"), ("Blog", "/blog/"), (tcase, u)])], og_type="article"))
 
 def notfound():
     body = f"""
@@ -1099,10 +1173,8 @@ PAGE_PATHS = ["/", "/services/", "/services/screen-printing/", "/services/embroi
     "/services/fusion/", "/services/sublimation/", "/services/live-printing/",
     "/services/e-commerce/", "/services/state-shirts/", "/customer-supplied-garments/",
     "/iowa-on-demand/", "/about-us/", "/faq/", "/contact/", "/shirts-for-scholarships/",
-    "/blog/"]
-    # Blog posts are noindexed stubs; add each path back here when its post is published:
-    # "/blog/its-just-a-shirt/", "/blog/its-not-just-a-shirt/",
-    # "/blog/what-your-print-location-says-about-you/", "/blog/shirts-in-sync/"
+    "/blog/", "/blog/its-just-a-shirt/", "/blog/its-not-just-a-shirt/",
+    "/blog/what-your-print-location-says-about-you/", "/blog/shirts-in-sync/"]
 
 def site_files():
     with open(os.path.join(OUT, "styles.css"), "w") as f:
