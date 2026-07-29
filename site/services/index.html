@@ -36,7 +36,7 @@
 <section class="texture hero" style="padding:84px 0 72px">
   <div class="wrap">
     <h1>every method. one roof.</h1>
-    <p class="lead">Not sure which method fits? That's literally our job. Here's the plain-English version. We're a phone call away for the rest.</p>
+    <p class="lead">Not sure which method fits? That's literally our job. We run jobs from 1 piece to 10,000 and beyond, so the only real question is which method. We're a phone call away for the rest.</p>
   </div>
 </section>
 <section>
@@ -45,9 +45,10 @@
 <section class="dark">
   <div class="wrap">
     <h2>which one is right for you?</h2>
-    <p style="color:#dcdcdc;max-width:60ch;margin-bottom:26px">Three quick questions. We'll point you to the cleanest route. (And if the quiz is wrong, a human will happily overrule it.)</p>
+    <p style="color:#dcdcdc;max-width:60ch;margin-bottom:26px">Three quick questions and we'll point you to the cleanest route. (And if the quiz is wrong, a human will happily overrule it. The quiz will not be offended.)</p>
     <div class="quiz" id="quiz">
       <div class="quiz-head"><span id="quiz-step">question 1 of 3.</span><button class="quiz-reset" id="quiz-reset" style="display:none">start over</button></div>
+      <div class="quiz-bar"><i id="quiz-fill" style="width:0%"></i></div>
       <div class="quiz-body" id="quiz-body"></div>
     </div>
   </div>
@@ -55,7 +56,7 @@
 <script>
 (function(){
   var Q=[
-    {q:"how many pieces are we talking?",o:[["Just 1 to 11","small"],["A solid batch, 12 to 47","med"],["48 or more. Go big.","big"]]},
+    {q:"how many pieces are we talking?",o:[["Just 1. Maybe a few.","small"],["A solid batch, 12 to 47","med"],["48 to 10,000 and beyond. Go big.","big"]]},
     {q:"what's the look you're after?",o:[["Bold and budget-friendly","bold"],["Premium and stitched","stitch"],["Photo-real, full color","photo"],["Edge-to-edge, all over the garment","allover"]]},
     {q:"what's it going on?",o:[["Cotton tees or blends","cotton"],["Light polyester athletic wear","poly"],["Hats, jackets, polos, or bags","structured"]]}
   ];
@@ -65,7 +66,10 @@
     fusion:{t:"fusion.",d:"DTF transfers, vinyl, glitter, and puff. Incredible detail on small runs with a soft feel.",u:"/services/fusion/"},
     sublimation:{t:"sublimation.",d:"Full-color ink that becomes part of the fabric. No crack, no peel, no feel.",u:"/services/sublimation/"}
   };
-  var a=[],body=document.getElementById("quiz-body"),step=document.getElementById("quiz-step"),reset=document.getElementById("quiz-reset");
+  var QUIPS={small:"One piece? Grandpa always said our minimum is 1; we can't do any less.",med:"A perfect-size batch. Right in our wheelhouse.",big:"Go big. 1 piece to 10,000 and beyond; we've shipped to all 50 states, so bring it."};
+  var SPIN=["mixing the ink...","burning the screens...","threading the needle...","consulting three generations...","checking it twice..."];
+  var a=[],body=document.getElementById("quiz-body"),step=document.getElementById("quiz-step"),
+      reset=document.getElementById("quiz-reset"),fill=document.getElementById("quiz-fill");
   function pick(){
     if(a[1]==="stitch"||(a[1]!=="allover"&&a[2]==="structured"))return"embroidery";
     if(a[1]==="allover")return a[2]==="poly"?"sublimation":"fusion";
@@ -75,14 +79,22 @@
   }
   function ask(i){
     step.textContent="question "+(i+1)+" of 3.";reset.style.display=i?"inline":"none";
-    var h="<h3>"+Q[i].q+"</h3><div class='quiz-opts'>";
+    fill.style.width=(i/3*100)+"%";
+    var h="<div class='quiz-slide'><h3>"+Q[i].q+"</h3><div class='quiz-opts'>";
     Q[i].o.forEach(function(o){h+="<button data-v='"+o[1]+"'>"+o[0]+"</button>";});
-    body.innerHTML=h+"</div>";
-    body.querySelectorAll("button").forEach(function(b){b.onclick=function(){a[i]=b.dataset.v;i<2?ask(i+1):done();};});
+    body.innerHTML=h+"</div></div>";
+    body.querySelectorAll("button").forEach(function(b){b.onclick=function(){a[i]=b.dataset.v;i<2?ask(i+1):spin();};});
+  }
+  function spin(){
+    fill.style.width="100%";step.textContent="working on it.";reset.style.display="none";
+    var picks=SPIN.slice().sort(function(){return .5-Math.random();}).slice(0,3),n=0;
+    body.innerHTML="<div class='quiz-print'><p id='quiz-spin'>"+picks[0]+"</p></div>";
+    var el=document.getElementById("quiz-spin");
+    var t=setInterval(function(){n++; if(n<picks.length){el.textContent=picks[n];}else{clearInterval(t);done();}},520);
   }
   function done(){
     var r=R[pick()];step.textContent="we can do that.";reset.style.display="inline";
-    body.innerHTML="<div class='quiz-result'><h3>"+r.t+"</h3><p class='cellsub'>"+r.d+"</p><div class='btn-row' style='margin-top:6px'><a class='cta-btn inv' href='"+r.u+"'>see how it works.</a><a class='cta-btn inv' style='background:#fff;color:#1a1a1a' href='https://wkf.ms/3WiETfm'>get a quote.</a></div></div>";
+    body.innerHTML="<div class='quiz-result'><h3 class='stamp'>"+r.t+"</h3><p class='cellsub'>"+r.d+"</p><p class='cellsub quip'>"+QUIPS[a[0]]+"</p><div class='btn-row' style='margin-top:6px'><a class='cta-btn inv' href='"+r.u+"'>see how it works.</a><a class='cta-btn inv' style='background:#fff;color:#1a1a1a' href='https://wkf.ms/3WiETfm'>get a quote.</a></div></div>";
   }
   reset.onclick=function(){a=[];ask(0);};
   ask(0);

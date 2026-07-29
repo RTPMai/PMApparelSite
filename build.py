@@ -198,6 +198,7 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 @media(max-width:820px){.hero-split{grid-template-columns:1fr}.hs-text{padding:64px 24px 48px}.hs-img{min-height:260px}}
 .imgband{padding:0;background:var(--ink)}
 .imgband img{width:100%;max-height:480px;object-fit:cover;display:block;opacity:.92}
+.imgband.sign img{max-height:560px;object-position:center 72%}
 .splitrow{display:grid;grid-template-columns:1fr 1fr;background:var(--ink)}
 .splitrow .sr-img{min-height:340px;position:relative}
 .splitrow .sr-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -239,6 +240,16 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .quiz-result h3{font-size:1.8rem}
 .quiz-result .cellsub{margin:10px 0 18px}
 .quiz-reset{font-family:var(--head);font-size:.8rem;background:none;border:none;color:#fff;cursor:pointer;text-decoration:underline}
+.quiz-bar{height:6px;background:#e5e5e5}
+.quiz-bar i{display:block;height:100%;background:var(--ink);transition:width .35s ease}
+.quiz-slide{animation:qslide .28s ease both}
+@keyframes qslide{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+.quiz-print p{font-family:var(--head);font-size:1.1rem;margin:20px 0;animation:qblink 1s ease infinite}
+@keyframes qblink{50%{opacity:.45}}
+.quiz-result .stamp{animation:qstamp .4s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes qstamp{from{opacity:0;transform:scale(1.7) rotate(-6deg)}to{opacity:1;transform:none}}
+.quiz-result .quip{color:#555;font-style:italic}
+@media (prefers-reduced-motion: reduce){.quiz-slide,.quiz-result .stamp,.quiz-print p{animation:none}}
 /* breadcrumbs */
 .crumbs{font-family:var(--head);font-size:.78rem;letter-spacing:.04em;text-transform:lowercase;color:#666;margin:0 0 22px}
 .crumbs a{color:#666;text-decoration:none}
@@ -488,6 +499,7 @@ def home():
     <div class="stat"><b>1987</b><span>three generations of family under one roof</span></div>
     <div class="stat"><b>50 + 29</b><span>states and countries we shipped to last year</span></div>
     <div class="stat"><b>90%</b><span>of our business comes from referrals</span></div>
+    <div class="stat"><b>1 to 10,000+</b><span>pieces per order. no job too small or too big</span></div>
   </div>
 </section>
 <section class="splitrow">
@@ -539,7 +551,7 @@ def services_index():
 <section class="texture hero" style="padding:84px 0 72px">
   <div class="wrap">
     <h1>every method. one roof.</h1>
-    <p class="lead">Not sure which method fits? That's literally our job. Here's the plain-English version. We're a phone call away for the rest.</p>
+    <p class="lead">Not sure which method fits? That's literally our job. We run jobs from 1 piece to 10,000 and beyond, so the only real question is which method. We're a phone call away for the rest.</p>
   </div>
 </section>
 <section>
@@ -548,9 +560,10 @@ def services_index():
 <section class="dark">
   <div class="wrap">
     <h2>which one is right for you?</h2>
-    <p style="color:#dcdcdc;max-width:60ch;margin-bottom:26px">Three quick questions. We'll point you to the cleanest route. (And if the quiz is wrong, a human will happily overrule it.)</p>
+    <p style="color:#dcdcdc;max-width:60ch;margin-bottom:26px">Three quick questions and we'll point you to the cleanest route. (And if the quiz is wrong, a human will happily overrule it. The quiz will not be offended.)</p>
     <div class="quiz" id="quiz">
       <div class="quiz-head"><span id="quiz-step">question 1 of 3.</span><button class="quiz-reset" id="quiz-reset" style="display:none">start over</button></div>
+      <div class="quiz-bar"><i id="quiz-fill" style="width:0%"></i></div>
       <div class="quiz-body" id="quiz-body"></div>
     </div>
   </div>
@@ -558,7 +571,7 @@ def services_index():
 <script>
 (function(){{
   var Q=[
-    {{q:"how many pieces are we talking?",o:[["Just 1 to 11","small"],["A solid batch, 12 to 47","med"],["48 or more. Go big.","big"]]}},
+    {{q:"how many pieces are we talking?",o:[["Just 1. Maybe a few.","small"],["A solid batch, 12 to 47","med"],["48 to 10,000 and beyond. Go big.","big"]]}},
     {{q:"what's the look you're after?",o:[["Bold and budget-friendly","bold"],["Premium and stitched","stitch"],["Photo-real, full color","photo"],["Edge-to-edge, all over the garment","allover"]]}},
     {{q:"what's it going on?",o:[["Cotton tees or blends","cotton"],["Light polyester athletic wear","poly"],["Hats, jackets, polos, or bags","structured"]]}}
   ];
@@ -568,7 +581,10 @@ def services_index():
     fusion:{{t:"fusion.",d:"DTF transfers, vinyl, glitter, and puff. Incredible detail on small runs with a soft feel.",u:"/services/fusion/"}},
     sublimation:{{t:"sublimation.",d:"Full-color ink that becomes part of the fabric. No crack, no peel, no feel.",u:"/services/sublimation/"}}
   }};
-  var a=[],body=document.getElementById("quiz-body"),step=document.getElementById("quiz-step"),reset=document.getElementById("quiz-reset");
+  var QUIPS={{small:"One piece? Grandpa always said our minimum is 1; we can't do any less.",med:"A perfect-size batch. Right in our wheelhouse.",big:"Go big. 1 piece to 10,000 and beyond; we've shipped to all 50 states, so bring it."}};
+  var SPIN=["mixing the ink...","burning the screens...","threading the needle...","consulting three generations...","checking it twice..."];
+  var a=[],body=document.getElementById("quiz-body"),step=document.getElementById("quiz-step"),
+      reset=document.getElementById("quiz-reset"),fill=document.getElementById("quiz-fill");
   function pick(){{
     if(a[1]==="stitch"||(a[1]!=="allover"&&a[2]==="structured"))return"embroidery";
     if(a[1]==="allover")return a[2]==="poly"?"sublimation":"fusion";
@@ -578,14 +594,22 @@ def services_index():
   }}
   function ask(i){{
     step.textContent="question "+(i+1)+" of 3.";reset.style.display=i?"inline":"none";
-    var h="<h3>"+Q[i].q+"</h3><div class='quiz-opts'>";
+    fill.style.width=(i/3*100)+"%";
+    var h="<div class='quiz-slide'><h3>"+Q[i].q+"</h3><div class='quiz-opts'>";
     Q[i].o.forEach(function(o){{h+="<button data-v='"+o[1]+"'>"+o[0]+"</button>";}});
-    body.innerHTML=h+"</div>";
-    body.querySelectorAll("button").forEach(function(b){{b.onclick=function(){{a[i]=b.dataset.v;i<2?ask(i+1):done();}};}});
+    body.innerHTML=h+"</div></div>";
+    body.querySelectorAll("button").forEach(function(b){{b.onclick=function(){{a[i]=b.dataset.v;i<2?ask(i+1):spin();}};}});
+  }}
+  function spin(){{
+    fill.style.width="100%";step.textContent="working on it.";reset.style.display="none";
+    var picks=SPIN.slice().sort(function(){{return .5-Math.random();}}).slice(0,3),n=0;
+    body.innerHTML="<div class='quiz-print'><p id='quiz-spin'>"+picks[0]+"</p></div>";
+    var el=document.getElementById("quiz-spin");
+    var t=setInterval(function(){{n++; if(n<picks.length){{el.textContent=picks[n];}}else{{clearInterval(t);done();}}}},520);
   }}
   function done(){{
     var r=R[pick()];step.textContent="we can do that.";reset.style.display="inline";
-    body.innerHTML="<div class='quiz-result'><h3>"+r.t+"</h3><p class='cellsub'>"+r.d+"</p><div class='btn-row' style='margin-top:6px'><a class='cta-btn inv' href='"+r.u+"'>see how it works.</a><a class='cta-btn inv' style='background:#fff;color:#1a1a1a' href='{QUOTE_URL}'>get a quote.</a></div></div>";
+    body.innerHTML="<div class='quiz-result'><h3 class='stamp'>"+r.t+"</h3><p class='cellsub'>"+r.d+"</p><p class='cellsub quip'>"+QUIPS[a[0]]+"</p><div class='btn-row' style='margin-top:6px'><a class='cta-btn inv' href='"+r.u+"'>see how it works.</a><a class='cta-btn inv' style='background:#fff;color:#1a1a1a' href='{QUOTE_URL}'>get a quote.</a></div></div>";
   }}
   reset.onclick=function(){{a=[];ask(0);}};
   ask(0);
@@ -912,7 +936,7 @@ def contact():
     <div class="btn-row"><a class="cta-btn" href="{QUOTE_URL}">get a quote.</a></div>
   </div>
 </section>
-<section class="imgband"><img src="/assets/photos/building-entrance-wide.jpg" alt="The front entrance of P&M Apparel at 1100 S 5th St, Polk City" loading="lazy"></section>
+<section class="imgband sign"><img src="/assets/photos/building-entrance-wide.jpg" alt="The front entrance of P&M Apparel at 1100 S 5th St, Polk City" loading="lazy"></section>
 <section>
   <div class="wrap">
     <div class="grid cols3">
