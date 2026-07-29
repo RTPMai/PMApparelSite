@@ -4,6 +4,14 @@ import json, os, html, datetime
 
 BASE = "https://www.pmapparel.com"
 OUT = "site"
+GBP_PLACE_ID = "ChIJ780iSSWC7ocR-TzjT7KFVVU"
+GBP_MAP_URL = f"https://www.google.com/maps/place/?q=place_id:{GBP_PLACE_ID}"
+GBP_READ_URL = f"https://search.google.com/local/reviews?placeid={GBP_PLACE_ID}"
+GBP_WRITE_URL = f"https://search.google.com/local/writereview?placeid={GBP_PLACE_ID}"
+# Refresh these two occasionally (they change slowly) and re-run build.py:
+GBP_RATING = "4.9"
+GBP_COUNT = "323"
+
 TODAY = "2026-07-28"
 UPDATED_HUMAN = datetime.date.fromisoformat(TODAY).strftime("%B %Y")
 
@@ -54,7 +62,8 @@ LOCAL_BUSINESS = {
         "opens": "08:00", "closes": "17:00",
     }],
     "areaServed": ["Polk City IA", "Ankeny IA", "Des Moines IA", "Central Iowa", "United States"],
-    "sameAs": [FB_URL, IG_URL, TT_URL, LI_URL],
+    "sameAs": [FB_URL, IG_URL, TT_URL, LI_URL, GBP_MAP_URL],
+    "hasMap": GBP_MAP_URL,
     "knowsAbout": ["screen printing", "custom embroidery", "DTF transfers", "sublimation printing", "promotional products", "online team stores", "live event printing"],
 }
 
@@ -249,6 +258,10 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .quiz-result .stamp{animation:qstamp .4s cubic-bezier(.2,1.6,.4,1) both}
 @keyframes qstamp{from{opacity:0;transform:scale(1.7) rotate(-6deg)}to{opacity:1;transform:none}}
 .quiz-result .quip{color:#555;font-style:italic}
+.gbadge{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin:0 0 24px;font-family:var(--head)}
+.gbadge b{font-size:1.5rem;letter-spacing:-.01em}
+.gbadge span{color:#555}
+.gbadge a{font-size:.85rem;color:var(--ink);text-underline-offset:3px}
 @media (prefers-reduced-motion: reduce){.quiz-slide,.quiz-result .stamp,.quiz-print p{animation:none}}
 /* breadcrumbs */
 .crumbs{font-family:var(--head);font-size:.78rem;letter-spacing:.04em;text-transform:lowercase;color:#666;margin:0 0 22px}
@@ -461,8 +474,8 @@ def home():
     review_schema = {
         "@context": "https://schema.org", "@type": "LocalBusiness",
         "@id": BASE + "/#business",
-        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5",
-                            "bestRating": "5", "reviewCount": str(len(testimonials))},
+        "aggregateRating": {"@type": "AggregateRating", "ratingValue": GBP_RATING,
+                            "bestRating": "5", "ratingCount": GBP_COUNT},
         "review": [
             {"@type": "Review", "reviewBody": t,
              "author": {"@type": "Person", "name": n},
@@ -528,6 +541,12 @@ def home():
 <section>
   <div class="wrap">
     <h2>good people. great gear.</h2>
+    <div class="gbadge">
+      <b>&#9733; {GBP_RATING}</b>
+      <span>from {GBP_COUNT} Google reviews</span>
+      <a href="{GBP_READ_URL}" rel="noopener">read them all</a>
+      <a href="{GBP_WRITE_URL}" rel="noopener">leave one</a>
+    </div>
     {quotes}
   </div>
 </section>
@@ -948,6 +967,9 @@ def contact():
       width="100%" height="360" style="border:0;border-radius:12px;margin-top:26px"
       loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
       title="Map to P&amp;M Apparel, 1100 S 5th St, Polk City, Iowa"></iframe>
+    <p style="margin-top:14px">Rated <b>&#9733; {GBP_RATING}</b> from {GBP_COUNT} Google reviews.
+      <a href="{GBP_READ_URL}" rel="noopener">Read them</a> or
+      <a href="{GBP_WRITE_URL}" rel="noopener">leave one</a> — it means a lot to a family shop.</p>
   </div>
 </section>
 <section class="dark">
