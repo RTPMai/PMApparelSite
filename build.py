@@ -142,6 +142,8 @@ section{padding:72px 0}
 .band{padding:44px 0}
 .hero{padding:104px 0 96px}
 .hero h1{max-width:14ch}
+.hero h1.eyebrow{font-size:.95rem;letter-spacing:.14em;font-weight:700;color:#fff;opacity:.85;max-width:none;margin:0 0 14px}
+.hero p.mega{font-family:var(--head);font-weight:800;line-height:1.05;font-size:clamp(2.4rem,6vw,4.2rem);max-width:14ch;margin:0 0 .5em;color:#fff}
 .hero p.lead{font-size:1.25rem;max-width:56ch;color:#e8e8e8}
 .btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
 
@@ -492,7 +494,8 @@ def home():
     body = f"""
 <section class="hero photo" style="--hero-img:url('/assets/photos/hero-floor.jpg')">
   <div class="wrap">
-    <h1>custom apparel in polk city, iowa. we can do that.</h1>
+    <h1 class="eyebrow">custom apparel in polk city, iowa.</h1>
+    <p class="mega">we can do that.</p>
     <p class="lead">Screen printing, embroidery, and promotional products for schools, businesses, and teams across the Des Moines metro and beyond. Third-generation family shop. Woman-owned. Let's make something people are proud to wear.</p>
     <div class="btn-row">
       <a class="cta-btn" href="{QUOTE_URL}">get a quote.</a>
