@@ -240,7 +240,8 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .flip-back h3{text-align:center;margin-bottom:10px}
 .flip-back .q{font-family:var(--head);font-size:.72rem;color:var(--ink);margin:10px 0 2px}
 .flip-back .a{font-size:.82rem;color:var(--gray);margin:0}
-.fliphint{font-family:var(--head);font-size:.68rem;letter-spacing:.06em;color:#aaa;margin-top:10px}
+.flip-front{padding-bottom:34px}
+.fliphint{position:absolute;left:0;right:0;bottom:12px;font-family:var(--head);font-size:.6rem;letter-spacing:.08em;color:#b5b5b5;margin:0;text-align:center}
 @media (prefers-reduced-motion: reduce){.flip-inner{transition:none}}
 
 /* photo hero */
