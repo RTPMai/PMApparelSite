@@ -128,7 +128,7 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .teamgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--ink);border:2px solid var(--ink)}
 @media(max-width:900px){.teamgrid{grid-template-columns:repeat(2,1fr)}}
 .teamcard{background:#fff;padding:26px 18px;text-align:center}
-.teamcard .avatar{width:84px;height:84px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-family:var(--head);font-size:.7rem}
+.teamcard img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 22%;display:block;margin:0 auto 12px}
 .teamcard h3{font-size:.95rem;margin-bottom:2px}
 .teamcard p{color:var(--gray);font-size:.85rem;margin:0}
 

@@ -28,6 +28,11 @@ STORES_URL = "https://pmapparel.chipply.com/"
 PROMO_URL = "https://www.promoplace.com/pmapparel"
 SPONSOR_URL = "https://form.jotform.com/231636854478064"
 IOD_URL = "https://www.iowaondemand.com/"
+# Schools on Iowa On Demand: six founding schools, then the six that joined in 2026.
+IOD_FOUNDING = ["North Polk", "Ankeny", "Ankeny Centennial", "Woodward-Granger",
+                "Ankeny Christian Academy", "Saydel"]
+IOD_SCHOOLS = ["Bondurant-Farrar", "Johnston", "Dallas Center-Grimes",
+               "Roosevelt", "Perry", "Ballard"]
 FB_URL = "https://www.facebook.com/pmapparel"
 IG_URL = "https://www.instagram.com/p_mapparel/"
 TT_URL = "https://www.tiktok.com/@p_mapparel"
@@ -61,7 +66,11 @@ LOCAL_BUSINESS = {
         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "opens": "08:00", "closes": "17:00",
     }],
-    "areaServed": ["Polk City IA", "Ankeny IA", "Des Moines IA", "Central Iowa", "United States"],
+    "areaServed": ["Polk City IA", "Ankeny IA", "Des Moines IA", "Alleman IA",
+                   "Elkhart IA", "Sheldahl IA", "Johnston IA", "Grimes IA",
+                   "Dallas Center IA", "Bondurant IA", "Woodward IA", "Granger IA",
+                   "Perry IA", "Huxley IA", "Slater IA", "Cambridge IA",
+                   "Central Iowa", "United States"],
     "sameAs": [FB_URL, IG_URL, TT_URL, LI_URL, GBP_MAP_URL],
     "hasMap": GBP_MAP_URL,
     "knowsAbout": ["screen printing", "custom embroidery", "DTF transfers", "sublimation printing", "promotional products", "online team stores", "live event printing"],
@@ -219,7 +228,7 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .teamgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--ink);border:2px solid var(--ink)}
 @media(max-width:900px){.teamgrid{grid-template-columns:repeat(2,1fr)}}
 .teamcard{background:#fff;padding:26px 18px;text-align:center}
-.teamcard .avatar{width:84px;height:84px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-family:var(--head);font-size:.7rem}
+.teamcard img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 22%;display:block;margin:0 auto 12px}
 .teamcard h3{font-size:.95rem;margin-bottom:2px}
 .teamcard p{color:var(--gray);font-size:.85rem;margin:0}
 
@@ -695,7 +704,7 @@ def all_services():
         "A polished, professional look on polos, jackets, hats, or bags. Stitched logos add texture and a premium feel that's built to last.",
         f"""
 <h2>the premium touch.</h2>
-<p>Embroidery stitches your logo directly into the fabric with thread. It reads as quality from across the room, which is why it's the standard for company polos, quarter-zips, jackets, caps, and bags. It doesn't crack, fade, or peel. It just lasts.</p>
+<p>Embroidery stitches your logo directly into the fabric with thread. It reads as quality from across the room, which is why it's the standard for company polos, quarter-zips, jackets, caps, and bags for businesses across Ankeny and the Des Moines metro. It doesn't crack, fade, or peel. It just lasts.</p>
 <h2>one piece minimum.</h2>
 <p>Unlike screen printing, embroidery has no real minimum. Order one jacket or one hundred. There's a one-time $35 setup fee to digitize your logo, and after that it's on file with us forever.</p>
 <h2>the techniques.</h2>
@@ -782,7 +791,7 @@ def all_services():
         "A simple, organized way for your group to order custom apparel. No paper forms. No chasing payments. No cost to set up.",
         f"""
 <h2>stop chasing sizes and money.</h2>
-<p>Online team stores give your group a simple, organized way to order custom apparel without passing around paper forms or collecting money. We build a custom storefront with your approved designs, and everyone orders exactly what they want, pays online, and has their order produced and delivered through us.</p>
+<p>Online team stores give your group a simple, organized way to order custom apparel without passing around paper forms or collecting money. We build and manage them for schools and teams across Ankeny, Des Moines, and all of Iowa. We build a custom storefront with your approved designs, and everyone orders exactly what they want, pays online, and has their order produced and delivered through us.</p>
 <h2>who they're for.</h2>
 <p>Schools, athletic teams, youth organizations, businesses, nonprofits, booster clubs, events, and fundraisers. If you're tired of tracking sizes, chasing payments, or ending up with extra inventory, an online store takes all of that off your plate while giving everyone more choices.</p>
 <h2>what it costs you.</h2>
@@ -867,7 +876,24 @@ def csg_page():
     write(path, layout(path, title, desc, body, [faq_schema(faqs), breadcrumbs([("Home", "/"), ("Customer-Supplied Garments", path)])]))
 
 # ---------------------------------------------------------------- OTHER PAGES
-TEAM = [('Megan Griffith', 'art director + owner'), ('Ryan Toney', 'grand poobah of many hats + owner'), ('Jacob Whitman', 'sales director'), ('Kim Taylor', 'production manager, embroidery'), ('Margo Niemeyer', 'production manager, screen printing'), ('Amanda Clark', 'finance manager'), ('Hannah Posey', 'account manager'), ('Alexis Davis', 'account manager'), ('Abby Penton', 'account manager'), ('Alex Hernandez', 'graphic designer'), ('Maggie Barbour', 'press operator'), ('Bailee Bishop', 'press operator'), ('Taylor Price', 'embroidery tech'), ('Nicole Printy', 'embroidery tech'), ('Tess Collins', 'shipping specialist'), ('Quinn Taylor', 'production assistant')]
+TEAM = [
+    ("Megan Griffith", "art director + owner", "All things art, and I can dip into most of the production, administrative, and financial things as necessary.", "megan"),
+    ("Ryan Toney", "grand poobah of many hats + owner", "Webstores, social media, production, sales, a little bit of everything. Plus show tunes, performed without request.", "ryan"),
+    ("Jacob Whitman", "sales director", "People and process wrangler.", "jacob"),
+    ("Kim Taylor", "production manager, embroidery", "The wizard at the embroidery machine and the fixer around here. The needle and thread is my home.", "kim"),
+    ("Margo Niemeyer", "production manager, screen printing", "If you order a single item from P&M, it touches my hands. I manage intake and keep production moving from start to finish.", "margo"),
+    ("Amanda Clark", "finance manager", "I help folks narrow down thousands of options to what best suits them, and come up with ideas they never knew were possible.", "amanda"),
+    ("Hannah Posey", "account manager", "I work with schools and sports organizations on apparel and uniforms they can pride themselves on.", "hannah"),
+    ("Alexis Davis", "account manager", "I help individuals and companies get apparel and swag they enjoy wearing.", "alexis"),
+    ("Abby Penton", "account manager", "I work with dance studios, churches, and all types of personal orders.", "abby"),
+    ("Alex Hernandez", "graphic designer", "I design custom artwork and mockup proofs, plus video and social media design for P&M marketing.", "alex"),
+    ("Maggie Barbour", "press operator", "I reclaim screens, coat them, and burn films. I also help on the embroidery side when needed.", "maggie"),
+    ("Bailee Bishop", "press operator", "Reclaiming, coating, and rinsing screens, plus pulling and boxing orders.", "bailee"),
+    ("Taylor Price", "embroidery tech", "I hoop garments and put them on a machine to get a brand new design.", "taylor"),
+    ("Nicole Printy", "embroidery tech", "I work with the embroidery team to get the best designs onto each piece.", "nicole"),
+    ("Tess Collins", "shipping specialist", "In charge of checking in orders, compiling, and shipping them out.", "tess"),
+    ("Quinn Taylor", "production assistant", "I help make shirts.", "quinn"),
+]
 
 def about():
     path = "/about-us/"
@@ -900,7 +926,11 @@ def about():
   <div class="wrap">
     <h2>the crew.</h2>
     <p style="max-width:60ch;margin-bottom:26px">Sixteen people who print it, stitch it, pack it, and answer the phone when you call. In their own words:</p>
-    <div class="teamgrid"><div class="teamcard"><div class="avatar">MG</div><h3>megan griffith.</h3><p><b>art director + owner</b></p><p>All things art, and I can dip into most of the production, administrative, and financial things as necessary.</p></div><div class="teamcard"><div class="avatar">RT</div><h3>ryan toney.</h3><p><b>grand poobah of many hats + owner</b></p><p>Webstores, social media, production, sales, a little bit of everything. Plus show tunes, performed without request.</p></div><div class="teamcard"><div class="avatar">JW</div><h3>jacob whitman.</h3><p><b>sales director</b></p><p>People and process wrangler.</p></div><div class="teamcard"><div class="avatar">KT</div><h3>kim taylor.</h3><p><b>production manager, embroidery</b></p><p>The wizard at the embroidery machine and the fixer around here. The needle and thread is my home.</p></div><div class="teamcard"><div class="avatar">MN</div><h3>margo niemeyer.</h3><p><b>production manager, screen printing</b></p><p>If you order a single item from P&M, it touches my hands. I manage intake and keep production moving from start to finish.</p></div><div class="teamcard"><div class="avatar">AC</div><h3>amanda clark.</h3><p><b>finance manager</b></p><p>I help folks narrow down thousands of options to what best suits them, and come up with ideas they never knew were possible.</p></div><div class="teamcard"><div class="avatar">HP</div><h3>hannah posey.</h3><p><b>account manager</b></p><p>I work with schools and sports organizations on apparel and uniforms they can pride themselves on.</p></div><div class="teamcard"><div class="avatar">AD</div><h3>alexis davis.</h3><p><b>account manager</b></p><p>I help individuals and companies get apparel and swag they enjoy wearing.</p></div><div class="teamcard"><div class="avatar">AP</div><h3>abby penton.</h3><p><b>account manager</b></p><p>I work with dance studios, churches, and all types of personal orders.</p></div><div class="teamcard"><div class="avatar">AH</div><h3>alex hernandez.</h3><p><b>graphic designer</b></p><p>I design custom artwork and mockup proofs, plus video and social media design for P&M marketing.</p></div><div class="teamcard"><div class="avatar">MB</div><h3>maggie barbour.</h3><p><b>press operator</b></p><p>I reclaim screens, coat them, and burn films. I also help on the embroidery side when needed.</p></div><div class="teamcard"><div class="avatar">BB</div><h3>bailee bishop.</h3><p><b>press operator</b></p><p>Reclaiming, coating, and rinsing screens, plus pulling and boxing orders.</p></div><div class="teamcard"><div class="avatar">TP</div><h3>taylor price.</h3><p><b>embroidery tech</b></p><p>I hoop garments and put them on a machine to get a brand new design.</p></div><div class="teamcard"><div class="avatar">NP</div><h3>nicole printy.</h3><p><b>embroidery tech</b></p><p>I work with the embroidery team to get the best designs onto each piece.</p></div><div class="teamcard"><div class="avatar">TC</div><h3>tess collins.</h3><p><b>shipping specialist</b></p><p>In charge of checking in orders, compiling, and shipping them out.</p></div><div class="teamcard"><div class="avatar">QT</div><h3>quinn taylor.</h3><p><b>production assistant</b></p><p>I help make shirts.</p></div></div>
+    <div class="teamgrid">{"".join(
+        f'<div class="teamcard">'
+        f'<img src="/assets/photos/team/{p}.jpg" alt="{n}, {r} at P&M Apparel" loading="lazy" width="240" height="240">'
+        f'<h3>{n.lower()}.</h3><p><b>{r}</b></p><p>{q}</p></div>'
+        for n, r, q, p in TEAM)}</div>
   </div>
 </section>
 <section class="imgband"><img src="/assets/photos/building-sign-close.jpg" alt="The P&M Apparel building and sign in Polk City" loading="lazy"></section>
@@ -918,7 +948,7 @@ def about():
         "@context": "https://schema.org", "@type": "AboutPage",
         "url": BASE + path, "about": {"@id": BASE + "/#business"},
     }
-    write(path, layout(path, title, desc, body, [{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": BASE + "/#business", "employee": [{"@type": "Person", "name": n, "jobTitle": r, "worksFor": {"@id": BASE + "/#business"}} for n, r in TEAM]}] + [schema, breadcrumbs([("Home", "/"), ("About Us", path)])]))
+    write(path, layout(path, title, desc, body, [{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": BASE + "/#business", "employee": [{"@type": "Person", "name": n, "jobTitle": r, "image": BASE + "/assets/photos/team/" + p + ".jpg", "worksFor": {"@id": BASE + "/#business"}} for n, r, q, p in TEAM]}] + [schema, breadcrumbs([("Home", "/"), ("About Us", path)])]))
 
 def iowa_on_demand():
     path = "/iowa-on-demand/"
@@ -932,7 +962,10 @@ def iowa_on_demand():
 </section>
 <section>
   <div class="wrap prose">
-    <p>Iowa On Demand is P&amp;M Apparel's on-demand offshoot, built for local schools. Right now it serves 12 Iowa school districts, with more joining all the time.</p>
+    <p>Iowa On Demand is P&amp;M Apparel's on-demand offshoot, built for local schools. Right now it serves 12 Iowa schools, with more joining all the time. The mission: make it easier to support your school with officially licensed spirit wear that's available year-round.</p>
+    <h2>the schools.</h2>
+    <p>It started with six: {", ".join(IOD_FOUNDING[:-1])}, and {IOD_FOUNDING[-1]}. In 2026, six more joined: {", ".join(IOD_SCHOOLS[:-1])}, and {IOD_SCHOOLS[-1]} — bringing thousands more students, families, alumni, and fans on board. Twelve schools. One place.</p>
+    <p>That means school communities across Polk City, Alleman, Elkhart, Ankeny, Johnston, Grimes, Dallas Center, Bondurant, Woodward, Granger, Perry, Huxley, Slater, Cambridge, and Des Moines can grab officially licensed gear whenever the mood strikes — no order windows, no waiting for the next fundraiser.</p>
     <h2>how it works.</h2>
     <p>Fans shop online whenever they want. Each item is produced as orders come in, decorated in-house by our team in Polk City, and shipped fast. No order windows. No leftover boxes in the booster club president's garage. Just school pride, ready when people want it.</p>
     <h2>get your district on board.</h2>
@@ -1054,6 +1087,54 @@ def faq_page():
 def blog():
     path = "/blog/"
     posts = [
+        ("screen printing vs dtf: how to choose.", "/blog/screen-printing-vs-dtf/",
+         "The honest decision guide: when screen printing's bulk economics win, when DTF's one-piece minimum and full-color detail win, and how to pick for your order.",
+         """
+<p>This is the question behind most quote requests we get, even when it isn't asked out loud. Both methods make great shirts. The right one depends on your order, and the answer is usually obvious once you know three things: your quantity, your color count, and your garment.</p>
+<h3>choose screen printing when quantity is on your side.</h3>
+<p>Screen printing pushes ink through a mesh screen, one color at a time, then cures it for maximum durability. Because each color needs its own screen, there's real setup work, which is why it has minimums: 12 pieces for 1 to 3 colors, 24 for 4 to 6, 48 for 7 to 10. But once the screens are burned, every additional shirt is fast and cheap to print. That's why per-piece pricing gets better as your order grows, and why screen printing is the workhorse for team shirts, staff tees, spirit wear, and event merch. It's also the most durable printing method we offer: bold color that survives years of washing.</p>
+<h3>choose dtf when flexibility is on yours.</h3>
+<p>DTF (direct-to-film, part of our fusion family) prints your design in full color onto a film, then heat-presses it onto the garment. There are no screens, so there's no color-count math and no real minimum: one piece is fine. It handles photo-real detail, gradients, and unlimited colors with a soft feel and strong durability. It's our go-to for small batches, one-offs, and player names and numbers.</p>
+<h3>the quick rules.</h3>
+<p>Under 12 pieces? DTF, almost always. Big order of a bold 1-to-3-color design? Screen printing, almost always. A design with dozens of colors or photographic detail? DTF unless the quantity is large enough that screen printing's setup still pays off. Personalized names on team gear? DTF, often combined with screen printing on the same garments — the front prints on the press, the names heat-press on the back.</p>
+<p>And if you're still not sure: that's literally our job. <a href="/services/screen-printing/">Read about screen printing</a>, <a href="/services/fusion/">read about fusion and DTF</a>, or just ask — quotes are usually back within 24 hours.</p>"""),
+        ("embroidery vs screen printing for company apparel.", "/blog/embroidery-vs-screen-printing/",
+         "Polos and jackets or staff tees? A practical guide to when stitched logos beat printed ones, what setup actually costs, and how minimums differ.",
+         """
+<p>When a business orders apparel, the choice usually comes down to embroidery or screen printing. They solve different problems, and most companies eventually use both. Here's how to think about it.</p>
+<h3>embroidery: the premium, no-minimum option.</h3>
+<p>Embroidery stitches your logo directly into the fabric with thread. It reads as quality from across the room, which is why it's the standard for company polos, quarter-zips, jackets, caps, and bags. It doesn't crack, fade, or peel. There's no real minimum: order one jacket for a new hire or a hundred for the whole team. The only setup is a one-time $35 fee to digitize your logo, and after that it's on file with us forever, so reorders are painless.</p>
+<h3>screen printing: the bulk-order workhorse.</h3>
+<p>For staff t-shirts, event gear, and giveaways, screen printing wins on economics. Minimums start at 12 pieces (for 1 to 3 colors), and per-piece pricing improves as quantity grows. The prints are bold, vibrant, and extremely durable.</p>
+<h3>the practical split.</h3>
+<p>Most of our business clients land here: embroidery for the polished layer (polos, outerwear, hats — the things worn to meet customers), screen printing for the volume layer (staff tees, event shirts, giveaways). Structured items like hats and bags are embroidery territory almost by default; flat cotton at quantity is print territory. And if your logo has fine gradients or photographic detail that thread can't render, our <a href="/services/fusion/">fusion methods</a> fill the gap.</p>
+<p>One more thing worth knowing: you can bring us garments you already own. We decorate <a href="/customer-supplied-garments/">customer-supplied garments</a> all the time — we just ask for a short waiver first.</p>
+<p>Details on both: <a href="/services/embroidery/">embroidery</a> and <a href="/services/screen-printing/">screen printing</a>. Quotes back within 24 hours.</p>"""),
+        ("what is sublimation actually good for?", "/blog/what-is-sublimation-good-for/",
+         "Sublimation makes prints you can't feel — but only on the right garments. Where it shines, where it fails, and what to use instead.",
+         """
+<p>Sublimation is the method behind prints you can't feel: the ink turns to gas under heat and bonds permanently with the fabric itself. No crack, no peel, no added weight, ever. It sounds like magic, and on the right garment it basically is. The catch is the phrase "the right garment."</p>
+<h3>where sublimation shines.</h3>
+<p>Full-color, edge-to-edge designs on light-colored polyester. Athletic jerseys, all-over prints, vivid pattern work, gradients, and photos are its sweet spot. Because the ink dyes the fibers rather than sitting on top, a sublimated jersey feels exactly like a blank one and the print lasts as long as the garment does. It pairs beautifully with fusion names and numbers for team uniforms.</p>
+<h3>where it simply doesn't work.</h3>
+<p>Sublimation needs polyester content and a light base color. The ink bonds with polyester fibers, so cotton won't hold it, and because it dyes rather than covers, it can't print light designs on dark fabric. This isn't a quality tradeoff, it's chemistry.</p>
+<h3>what to use instead.</h3>
+<p>For cotton or dark garments, <a href="/services/fusion/">DTF transfers</a> deliver similar full-color detail with a soft feel. For bold designs at quantity on any fabric, <a href="/services/screen-printing/">screen printing</a> is the workhorse. Part of what you get with a full-service shop is that we'll steer you to the right method for your actual garment instead of forcing your design into the wrong one.</p>
+<p>One-piece minimum, standard 8 to 10 business day turnaround. <a href="/services/sublimation/">More on sublimation here.</a></p>"""),
+        ("what does custom apparel cost? how our quotes work.", "/blog/how-quotes-work/",
+         "We quote every job individually — here's exactly what moves the number: quantity breaks, color counts, setup fees, art time, and what happens after you say yes.",
+         """
+<p>The honest answer to "what does a custom shirt cost?" is: it depends, and anyone who gives you one number without asking questions is guessing. Every job we run is quoted individually. But "it depends" is a lazy place to stop, so here is exactly what it depends on.</p>
+<h3>the variables that move your quote.</h3>
+<p><b>Quantity.</b> The single biggest lever. Setup work (burning screens, dialing in the press) is spread across your whole order, so per-piece pricing gets meaningfully better as quantity grows. We run jobs from 1 piece to 10,000 and beyond.</p>
+<p><b>Colors and locations.</b> In screen printing, every ink color needs its own screen and every print location is a separate run. A 1-color front is the budget option; a 6-color front plus a back adds real work.</p>
+<p><b>The garment itself.</b> A basic Gildan tee and a Carhartt jacket are different starting points. We carry Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour, and more, at a range of price points.</p>
+<p><b>Method.</b> Screen printing wins at quantity, embroidery and DTF have one-piece minimums, and thread count matters for embroidery quotes.</p>
+<h3>the fixed fees, in plain sight.</h3>
+<p>Screen printing orders below minimum (12 pieces for 1 to 3 colors) carry a $35 per-screen charge. Embroidery has a one-time $35 digitizing setup fee, after which your logo is on file forever. Custom artwork runs $100 per hour, and the first 30 minutes is free when your order includes production. Rush fees depend on the timeline — except state tournament orders, which carry no rush fees at all.</p>
+<h3>what happens when you ask.</h3>
+<p>Send us the idea however is easiest: walk in, call, email, or the quote form. Quotes are usually back within 24 hours. You approve the quote, a 50% deposit sends the job into art, you approve a proof, and nothing prints until you've signed off. Standard turnaround is 8 to 10 business days after art approval.</p>
+<p>Why don't we publish a price list? Because we'd rather ask you three questions and get the number right than publish a range that's wrong for your job in both directions. <a href="{QUOTE_URL}">Ask us</a> — it costs nothing and takes a day.</p>"""),
         ("it's just a shirt.", "/blog/its-just-a-shirt/",
          "An ode to the easy stuff: why keeping the 'it's just a shirt' mentality keeps our heads cool and your order fixable.",
          """
@@ -1132,6 +1213,7 @@ def blog():
     write(path, layout(path, title, desc, body,
                        [blog_schema, breadcrumbs([("Home", "/"), ("Blog", path)])]))
     for t, u, d, b in posts:
+        b = b.replace("{QUOTE_URL}", QUOTE_URL)
         post_schema = {
             "@context": "https://schema.org", "@type": "BlogPosting",
             "headline": t.rstrip('.'), "url": BASE + u, "description": d,
@@ -1173,7 +1255,9 @@ PAGE_PATHS = ["/", "/services/", "/services/screen-printing/", "/services/embroi
     "/services/fusion/", "/services/sublimation/", "/services/live-printing/",
     "/services/e-commerce/", "/services/state-shirts/", "/customer-supplied-garments/",
     "/iowa-on-demand/", "/about-us/", "/faq/", "/contact/", "/shirts-for-scholarships/",
-    "/blog/", "/blog/its-just-a-shirt/", "/blog/its-not-just-a-shirt/",
+    "/blog/", "/blog/screen-printing-vs-dtf/", "/blog/embroidery-vs-screen-printing/",
+    "/blog/what-is-sublimation-good-for/", "/blog/how-quotes-work/",
+    "/blog/its-just-a-shirt/", "/blog/its-not-just-a-shirt/",
     "/blog/what-your-print-location-says-about-you/", "/blog/shirts-in-sync/"]
 
 def site_files():
@@ -1184,7 +1268,15 @@ def site_files():
     with open(os.path.join(OUT, "sitemap.xml"), "w") as f:
         f.write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
     with open(os.path.join(OUT, "robots.txt"), "w") as f:
-        f.write(f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
+        f.write(
+            "User-agent: *\nAllow: /\n\n"
+            "User-agent: GPTBot\nAllow: /\n\n"
+            "User-agent: OAI-SearchBot\nAllow: /\n\n"
+            "User-agent: ClaudeBot\nAllow: /\n\n"
+            "User-agent: Claude-SearchBot\nAllow: /\n\n"
+            "User-agent: PerplexityBot\nAllow: /\n\n"
+            "User-agent: Google-Extended\nAllow: /\n\n"
+            f"Sitemap: {BASE}/sitemap.xml\n")
     with open(os.path.join(OUT, "llms.txt"), "w") as f:
         f.write(f"""# P&M Apparel
 
