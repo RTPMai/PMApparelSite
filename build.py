@@ -231,6 +231,17 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .teamcard img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 22%;display:block;margin:0 auto 12px}
 .teamcard h3{font-size:.95rem;margin-bottom:2px}
 .teamcard p{color:var(--gray);font-size:.85rem;margin:0}
+.flipcard{cursor:pointer;perspective:1200px;background:none;padding:0;user-select:none}
+.flipcard:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.flip-inner{position:relative;width:100%;min-height:290px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.9,.4,1)}
+.flipcard.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;padding:26px 18px}
+.flip-back{transform:rotateY(180deg);overflow-y:auto;text-align:left;padding:20px 16px}
+.flip-back h3{text-align:center;margin-bottom:10px}
+.flip-back .q{font-family:var(--head);font-size:.72rem;color:var(--ink);margin:10px 0 2px}
+.flip-back .a{font-size:.82rem;color:var(--gray);margin:0}
+.fliphint{font-family:var(--head);font-size:.68rem;letter-spacing:.06em;color:#aaa;margin-top:10px}
+@media (prefers-reduced-motion: reduce){.flip-inner{transition:none}}
 
 /* photo hero */
 .hero.photo{background:linear-gradient(90deg,rgba(10,10,10,.88) 0%,rgba(10,10,10,.55) 55%,rgba(10,10,10,.25) 100%),var(--hero-img) center/cover no-repeat #111;color:#fff}
@@ -876,23 +887,25 @@ def csg_page():
     write(path, layout(path, title, desc, body, [faq_schema(faqs), breadcrumbs([("Home", "/"), ("Customer-Supplied Garments", path)])]))
 
 # ---------------------------------------------------------------- OTHER PAGES
+# Each entry: (name, role, photo, [(question, answer), ...])
+# OWNER: paste new Q&As into each person's list; the card back renders all of them.
 TEAM = [
-    ("Megan Griffith", "art director + owner", "All things art, and I can dip into most of the production, administrative, and financial things as necessary.", "megan"),
-    ("Ryan Toney", "grand poobah of many hats + owner", "Webstores, social media, production, sales, a little bit of everything. Plus show tunes, performed without request.", "ryan"),
-    ("Jacob Whitman", "sales director", "People and process wrangler.", "jacob"),
-    ("Kim Taylor", "production manager, embroidery", "The wizard at the embroidery machine and the fixer around here. The needle and thread is my home.", "kim"),
-    ("Margo Niemeyer", "production manager, screen printing", "If you order a single item from P&M, it touches my hands. I manage intake and keep production moving from start to finish.", "margo"),
-    ("Amanda Clark", "finance manager", "I help folks narrow down thousands of options to what best suits them, and come up with ideas they never knew were possible.", "amanda"),
-    ("Hannah Posey", "account manager", "I work with schools and sports organizations on apparel and uniforms they can pride themselves on.", "hannah"),
-    ("Alexis Davis", "account manager", "I help individuals and companies get apparel and swag they enjoy wearing.", "alexis"),
-    ("Abby Penton", "account manager", "I work with dance studios, churches, and all types of personal orders.", "abby"),
-    ("Alex Hernandez", "graphic designer", "I design custom artwork and mockup proofs, plus video and social media design for P&M marketing.", "alex"),
-    ("Maggie Barbour", "press operator", "I reclaim screens, coat them, and burn films. I also help on the embroidery side when needed.", "maggie"),
-    ("Bailee Bishop", "press operator", "Reclaiming, coating, and rinsing screens, plus pulling and boxing orders.", "bailee"),
-    ("Taylor Price", "embroidery tech", "I hoop garments and put them on a machine to get a brand new design.", "taylor"),
-    ("Nicole Printy", "embroidery tech", "I work with the embroidery team to get the best designs onto each piece.", "nicole"),
-    ("Tess Collins", "shipping specialist", "In charge of checking in orders, compiling, and shipping them out.", "tess"),
-    ("Quinn Taylor", "production assistant", "I help make shirts.", "quinn"),
+    ("Megan Griffith", "art director + owner", "megan", [("what would you say ya' do here?", "All things art, and I can dip into most of the production, administrative, and financial things as necessary.")]),
+    ("Ryan Toney", "grand poobah of many hats + owner", "ryan", [("what would you say ya' do here?", "Webstores, social media, production, sales, a little bit of everything. Plus show tunes, performed without request.")]),
+    ("Jacob Whitman", "sales director", "jacob", [("what would you say ya' do here?", "People and process wrangler.")]),
+    ("Kim Taylor", "production manager, embroidery", "kim", [("what would you say ya' do here?", "The wizard at the embroidery machine and the fixer around here. The needle and thread is my home.")]),
+    ("Margo Niemeyer", "production manager, screen printing", "margo", [("what would you say ya' do here?", "If you order a single item from P&M, it touches my hands. I manage intake and keep production moving from start to finish.")]),
+    ("Amanda Clark", "finance manager", "amanda", [("what would you say ya' do here?", "I help folks narrow down thousands of options to what best suits them, and come up with ideas they never knew were possible.")]),
+    ("Hannah Posey", "account manager", "hannah", [("what would you say ya' do here?", "I work with schools and sports organizations on apparel and uniforms they can pride themselves on.")]),
+    ("Alexis Davis", "account manager", "alexis", [("what would you say ya' do here?", "I help individuals and companies get apparel and swag they enjoy wearing.")]),
+    ("Abby Penton", "account manager", "abby", [("what would you say ya' do here?", "I work with dance studios, churches, and all types of personal orders.")]),
+    ("Alex Hernandez", "graphic designer", "alex", [("what would you say ya' do here?", "I design custom artwork and mockup proofs, plus video and social media design for P&M marketing.")]),
+    ("Maggie Barbour", "press operator", "maggie", [("what would you say ya' do here?", "I reclaim screens, coat them, and burn films. I also help on the embroidery side when needed.")]),
+    ("Bailee Bishop", "press operator", "bailee", [("what would you say ya' do here?", "Reclaiming, coating, and rinsing screens, plus pulling and boxing orders.")]),
+    ("Taylor Price", "embroidery tech", "taylor", [("what would you say ya' do here?", "I hoop garments and put them on a machine to get a brand new design.")]),
+    ("Nicole Printy", "embroidery tech", "nicole", [("what would you say ya' do here?", "I work with the embroidery team to get the best designs onto each piece.")]),
+    ("Tess Collins", "shipping specialist", "tess", [("what would you say ya' do here?", "In charge of checking in orders, compiling, and shipping them out.")]),
+    ("Quinn Taylor", "production assistant", "quinn", [("what would you say ya' do here?", "I help make shirts.")]),
 ]
 
 def about():
@@ -927,10 +940,14 @@ def about():
     <h2>the crew.</h2>
     <p style="max-width:60ch;margin-bottom:26px">Sixteen people who print it, stitch it, pack it, and answer the phone when you call. In their own words:</p>
     <div class="teamgrid">{"".join(
-        f'<div class="teamcard">'
+        f'<div class="teamcard flipcard" tabindex="0" role="button" aria-pressed="false" aria-label="Meet {n}, {r}">'
+        f'<div class="flip-inner"><div class="flip-front">'
         f'<img src="/assets/photos/team/{p}.jpg" alt="{n}, {r} at P&M Apparel" loading="lazy" width="240" height="240">'
-        f'<h3>{n.lower()}.</h3><p><b>{r}</b></p><p>{q}</p></div>'
-        for n, r, q, p in TEAM)}</div>
+        f'<h3>{n.lower()}.</h3><p><b>{r}</b></p><p class="fliphint">tap to meet me</p></div>'
+        f'<div class="flip-back"><h3>{n.split()[0].lower()}.</h3>'
+        + "".join(f'<p class="q">{q}</p><p class="a">{a}</p>' for q, a in qa)
+        + '</div></div></div>'
+        for n, r, p, qa in TEAM)}</div>
   </div>
 </section>
 <section class="imgband"><img src="/assets/photos/building-sign-close.jpg" alt="The P&M Apparel building and sign in Polk City" loading="lazy"></section>
@@ -941,14 +958,21 @@ def about():
     <div class="stat"><b>100%</b><span>of our art is custom, made in-house</span></div>
   </div>
 </section>
-{cta_band("come say hi.", "1100 S 5th St in Polk City. Monday to Friday, 8am to 5pm.")}"""
+{cta_band("come say hi.", "1100 S 5th St in Polk City. Monday to Friday, 8am to 5pm.")}
+<script>
+document.querySelectorAll(".flipcard").forEach(function(c){{
+  function flip(){{var on=c.classList.toggle("flipped");c.setAttribute("aria-pressed",on);}}
+  c.addEventListener("click",flip);
+  c.addEventListener("keydown",function(e){{if(e.key==="Enter"||e.key===" "){{e.preventDefault();flip();}}}});
+}});
+</script>"""
     title = "About P&M Apparel | Woman-Owned Custom Apparel in Iowa Since 1987"
     desc = "P&M Apparel is a woman-owned, third-generation family business in Polk City, Iowa. From Phyllis and Melvin's basement in 1987 to shipping worldwide today."
     schema = {
         "@context": "https://schema.org", "@type": "AboutPage",
         "url": BASE + path, "about": {"@id": BASE + "/#business"},
     }
-    write(path, layout(path, title, desc, body, [{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": BASE + "/#business", "employee": [{"@type": "Person", "name": n, "jobTitle": r, "image": BASE + "/assets/photos/team/" + p + ".jpg", "worksFor": {"@id": BASE + "/#business"}} for n, r, q, p in TEAM]}] + [schema, breadcrumbs([("Home", "/"), ("About Us", path)])]))
+    write(path, layout(path, title, desc, body, [{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": BASE + "/#business", "employee": [{"@type": "Person", "name": n, "jobTitle": r, "image": BASE + "/assets/photos/team/" + p + ".jpg", "worksFor": {"@id": BASE + "/#business"}} for n, r, p, qa in TEAM]}] + [schema, breadcrumbs([("Home", "/"), ("About Us", path)])]))
 
 def iowa_on_demand():
     path = "/iowa-on-demand/"

@@ -131,6 +131,17 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .teamcard img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 22%;display:block;margin:0 auto 12px}
 .teamcard h3{font-size:.95rem;margin-bottom:2px}
 .teamcard p{color:var(--gray);font-size:.85rem;margin:0}
+.flipcard{cursor:pointer;perspective:1200px;background:none;padding:0;user-select:none}
+.flipcard:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.flip-inner{position:relative;width:100%;min-height:290px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.9,.4,1)}
+.flipcard.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;padding:26px 18px}
+.flip-back{transform:rotateY(180deg);overflow-y:auto;text-align:left;padding:20px 16px}
+.flip-back h3{text-align:center;margin-bottom:10px}
+.flip-back .q{font-family:var(--head);font-size:.72rem;color:var(--ink);margin:10px 0 2px}
+.flip-back .a{font-size:.82rem;color:var(--gray);margin:0}
+.fliphint{font-family:var(--head);font-size:.68rem;letter-spacing:.06em;color:#aaa;margin-top:10px}
+@media (prefers-reduced-motion: reduce){.flip-inner{transition:none}}
 
 /* photo hero */
 .hero.photo{background:linear-gradient(90deg,rgba(10,10,10,.88) 0%,rgba(10,10,10,.55) 55%,rgba(10,10,10,.25) 100%),var(--hero-img) center/cover no-repeat #111;color:#fff}
