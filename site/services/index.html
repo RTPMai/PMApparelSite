@@ -157,8 +157,8 @@
       t.push(sel.sti===2?"Stitch count is embroidery's color count. A jacket-back design carries a lot more thread time than a chest logo.":"New logo? Digitizing is a one-time $35, then it's on file forever. Reorders never pay it again.");
     }else{
       if(sel.qty===0)t.push("DTF's 1-piece minimum and zero per-color setup make it the small-run champion.");
-      else t.push("No screens to burn with DTF, so quantity helps gently instead of dramatically.");
-      if(sel.col===0&&sel.qty>2)t.push("At this quantity, a simple design might screen-print for less — ask us to quote it both ways.");
+      else if(sel.qty>=2)t.push("Heads up: every DTF piece is placed by hand, so there's no bulk discount. At this quantity, a simple design often screen-prints for less — ask us to quote it both ways.");
+      else t.push("Every DTF piece is placed by hand, one at a time, so per-piece price stays flat as your order grows. No bulk discount, no bulk penalty.");
     }
     if(sel.loc>0)t.push("Each location is a separate run. One strong spot often says more than two.");
     if(sel.gar===2)t.push("The blank drives cost more than the decoration does — the garment can cost more than the art on it.");
@@ -169,7 +169,7 @@
   function score(){
     if(sel.mth===0)return 34-sel.qty*9+sel.col*8+sel.loc*8+sel.gar*9+sel.spd*8;
     if(sel.mth===1)return 33-sel.qty*4+sel.sti*14+sel.loc*8+sel.gar*7+sel.spd*8;
-    return 31-sel.qty*5+sel.loc*8+sel.gar*9+sel.spd*8;
+    return 29+sel.loc*8+sel.gar*9+sel.spd*8;
   }
   function render(){
     gCol.style.display=sel.mth===0?"":"none";

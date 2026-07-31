@@ -713,8 +713,8 @@ def price_machine(dark=False):
       t.push(sel.sti===2?"Stitch count is embroidery's color count. A jacket-back design carries a lot more thread time than a chest logo.":"New logo? Digitizing is a one-time $35, then it's on file forever. Reorders never pay it again.");
     }else{
       if(sel.qty===0)t.push("DTF's 1-piece minimum and zero per-color setup make it the small-run champion.");
-      else t.push("No screens to burn with DTF, so quantity helps gently instead of dramatically.");
-      if(sel.col===0&&sel.qty>2)t.push("At this quantity, a simple design might screen-print for less \u2014 ask us to quote it both ways.");
+      else if(sel.qty>=2)t.push("Heads up: every DTF piece is placed by hand, so there's no bulk discount. At this quantity, a simple design often screen-prints for less \u2014 ask us to quote it both ways.");
+      else t.push("Every DTF piece is placed by hand, one at a time, so per-piece price stays flat as your order grows. No bulk discount, no bulk penalty.");
     }
     if(sel.loc>0)t.push("Each location is a separate run. One strong spot often says more than two.");
     if(sel.gar===2)t.push("The blank drives cost more than the decoration does \u2014 the garment can cost more than the art on it.");
@@ -725,7 +725,7 @@ def price_machine(dark=False):
   function score(){
     if(sel.mth===0)return 34-sel.qty*9+sel.col*8+sel.loc*8+sel.gar*9+sel.spd*8;
     if(sel.mth===1)return 33-sel.qty*4+sel.sti*14+sel.loc*8+sel.gar*7+sel.spd*8;
-    return 31-sel.qty*5+sel.loc*8+sel.gar*9+sel.spd*8;
+    return 29+sel.loc*8+sel.gar*9+sel.spd*8;
   }
   function render(){
     gCol.style.display=sel.mth===0?"":"none";
@@ -755,7 +755,7 @@ def pricing():
     faqs = [
         ("Why doesn't P&M Apparel post prices online?", "Because a posted grid would be wrong within the week. Blank garment costs move constantly, and no two jobs share the same art, color count, locations, and quantity. Instead of a stale price list, we explain exactly what drives the number and return real quotes within about 24 hours."),
         ("What fees does P&M Apparel put in writing?", "A one-time $35 digitizing fee for new embroidery logos (then it's on file forever). Custom artwork at $100 per hour, with the first 30 minutes free on production orders. A 50% deposit sends your job into art. Quotes are free, and online team stores are free to set up."),
-        ("What's the cheapest way to print custom shirts?", "One ink color, one print location, a basic cotton tee, ordered at quantity on the standard 8-to-10-day timeline. Quantity is the biggest lever: per-piece pricing improves at 12, 24, 48, and 144 pieces."),
+        ("What's the cheapest way to print custom shirts?", "One ink color, one print location, a basic cotton tee, ordered at quantity on the standard 8-to-10-day timeline. Quantity is screen printing's biggest lever: per-piece pricing improves at 12, 24, 48, and 144 pieces. (DTF is the exception — it's hand-placed piece by piece, so its price stays flat at any quantity.)"),
         ("Are there minimums?", "Screen printing minimums scale with color count: 12 pieces for 1 to 3 colors, 24 for 4 to 6, and 48 for 7 to 10. Embroidery and DTF have 1-piece minimums."),
         ("Is an instant online price accurate?", "Instant calculators quote a formula, not your order. They can't see that your art needs cleanup, that a different blank saves you money, or that DTF beats screens at your quantity. A human quote catches all three, and ours comes back in about 24 hours."),
     ]
@@ -775,7 +775,7 @@ def pricing():
     <p>You won't find a price grid on this page, and here's the real reason: blank garment prices change constantly, and no two jobs are the same. A grid we posted today would quietly lie to you by Friday. What we can do &mdash; and what almost nobody in custom apparel does &mdash; is show you the whole machine: every variable that moves your per-piece price, which direction it moves it, and the handful of fees we're happy to put in writing.</p>
     <p>Then, when you're ready, a human (not a formula) reads your actual art and your actual order and sends a real quote, usually within 24 hours.</p>
     <h2>the six things that move your price.</h2>
-    <p><b>1. Quantity.</b> The biggest lever by far. Setup work (burning screens, loading the press) costs the same whether we print 12 shirts or 400, so the more pieces that setup spreads across, the less each piece carries. Price breaks land at 12, 24, 48, and 144 pieces.</p>
+    <p><b>1. Quantity.</b> The biggest lever by far &mdash; in screen printing. Setup work (burning screens, loading the press) costs the same whether we print 12 shirts or 400, so the more pieces that setup spreads across, the less each piece carries. Price breaks land at 12, 24, 48, and 144 pieces. The exception is <a href="/services/fusion/">DTF</a>: every piece is placed by hand, one at a time, so its per-piece price stays flat at any quantity &mdash; no bulk discount, no bulk penalty. That's exactly why big simple orders belong on the press and small detailed ones belong on DTF.</p>
     <p><b>2. Ink colors.</b> In screen printing, every color is its own screen, its own setup, and its own station on the press. A one-color design is the oldest budget trick in the book. (Under 12 pieces, full-color <a href="/services/fusion/">DTF</a> sidesteps color-count math entirely.)</p>
     <p><b>3. Print locations.</b> Front, back, sleeve &mdash; each one is a separate run through the press. A single strong front print often beats front-and-back on both budget and design.</p>
     <p><b>4. The garment itself.</b> The blank usually drives cost more than the decoration does. A basic tee, a retail-soft tee, and a hoodie can be the same print at three very different prices. We'll happily suggest a substitute blank that saves money without looking like it did.</p>
@@ -1412,7 +1412,7 @@ def blog():
          """
 <p>Everyone asks us how much shirts cost. Almost nobody asks the better question: how do I make them cost less? Here are the seven levers that actually move the number, straight from the people who build the quotes. (For the full anatomy of a quote, see <a href="/pricing/">how pricing works</a>.)</p>
 <h3>1. order together, not in waves.</h3>
-<p>Quantity is the single biggest lever in custom apparel. Setup costs the same for 12 shirts as for 400, so every extra piece spreads it thinner. Price breaks land at 12, 24, 48, and 144 pieces. Three separate orders of 20 will always cost more than one order of 60 &mdash; so if the marketing shirts, the event shirts, and the new-hire shirts share a design, order them in one run.</p>
+<p>Quantity is the single biggest lever in screen printing. Setup costs the same for 12 shirts as for 400, so every extra piece spreads it thinner. Price breaks land at 12, 24, 48, and 144 pieces. Three separate orders of 20 will always cost more than one order of 60 &mdash; so if the marketing shirts, the event shirts, and the new-hire shirts share a design, order them in one run. (One honest exception: DTF is placed by hand, piece by piece, so its price stays flat at any quantity &mdash; which is why big orders usually move to the press.)</p>
 <h3>2. cut an ink color.</h3>
 <p>In screen printing, every color is its own screen, its own setup, and its own pass on the press. A three-color design reduced to one smart color doesn't just save money; it usually looks bolder, too. Great one-color design is the oldest budget hack in the industry.</p>
 <h3>3. skip the second location.</h3>
