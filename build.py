@@ -12,7 +12,13 @@ GBP_WRITE_URL = f"https://search.google.com/local/writereview?placeid={GBP_PLACE
 GBP_RATING = "4.9"
 GBP_COUNT = "323"
 
-TODAY = "2026-07-28"
+TODAY = "2026-07-31"
+
+# Flyover Con. Update these when the next edition is announced, re-run build.py.
+FLYOVER_DATES_HUMAN = "april 16–18, 2026"
+FLYOVER_START = "2026-04-16"
+FLYOVER_END = "2026-04-18"
+FLYOVER_URL = None  # when the dedicated flyovercon site launches, put its URL here
 UPDATED_HUMAN = datetime.date.fromisoformat(TODAY).strftime("%B %Y")
 
 PHONE = "(515) 984-7740"
@@ -79,6 +85,7 @@ LOCAL_BUSINESS = {
 NAV = [
     ("home.", "/"),
     ("services.", "/services/"),
+    ("pricing.", "/pricing/"),
     ("iowa on demand.", "/iowa-on-demand/"),
     ("about.", "/about-us/"),
     ("faq.", "/faq/"),
@@ -170,8 +177,9 @@ a.cell:hover .cellsub,a.cell:focus .cellsub{color:#cfcfcf}
 .dark .cell{background:var(--ink);color:#fff}
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center}
-@media(max-width:700px){.stats{grid-template-columns:1fr}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px 24px;text-align:center}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr);gap:26px 14px}}
+@media(max-width:700px){.stat b{font-size:1.7rem}.stat span{font-size:.82rem}}
 .stat b{font-family:var(--head);font-size:clamp(2rem,5vw,3.2rem);display:block}
 .stat span{color:#bdbdbd;font-size:.95rem}
 
@@ -297,6 +305,63 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .skip:focus{left:12px;top:12px}
 :focus-visible{outline:3px solid #1a1a1a;outline-offset:2px}
 .dark :focus-visible,.texture :focus-visible,header :focus-visible,footer.site :focus-visible{outline-color:#fff}
+
+/* trust strip */
+.truststrip{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 34px}
+.truststrip span{font-family:var(--head);font-size:.8rem;letter-spacing:.02em;border:2px solid var(--ink);padding:9px 14px;background:#fff}
+.dark .truststrip span{border-color:#fff;background:transparent;color:#fff}
+
+/* price machine */
+.pbuild{border:3px solid var(--ink);background:#fff;color:var(--ink);max-width:760px}
+.pbuild-head{background:var(--ink);color:#fff;padding:16px 22px;font-family:var(--head);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pbuild-head span{font-size:.95rem}
+.pbuild-body{padding:24px 22px}
+.pb-group{margin-bottom:20px}
+.pb-group>b{font-family:var(--head);font-size:.78rem;letter-spacing:.06em;display:block;margin-bottom:8px}
+.pb-opts{display:flex;flex-wrap:wrap;gap:8px}
+.pb-opts button{font-family:var(--head);font-size:.8rem;padding:11px 14px;background:#fff;border:2px solid var(--ink);cursor:pointer;transition:background .12s,color .12s;min-height:44px}
+.pb-opts button:hover,.pb-opts button:focus{background:#efefef}
+.pb-opts button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.pmeter{margin:26px 0 6px}
+.pmeter-track{height:22px;border:2px solid var(--ink);background:#fff;position:relative;overflow:hidden}
+.pmeter-track i{display:block;height:100%;background:var(--ink);transition:width .45s cubic-bezier(.3,1.2,.4,1)}
+.pmeter-scale{display:flex;justify-content:space-between;font-family:var(--head);font-size:.68rem;color:#8a8a8a;margin-top:5px}
+.pmeter-label{font-family:var(--head);font-size:1.25rem;margin:14px 0 4px}
+.pmeter-label.bump{animation:qstamp .4s cubic-bezier(.2,1.6,.4,1) both}
+.pb-tips{min-height:52px}
+.pb-tips p{font-size:.92rem;color:#555;font-style:italic;margin:0 0 6px}
+.pb-fine{font-size:.8rem;color:#8a8a8a;margin:16px 0 0}
+.pb-cta{margin-top:18px}
+@media (prefers-reduced-motion:reduce){.pmeter-track i{transition:none}.pmeter-label.bump{animation:none}}
+
+/* mobile pass */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:rgba(0,0,0,.08)}
+@media(max-width:700px){
+  section{padding:52px 0}
+  .band{padding:36px 0}
+  .hero{padding:72px 0 60px}
+  .hero p.lead{font-size:1.1rem}
+  .imgband img{max-height:300px}
+  .quiz-body,.pbuild-body{padding:20px 16px}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .prose h2{margin-top:1.3em}
+}
+@media(max-width:520px){
+  .btn-row{flex-direction:column;align-items:stretch}
+  .btn-row .cta-btn{text-align:center;padding:14px 18px}
+  .teamcard img{width:96px;height:96px}
+  .teamcard,.flip-front,.flip-back{padding:20px 12px}
+  .cell{padding:22px 18px}
+  .splitrow .sr-text{padding:40px 20px}
+  .wrap{padding:0 18px}
+}
+@media(max-width:900px){
+  details.mnav summary{min-height:44px;display:flex;align-items:center}
+  .mnav-panel{max-height:calc(100vh - 80px);overflow-y:auto}
+  .mnav-panel a{padding:13px 0;font-size:1.05rem}
+  header .cta-btn{padding:10px 14px;font-size:.78rem}
+}
 """
 
 def esc(s): return html.escape(s, quote=True)
@@ -372,6 +437,8 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
       <h3>more.</h3>
       <ul class="flist">
         <li><a href="{QUOTE_URL}">Get a quote</a></li>
+        <li><a href="/pricing/">How pricing works</a></li>
+        <li><a href="/flyover-con/">Flyover Con</a></li>
         <li><a href="{STORES_URL}">Online stores</a></li>
         <li><a href="{IOD_URL}">Iowa On Demand</a></li>
         <li><a href="/shirts-for-scholarships/">Shirts for Scholarships</a></li>
@@ -534,8 +601,12 @@ def home():
 <section class="dark band">
   <div class="wrap stats">
     <div class="stat"><b>1987</b><span>three generations of family under one roof</span></div>
+    <div class="stat"><b>3,738</b><span>orders out the door in 2025 alone</span></div>
     <div class="stat"><b>50 + 29</b><span>states and countries we shipped to last year</span></div>
+    <div class="stat"><b>&#9733; {GBP_RATING}</b><span>average across {GBP_COUNT} Google reviews</span></div>
     <div class="stat"><b>90%</b><span>of our business comes from referrals</span></div>
+    <div class="stat"><b>24 hrs</b><span>typical turnaround on a quote</span></div>
+    <div class="stat"><b>16</b><span>real humans on the crew. zero robots</span></div>
     <div class="stat"><b>1 to 10,000+</b><span>pieces per order. no job too small or too big</span></div>
   </div>
 </section>
@@ -571,7 +642,14 @@ def home():
       <a href="{GBP_READ_URL}" rel="noopener">read them all</a>
       <a href="{GBP_WRITE_URL}" rel="noopener">leave one</a>
     </div>
+    <div class="truststrip">{"".join(f"<span>{esc(o)}</span>" for t, n, o in testimonials)}<span>12 Iowa school districts</span><span>+ a few thousand more</span></div>
     {quotes}
+  </div>
+</section>
+<section class="band" style="border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px">
+    <div><h2 style="margin-bottom:.2em">flyover con.</h2><p style="color:#555;margin:0">An apparel industry event inside our working print shop. Real production, honest tours, free to attend.</p></div>
+    <a class="cta-btn inv" href="/flyover-con/">see the event.</a>
   </div>
 </section>
 <section class="dark band">
@@ -586,6 +664,207 @@ def home():
     write("/", layout("/", title, desc, body, [review_schema, website_schema]))
 
 # ---------------------------------------------------------------- SERVICES INDEX
+def price_machine(dark=False):
+    """The gamified 'what moves your price' widget. Plain-HTML page content stays
+    readable without JS; this is an enhancement layer, not hidden content."""
+    tone = ' style="color:#dcdcdc"' if dark else ""
+    block = """
+<div class="pbuild" id="pbuild">
+  <div class="pbuild-head"><span>the price machine.</span><span style="font-size:.7rem;opacity:.75">direction, not dollars</span></div>
+  <div class="pbuild-body">
+    <div class="pb-group"><b>how many pieces?</b><div class="pb-opts" data-k="qty">
+      <button type="button">1&ndash;11</button><button type="button" aria-pressed="true">12&ndash;23</button><button type="button">24&ndash;47</button><button type="button">48&ndash;143</button><button type="button">144+</button></div></div>
+    <div class="pb-group"><b>how many ink colors?</b><div class="pb-opts" data-k="col">
+      <button type="button" aria-pressed="true">1 color</button><button type="button">2&ndash;3</button><button type="button">4&ndash;6</button><button type="button">7&ndash;10</button></div></div>
+    <div class="pb-group"><b>how many print locations?</b><div class="pb-opts" data-k="loc">
+      <button type="button" aria-pressed="true">front only</button><button type="button">front + back</button><button type="button">3+ spots</button></div></div>
+    <div class="pb-group"><b>what's it going on?</b><div class="pb-opts" data-k="gar">
+      <button type="button" aria-pressed="true">basic tee</button><button type="button">retail-soft tee</button><button type="button">hoodie / premium</button></div></div>
+    <div class="pb-group"><b>how fast?</b><div class="pb-opts" data-k="spd">
+      <button type="button" aria-pressed="true">standard, 8&ndash;10 days</button><button type="button">rush it</button></div></div>
+    <div class="pmeter">
+      <div class="pmeter-track"><i id="pb-fill" style="width:42%"></i></div>
+      <div class="pmeter-scale"><span>$ per piece</span><span>$$$$$ per piece</span></div>
+      <p class="pmeter-label" id="pb-label">great value.</p>
+      <div class="pb-tips" id="pb-tips"></div>
+    </div>
+    <p class="pb-cta"><a class="cta-btn inv" href="__QUOTE__">get the real number.</a></p>
+    <p class="pb-fine">This machine shows which way the number moves, not the number itself. For that, a human reads your actual art and order &mdash; and gets a quote back to you within about 24 hours.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var pb=document.getElementById("pbuild");if(!pb)return;
+  var sel={qty:1,col:0,loc:0,gar:0,spd:0};
+  var groups=pb.querySelectorAll(".pb-opts");
+  var fill=document.getElementById("pb-fill"),label=document.getElementById("pb-label"),tips=document.getElementById("pb-tips");
+  var BANDS=[[25,"budget sweet spot."],[45,"great value."],[65,"middle of the road."],[85,"premium territory."],[101,"top shelf."]];
+  var QTIP=["Hit 12 pieces and screen printing opens up. Under 12, full-color DTF usually wins \u2014 no per-color setup at all.",
+            "Solid start. The next price break lands at 24 pieces.",
+            "Nice. The per-piece math gets noticeably friendlier at 48.",
+            "This is where per-piece pricing really starts working for you.",
+            "144 and up: our best per-piece pricing. The presses purr at this volume."];
+  function tipList(){
+    var t=[QTIP[sel.qty]];
+    if(sel.col>0)t.push("Every ink color needs its own screen and its own setup. One-color designs are the oldest budget hack in the book.");
+    if(sel.loc>0)t.push("Each location is a separate trip through the press. A big front print often says more than front-and-back.");
+    if(sel.gar===2)t.push("The blank drives cost more than the print does \u2014 a hoodie can cost more than the printing on it.");
+    if(sel.gar===1)t.push("Retail-soft blanks cost more per piece, but people wear them for years. Sometimes that IS the budget move.");
+    if(sel.spd===1)t.push("Rush is real (same-day if stock allows), but the standard timeline keeps the price standard.");
+    if(t.length===1&&sel.qty>=3)t.push("This is about as optimized as custom apparel gets. Well played.");
+    return t.slice(0,2);
+  }
+  function render(){
+    var score=50-sel.qty*10+sel.col*8+sel.loc*8+sel.gar*9+sel.spd*8;
+    score=Math.max(6,Math.min(98,score));
+    fill.style.width=score+"%";
+    var name=BANDS[0][1];for(var i=0;i<BANDS.length;i++){if(score<BANDS[i][0]){name=BANDS[i][1];break;}}
+    if(label.textContent!==name){label.textContent=name;label.classList.remove("bump");void label.offsetWidth;label.classList.add("bump");}
+    tips.innerHTML=tipList().map(function(s){return "<p>"+s+"</p>";}).join("");
+  }
+  groups.forEach(function(g){
+    var k=g.getAttribute("data-k"),btns=g.querySelectorAll("button");
+    btns.forEach(function(b,i){b.addEventListener("click",function(){
+      btns.forEach(function(x){x.setAttribute("aria-pressed","false");});
+      b.setAttribute("aria-pressed","true");sel[k]=i;render();
+    });});
+  });
+  render();
+})();
+</script>"""
+    return block.replace("__QUOTE__", QUOTE_URL).replace("__TONE__", tone)
+
+# ---------------------------------------------------------------- PRICING
+def pricing():
+    path = "/pricing/"
+    faqs = [
+        ("Why doesn't P&M Apparel post prices online?", "Because a posted grid would be wrong within the week. Blank garment costs move constantly, and no two jobs share the same art, color count, locations, and quantity. Instead of a stale price list, we explain exactly what drives the number and return real quotes within about 24 hours."),
+        ("What fees does P&M Apparel put in writing?", "A one-time $35 digitizing fee for new embroidery logos (then it's on file forever). Custom artwork at $100 per hour, with the first 30 minutes free on production orders. A 50% deposit sends your job into art. Quotes are free, and online team stores are free to set up."),
+        ("What's the cheapest way to print custom shirts?", "One ink color, one print location, a basic cotton tee, ordered at quantity on the standard 8-to-10-day timeline. Quantity is the biggest lever: per-piece pricing improves at 12, 24, 48, and 144 pieces."),
+        ("Are there minimums?", "Screen printing minimums scale with color count: 12 pieces for 1 to 3 colors, 24 for 4 to 6, and 48 for 7 to 10. Embroidery and DTF have 1-piece minimums."),
+        ("Is an instant online price accurate?", "Instant calculators quote a formula, not your order. They can't see that your art needs cleanup, that a different blank saves you money, or that DTF beats screens at your quantity. A human quote catches all three, and ours comes back in about 24 hours."),
+    ]
+    faq_html = "".join(
+        f'<details class="faq"><summary><h3>{esc(q)}</h3></summary><div class="a"><p>{a}</p></div></details>'
+        for q, a in faqs)
+    body = f"""
+<section class="texture hero" style="padding:84px 0 72px">
+  <div class="wrap">
+    <h1>how pricing works.</h1>
+    <p class="lead">No mystery, no gotchas, no "call for pricing" runaround. Here's exactly what moves the number on your quote &mdash; and how to move it in your favor.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap prose">
+    <h2>the honest part first.</h2>
+    <p>You won't find a price grid on this page, and here's the real reason: blank garment prices change constantly, and no two jobs are the same. A grid we posted today would quietly lie to you by Friday. What we can do &mdash; and what almost nobody in custom apparel does &mdash; is show you the whole machine: every variable that moves your per-piece price, which direction it moves it, and the handful of fees we're happy to put in writing.</p>
+    <p>Then, when you're ready, a human (not a formula) reads your actual art and your actual order and sends a real quote, usually within 24 hours.</p>
+    <h2>the six things that move your price.</h2>
+    <p><b>1. Quantity.</b> The biggest lever by far. Setup work (burning screens, loading the press) costs the same whether we print 12 shirts or 400, so the more pieces that setup spreads across, the less each piece carries. Price breaks land at 12, 24, 48, and 144 pieces.</p>
+    <p><b>2. Ink colors.</b> In screen printing, every color is its own screen, its own setup, and its own station on the press. A one-color design is the oldest budget trick in the book. (Under 12 pieces, full-color <a href="/services/fusion/">DTF</a> sidesteps color-count math entirely.)</p>
+    <p><b>3. Print locations.</b> Front, back, sleeve &mdash; each one is a separate run through the press. A single strong front print often beats front-and-back on both budget and design.</p>
+    <p><b>4. The garment itself.</b> The blank usually drives cost more than the decoration does. A basic tee, a retail-soft tee, and a hoodie can be the same print at three very different prices. We'll happily suggest a substitute blank that saves money without looking like it did.</p>
+    <p><b>5. Artwork.</b> Print-ready art costs nothing extra. Art that needs recreating or designing from scratch is billed at $100 per hour &mdash; and the first 30 minutes are free with any production order, which covers most cleanup jobs entirely.</p>
+    <p><b>6. Timeline.</b> Standard turnaround is 8 to 10 business days after art approval. Rush is genuinely available (same day if garments are in stock), but the standard timeline keeps the price standard.</p>
+    <h2>the fees we put in writing.</h2>
+    <ul>
+      <li><b>Quotes: free.</b> Back to you in about 24 hours.</li>
+      <li><b>Embroidery digitizing: $35, once.</b> Your logo goes on file forever; reorders never pay it again.</li>
+      <li><b>Custom art: $100/hr,</b> first 30 minutes free with a production order.</li>
+      <li><b>Deposit: 50%</b> sends your job into art. Nothing prints before you approve a proof.</li>
+      <li><b>Online team stores: free</b> to build, host, and manage. Really.</li>
+    </ul>
+  </div>
+</section>
+<section class="dark">
+  <div class="wrap">
+    <h2>play with the machine.</h2>
+    <p style="color:#dcdcdc;max-width:60ch;margin-bottom:26px">Flip the levers and watch which way your per-piece price moves. The machine coaches; the humans quote.</p>
+    {price_machine(dark=True)}
+  </div>
+</section>
+<section>
+  <div class="wrap prose">
+    <h2>frequently asked, honestly answered.</h2>
+    {faq_html}
+    <p style="margin-top:22px">Want the play-by-play on stretching a budget? Read <a href="/blog/how-to-lower-per-shirt-cost/">how to lower your per-shirt cost</a>, or <a href="/blog/how-quotes-work/">how our quotes work</a>.</p>
+  </div>
+</section>
+{cta_band("ready for a real number?", "Send us the idea. A human quotes it within about 24 hours, and the quote is free.")}"""
+    title = "How Custom Apparel Pricing Works | P&M Apparel, Polk City IA"
+    desc = "The honest guide to custom t-shirt and embroidery pricing: the six variables that move your per-piece price, the fees we put in writing, and an interactive price machine. No gotchas."
+    write(path, layout(path, title, desc, body,
+                       [faq_schema(faqs), breadcrumbs([("Home", "/"), ("Pricing", path)])]))
+
+# ---------------------------------------------------------------- FLYOVER CON
+def flyover():
+    path = "/flyover-con/"
+    event_schema = {
+        "@context": "https://schema.org", "@type": "Event",
+        "name": "Flyover Con",
+        "description": "An apparel decoration industry event held inside P&M Apparel's working print shop in Polk City, Iowa. Hands-on education, honest shop tours, live production, and real conversations. Built by printers, for printers. Attendance is free, made possible by sponsors.",
+        "startDate": FLYOVER_START, "endDate": FLYOVER_END,
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "isAccessibleForFree": True,
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD",
+                   "availability": "https://schema.org/InStock", "url": BASE + path},
+        "location": {"@type": "Place", "name": "P&M Apparel",
+                     "address": {"@type": "PostalAddress", "streetAddress": ADDR,
+                                 "addressLocality": CITY, "addressRegion": STATE,
+                                 "postalCode": ZIP, "addressCountry": "US"}},
+        "organizer": {"@id": BASE + "/#business"},
+    }
+    body = f"""
+<section class="texture hero" style="padding:84px 0 72px">
+  <div class="wrap">
+    <h1 class="eyebrow">{FLYOVER_DATES_HUMAN} // p&m apparel // polk city, iowa</h1>
+    <p class="mega">flyover con.</p>
+    <p class="lead">Some of the best ideas in this industry don't come from the biggest cities or the biggest companies. They come from hardworking shops in the middle of the country that are willing to open their doors and share what they've learned. This is us, opening ours.</p>
+    <div class="btn-row">
+      <a class="cta-btn" href="mailto:{EMAIL}?subject=Flyover%20Con">i want in.</a>
+      <a class="cta-btn" style="background:transparent;color:#fff" href="mailto:{EMAIL}?subject=Flyover%20Con%20sponsorship">sponsor the education.</a>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap prose">
+    <h2>not another hotel ballroom.</h2>
+    <p>You know the formula: convention center, carpet squares, badge scanners, a tote bag of brochures you'll never open. Flyover Con is intentionally none of that. It happens inside our working print shop in Polk City &mdash; presses running, dryers humming, real orders moving through the building while you're in it.</p>
+    <p>It's designed to feel like an industry reunion inside a real production facility. Fewer sales pitches, more honest conversations. Hands-on demonstrations instead of PowerPoint. Small enough that everyone can actually meet everyone. And the goal for every attendee is the same: leave with things you can implement Monday morning.</p>
+    <p>Built by printers, for printers. Shop life is the attraction.</p>
+  </div>
+</section>
+<section class="dark">
+  <div class="wrap">
+    <h2>what you'll actually get.</h2>
+    <div class="grid cols3">
+      <div class="cell"><h3>honest shop tours.</h3><p class="cellsub">No fake showroom, no staged demos. You'll walk an operating production floor and see the real workflow, mess and all.</p></div>
+      <div class="cell"><h3>live production.</h3><p class="cellsub">Equipment being used for actual orders, run by the people who run it every day. Ask them anything.</p></div>
+      <div class="cell"><h3>practical sessions.</h3><p class="cellsub">Hands-on education from working decorators. Knowledge you'll use, not brochures you'll recycle.</p></div>
+      <div class="cell"><h3>real conversations.</h3><p class="cellsub">Talk directly with owners and operators. No polished marketing talks, no scripts.</p></div>
+      <div class="cell"><h3>small on purpose.</h3><p class="cellsub">Sized so you can meet everyone in the building, including the vendors. Community over competition.</p></div>
+      <div class="cell"><h3>collaborative vendors.</h3><p class="cellsub">Sponsor interaction that feels like working together, not being worked over.</p></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap prose">
+    <h2>on the program.</h2>
+    <p><b>Nicole Pape &mdash; buying and selling pre-loved equipment.</b> How to evaluate used equipment before you wire the money, what the listings don't tell you, and how to avoid the expensive mistakes decorators usually learn the hard way.</p>
+    <p>More sessions and demonstrations are added as they're confirmed. Every one follows the same rule: practical over polished.</p>
+    <h2>free. on purpose.</h2>
+    <p>Attendance costs nothing, and that's not a promotion &mdash; it's the point. Education in this industry shouldn't be gated behind a badge fee. Sponsors make that possible, and sponsoring Flyover Con isn't buying ad space: it's face-to-face time with working decorators, a seat inside an authentic community event, and a direct hand in keeping industry education accessible.</p>
+    <p>If your company wants in on that, <a href="mailto:{EMAIL}?subject=Flyover%20Con%20sponsorship">let's talk sponsorship</a>.</p>
+    <h2>why we host it.</h2>
+    <p>Flyover Con is what P&M stands for, turned into an event: generosity, education, transparency, and helping other decorators succeed. We'd rather grow the whole industry than guard our corner of it. Open doors beat closed playbooks.</p>
+  </div>
+</section>
+{cta_band("want in?", "Email us with 'Flyover Con' in the subject line and we'll keep you in the loop on everything: " + EMAIL)}"""
+    title = "Flyover Con | An Industry Event Inside a Working Print Shop"
+    desc = f"Flyover Con: hands-on apparel decoration education inside P&M Apparel's working print shop in Polk City, Iowa. Honest shop tours, live production, real conversations. Free to attend."
+    write(path, layout(path, title, desc, body,
+                       [event_schema, breadcrumbs([("Home", "/"), ("Flyover Con", path)])]))
+
 def services_index():
     tiles = "".join(
         f'<a class="cell" href="{h}"><h3>{esc(n)}</h3><p class="cellsub">{esc(d)}</p></a>'
@@ -658,6 +937,13 @@ def services_index():
   ask(0);
 }})();
 </script>
+<section>
+  <div class="wrap">
+    <h2>know your method? now play with your price.</h2>
+    <p style="max-width:60ch;margin-bottom:26px">Nobody around here posts a price grid, and we explain <a href="/pricing/">exactly why</a>. But we'll do you one better: flip the levers and watch which way your per-piece price moves before you ever ask for a quote.</p>
+    {price_machine()}
+  </div>
+</section>
 {cta_band()}"""
     title = "Custom Apparel Services | Screen Printing, Embroidery & More | P&M Apparel"
     desc = "Screen printing, embroidery, DTF fusion transfers, sublimation, live event printing, online team stores, and promotional products in Polk City, Iowa."
@@ -1112,6 +1398,25 @@ def faq_page():
 def blog():
     path = "/blog/"
     posts = [
+        ("how to lower your per-shirt cost.", "/blog/how-to-lower-per-shirt-cost/",
+         "Seven real levers that bring your custom apparel price down, straight from the people who quote the jobs. No coupon codes, just math.",
+         """
+<p>Everyone asks us how much shirts cost. Almost nobody asks the better question: how do I make them cost less? Here are the seven levers that actually move the number, straight from the people who build the quotes. (For the full anatomy of a quote, see <a href="/pricing/">how pricing works</a>.)</p>
+<h3>1. order together, not in waves.</h3>
+<p>Quantity is the single biggest lever in custom apparel. Setup costs the same for 12 shirts as for 400, so every extra piece spreads it thinner. Price breaks land at 12, 24, 48, and 144 pieces. Three separate orders of 20 will always cost more than one order of 60 &mdash; so if the marketing shirts, the event shirts, and the new-hire shirts share a design, order them in one run.</p>
+<h3>2. cut an ink color.</h3>
+<p>In screen printing, every color is its own screen, its own setup, and its own pass on the press. A three-color design reduced to one smart color doesn't just save money; it usually looks bolder, too. Great one-color design is the oldest budget hack in the industry.</p>
+<h3>3. skip the second location.</h3>
+<p>Front, back, and sleeve are each a separate trip through the press. One strong front print often communicates more than front-and-back, at a meaningfully lower price. If you need the second location, keep it to one color.</p>
+<h3>4. let the blank do the saving.</h3>
+<p>The garment usually drives cost more than the printing does. There's often a blank one shelf over that saves real money without looking like it did &mdash; and because we quote from live garment pricing, we'll tell you when a substitute makes sense. Just ask "is there a cheaper blank that still looks good?" We love that question.</p>
+<h3>5. send clean art (or keep it simple).</h3>
+<p>Print-ready vector art costs nothing extra, and the first 30 minutes of art time are free with a production order &mdash; which covers most cleanup. From-scratch design runs $100 per hour, so a simple concept described clearly beats a complicated one described vaguely.</p>
+<h3>6. ride the standard timeline.</h3>
+<p>Standard turnaround is 8 to 10 business days after art approval. Rush is genuinely available when you need it, but planning two weeks ahead keeps the price standard. Deadlines are the most expensive surprise in apparel.</p>
+<h3>7. reorder instead of reinventing.</h3>
+<p>Once your art is on file (embroidery digitizing is a one-time $35, forever), reorders skip the setup conversation entirely. Same goes for keeping a design consistent year to year: the second run is always the easy one.</p>
+<p>Not sure which levers apply to your order? That's literally our job. <a href="/services/">Pick a method</a>, play with the <a href="/pricing/">price machine</a>, or just ask &mdash; quotes are free and usually back within 24 hours.</p>"""),
         ("screen printing vs dtf: how to choose.", "/blog/screen-printing-vs-dtf/",
          "The honest decision guide: when screen printing's bulk economics win, when DTF's one-piece minimum and full-color detail win, and how to pick for your order.",
          """
@@ -1276,7 +1581,8 @@ def notfound():
         f.write(html_out)
 
 # ---------------------------------------------------------------- SITE FILES
-PAGE_PATHS = ["/", "/services/", "/services/screen-printing/", "/services/embroidery/",
+PAGE_PATHS = ["/", "/pricing/", "/flyover-con/", "/blog/how-to-lower-per-shirt-cost/",
+    "/services/", "/services/screen-printing/", "/services/embroidery/",
     "/services/fusion/", "/services/sublimation/", "/services/live-printing/",
     "/services/e-commerce/", "/services/state-shirts/", "/customer-supplied-garments/",
     "/iowa-on-demand/", "/about-us/", "/faq/", "/contact/", "/shirts-for-scholarships/",
@@ -1312,6 +1618,8 @@ Contact: {PHONE}, {EMAIL}, {ADDR}, {CITY}, {STATE} {ZIP}. Hours: Monday-Friday 8
 Key facts: 12-piece recommended minimum for screen printing (1-piece minimums for embroidery and DTF). Standard turnaround 8-10 business days after art approval. Rush available (same day if in stock). Quotes within 24 hours. One-time $35 embroidery setup. Custom art $100/hr, first 30 minutes free with production orders. Customer-supplied garments welcome with waiver. Free online team stores (Chipply). Pantone matching available. Brands: Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour.
 
 ## Pages
+- [How Pricing Works]({BASE}/pricing/): the six variables that move per-piece price, fees in writing
+- [Flyover Con]({BASE}/flyover-con/): free apparel industry event inside P&M's working print shop
 - [Services]({BASE}/services/): all decoration methods explained
 - [Screen Printing]({BASE}/services/screen-printing/)
 - [Embroidery]({BASE}/services/embroidery/)
@@ -1363,6 +1671,8 @@ if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     home()
     services_index()
+    pricing()
+    flyover()
     all_services()
     csg_page()
     about()
