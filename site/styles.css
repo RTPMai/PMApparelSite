@@ -70,11 +70,11 @@ a.cell:hover .cellsub,a.cell:focus .cellsub{color:#cfcfcf}
 .dark .cell{background:var(--ink);color:#fff}
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px 24px;text-align:center}
-@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr);gap:26px 14px}}
-@media(max-width:700px){.stat b{font-size:1.7rem}.stat span{font-size:.82rem}}
-.stat b{font-family:var(--head);font-size:clamp(2rem,5vw,3.2rem);display:block}
-.stat span{color:#bdbdbd;font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:34px 20px;text-align:center}
+.stat b{font-family:var(--head);font-size:clamp(2.1rem,4vw,3rem);display:block;line-height:1;margin-bottom:8px}
+.stat span{color:#bdbdbd;font-size:.92rem;display:block;max-width:22ch;margin:0 auto}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr);gap:28px 14px}}
+@media(max-width:700px){.stat b{font-size:1.9rem}.stat span{font-size:.82rem}}
 
 /* testimonials */
 .quote{border-left:4px solid var(--ink);padding:4px 0 4px 22px;margin-bottom:28px}
@@ -198,11 +198,6 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .skip:focus{left:12px;top:12px}
 :focus-visible{outline:3px solid #1a1a1a;outline-offset:2px}
 .dark :focus-visible,.texture :focus-visible,header :focus-visible,footer.site :focus-visible{outline-color:#fff}
-
-/* trust strip */
-.truststrip{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 34px}
-.truststrip span{font-family:var(--head);font-size:.8rem;letter-spacing:.02em;border:2px solid var(--ink);padding:9px 14px;background:#fff}
-.dark .truststrip span{border-color:#fff;background:transparent;color:#fff}
 
 /* price machine */
 .pbuild{border:3px solid var(--ink);background:#fff;color:var(--ink);max-width:760px}

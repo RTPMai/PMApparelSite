@@ -14,11 +14,9 @@ GBP_COUNT = "323"
 
 TODAY = "2026-07-31"
 
-# Flyover Con. Update these when the next edition is announced, re-run build.py.
-FLYOVER_DATES_HUMAN = "april 16–18, 2026"
-FLYOVER_START = "2026-04-16"
-FLYOVER_END = "2026-04-18"
-FLYOVER_URL = None  # when the dedicated flyovercon site launches, put its URL here
+# Flyover Con. When the dedicated flyovercon site launches, put its URL here
+# and the site's Flyover links can point to it.
+FLYOVER_URL = None
 UPDATED_HUMAN = datetime.date.fromisoformat(TODAY).strftime("%B %Y")
 
 PHONE = "(515) 984-7740"
@@ -177,11 +175,11 @@ a.cell:hover .cellsub,a.cell:focus .cellsub{color:#cfcfcf}
 .dark .cell{background:var(--ink);color:#fff}
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px 24px;text-align:center}
-@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr);gap:26px 14px}}
-@media(max-width:700px){.stat b{font-size:1.7rem}.stat span{font-size:.82rem}}
-.stat b{font-family:var(--head);font-size:clamp(2rem,5vw,3.2rem);display:block}
-.stat span{color:#bdbdbd;font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:34px 20px;text-align:center}
+.stat b{font-family:var(--head);font-size:clamp(2.1rem,4vw,3rem);display:block;line-height:1;margin-bottom:8px}
+.stat span{color:#bdbdbd;font-size:.92rem;display:block;max-width:22ch;margin:0 auto}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr);gap:28px 14px}}
+@media(max-width:700px){.stat b{font-size:1.9rem}.stat span{font-size:.82rem}}
 
 /* testimonials */
 .quote{border-left:4px solid var(--ink);padding:4px 0 4px 22px;margin-bottom:28px}
@@ -305,11 +303,6 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .skip:focus{left:12px;top:12px}
 :focus-visible{outline:3px solid #1a1a1a;outline-offset:2px}
 .dark :focus-visible,.texture :focus-visible,header :focus-visible,footer.site :focus-visible{outline-color:#fff}
-
-/* trust strip */
-.truststrip{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 34px}
-.truststrip span{font-family:var(--head);font-size:.8rem;letter-spacing:.02em;border:2px solid var(--ink);padding:9px 14px;background:#fff}
-.dark .truststrip span{border-color:#fff;background:transparent;color:#fff}
 
 /* price machine */
 .pbuild{border:3px solid var(--ink);background:#fff;color:var(--ink);max-width:760px}
@@ -600,14 +593,14 @@ def home():
 <section class="imgband"><img src="/assets/photos/floor-three-working.jpg" alt="The P&M Apparel production floor mid-shift" loading="lazy"></section>
 <section class="dark band">
   <div class="wrap stats">
-    <div class="stat"><b>1987</b><span>three generations of family under one roof</span></div>
-    <div class="stat"><b>3,738</b><span>orders out the door in 2025 alone</span></div>
-    <div class="stat"><b>50 + 29</b><span>states and countries we shipped to last year</span></div>
-    <div class="stat"><b>&#9733; {GBP_RATING}</b><span>average across {GBP_COUNT} Google reviews</span></div>
-    <div class="stat"><b>90%</b><span>of our business comes from referrals</span></div>
-    <div class="stat"><b>24 hrs</b><span>typical turnaround on a quote</span></div>
+    <div class="stat"><b>1987</b><span>the year it all started</span></div>
+    <div class="stat"><b>3</b><span>generations of family under one roof</span></div>
+    <div class="stat"><b>50</b><span>states we shipped to last year</span></div>
+    <div class="stat"><b>29</b><span>countries we shipped to last year</span></div>
+    <div class="stat"><b>{GBP_RATING}</b><span>stars across {GBP_COUNT} Google reviews</span></div>
+    <div class="stat"><b>24</b><span>hours to a typical quote</span></div>
+    <div class="stat"><b>1</b><span>piece minimum. yes, really</span></div>
     <div class="stat"><b>16</b><span>real humans on the crew. zero robots</span></div>
-    <div class="stat"><b>1 to 10,000+</b><span>pieces per order. no job too small or too big</span></div>
   </div>
 </section>
 <section class="splitrow">
@@ -642,7 +635,6 @@ def home():
       <a href="{GBP_READ_URL}" rel="noopener">read them all</a>
       <a href="{GBP_WRITE_URL}" rel="noopener">leave one</a>
     </div>
-    <div class="truststrip">{"".join(f"<span>{esc(o)}</span>" for t, n, o in testimonials)}<span>12 Iowa school districts</span><span>+ a few thousand more</span></div>
     {quotes}
   </div>
 </section>
@@ -665,27 +657,32 @@ def home():
 
 # ---------------------------------------------------------------- SERVICES INDEX
 def price_machine(dark=False):
-    """The gamified 'what moves your price' widget. Plain-HTML page content stays
-    readable without JS; this is an enhancement layer, not hidden content."""
-    tone = ' style="color:#dcdcdc"' if dark else ""
+    """The gamified 'what moves your price' widget, covering screen printing,
+    embroidery, and DTF. Plain-HTML page content stays readable without JS;
+    this is an enhancement layer, not hidden content."""
     block = """
 <div class="pbuild" id="pbuild">
   <div class="pbuild-head"><span>the price machine.</span><span style="font-size:.7rem;opacity:.75">direction, not dollars</span></div>
   <div class="pbuild-body">
+    <div class="pb-group"><b>pick your method.</b><div class="pb-opts" data-k="mth">
+      <button type="button" aria-pressed="true">screen printing</button><button type="button">embroidery</button><button type="button">dtf</button></div></div>
     <div class="pb-group"><b>how many pieces?</b><div class="pb-opts" data-k="qty">
       <button type="button">1&ndash;11</button><button type="button" aria-pressed="true">12&ndash;23</button><button type="button">24&ndash;47</button><button type="button">48&ndash;143</button><button type="button">144+</button></div></div>
-    <div class="pb-group"><b>how many ink colors?</b><div class="pb-opts" data-k="col">
+    <div class="pb-group" id="pb-g-col"><b>how many ink colors?</b><div class="pb-opts" data-k="col">
       <button type="button" aria-pressed="true">1 color</button><button type="button">2&ndash;3</button><button type="button">4&ndash;6</button><button type="button">7&ndash;10</button></div></div>
-    <div class="pb-group"><b>how many print locations?</b><div class="pb-opts" data-k="loc">
-      <button type="button" aria-pressed="true">front only</button><button type="button">front + back</button><button type="button">3+ spots</button></div></div>
+    <div class="pb-group" id="pb-g-sti" style="display:none"><b>how big is the stitch job?</b><div class="pb-opts" data-k="sti">
+      <button type="button" aria-pressed="true">left-chest logo</button><button type="button">cap or hat</button><button type="button">jacket-back big</button></div></div>
+    <p class="pb-fine" id="pb-note-dtf" style="display:none;margin:0 0 20px">Full color is included with DTF. No screens, no per-color setup. Go nuts.</p>
+    <div class="pb-group"><b>how many locations?</b><div class="pb-opts" data-k="loc">
+      <button type="button" aria-pressed="true">one spot</button><button type="button">front + back</button><button type="button">3+ spots</button></div></div>
     <div class="pb-group"><b>what's it going on?</b><div class="pb-opts" data-k="gar">
-      <button type="button" aria-pressed="true">basic tee</button><button type="button">retail-soft tee</button><button type="button">hoodie / premium</button></div></div>
+      <button type="button" aria-pressed="true">basic tee</button><button type="button">retail-soft tee</button><button type="button">polo / hat / hoodie</button></div></div>
     <div class="pb-group"><b>how fast?</b><div class="pb-opts" data-k="spd">
       <button type="button" aria-pressed="true">standard, 8&ndash;10 days</button><button type="button">rush it</button></div></div>
     <div class="pmeter">
-      <div class="pmeter-track"><i id="pb-fill" style="width:42%"></i></div>
+      <div class="pmeter-track"><i id="pb-fill" style="width:25%"></i></div>
       <div class="pmeter-scale"><span>$ per piece</span><span>$$$$$ per piece</span></div>
-      <p class="pmeter-label" id="pb-label">great value.</p>
+      <p class="pmeter-label" id="pb-label">budget sweet spot.</p>
       <div class="pb-tips" id="pb-tips"></div>
     </div>
     <p class="pb-cta"><a class="cta-btn inv" href="__QUOTE__">get the real number.</a></p>
@@ -695,32 +692,50 @@ def price_machine(dark=False):
 <script>
 (function(){
   var pb=document.getElementById("pbuild");if(!pb)return;
-  var sel={qty:1,col:0,loc:0,gar:0,spd:0};
+  var sel={mth:0,qty:1,col:0,sti:0,loc:0,gar:0,spd:0};
   var groups=pb.querySelectorAll(".pb-opts");
   var fill=document.getElementById("pb-fill"),label=document.getElementById("pb-label"),tips=document.getElementById("pb-tips");
-  var BANDS=[[25,"budget sweet spot."],[45,"great value."],[65,"middle of the road."],[85,"premium territory."],[101,"top shelf."]];
-  var QTIP=["Hit 12 pieces and screen printing opens up. Under 12, full-color DTF usually wins \u2014 no per-color setup at all.",
-            "Solid start. The next price break lands at 24 pieces.",
-            "Nice. The per-piece math gets noticeably friendlier at 48.",
-            "This is where per-piece pricing really starts working for you.",
-            "144 and up: our best per-piece pricing. The presses purr at this volume."];
+  var gCol=document.getElementById("pb-g-col"),gSti=document.getElementById("pb-g-sti"),nDtf=document.getElementById("pb-note-dtf");
+  var BANDS=[[27,"budget sweet spot."],[45,"great value."],[65,"middle of the road."],[85,"premium territory."],[101,"top shelf."]];
+  var QTIP_S=["Under 12 pieces, screen printing carries a $35 per-screen charge \u2014 this is exactly where DTF shines instead.",
+              "Solid start. The next price break lands at 24 pieces.",
+              "Nice. The per-piece math gets noticeably friendlier at 48.",
+              "This is where per-piece pricing really starts working for you.",
+              "144 and up: our best per-piece pricing. The presses purr at this volume."];
   function tipList(){
-    var t=[QTIP[sel.qty]];
-    if(sel.col>0)t.push("Every ink color needs its own screen and its own setup. One-color designs are the oldest budget hack in the book.");
-    if(sel.loc>0)t.push("Each location is a separate trip through the press. A big front print often says more than front-and-back.");
-    if(sel.gar===2)t.push("The blank drives cost more than the print does \u2014 a hoodie can cost more than the printing on it.");
-    if(sel.gar===1)t.push("Retail-soft blanks cost more per piece, but people wear them for years. Sometimes that IS the budget move.");
+    var t=[];
+    if(sel.mth===0){
+      t.push(QTIP_S[sel.qty]);
+      if(sel.col>0)t.push("Every ink color needs its own screen and its own setup. One-color designs are the oldest budget hack in the book.");
+    }else if(sel.mth===1){
+      if(sel.qty===0)t.push("Embroidery has a true 1-piece minimum. One jacket for the new hire? We're completely serious.");
+      else t.push("Embroidery cares less about quantity than screen printing does \u2014 but more pieces still spread the hooping time.");
+      t.push(sel.sti===2?"Stitch count is embroidery's color count. A jacket-back design carries a lot more thread time than a chest logo.":"New logo? Digitizing is a one-time $35, then it's on file forever. Reorders never pay it again.");
+    }else{
+      if(sel.qty===0)t.push("DTF's 1-piece minimum and zero per-color setup make it the small-run champion.");
+      else t.push("No screens to burn with DTF, so quantity helps gently instead of dramatically.");
+      if(sel.col===0&&sel.qty>2)t.push("At this quantity, a simple design might screen-print for less \u2014 ask us to quote it both ways.");
+    }
+    if(sel.loc>0)t.push("Each location is a separate run. One strong spot often says more than two.");
+    if(sel.gar===2)t.push("The blank drives cost more than the decoration does \u2014 the garment can cost more than the art on it.");
     if(sel.spd===1)t.push("Rush is real (same-day if stock allows), but the standard timeline keeps the price standard.");
-    if(t.length===1&&sel.qty>=3)t.push("This is about as optimized as custom apparel gets. Well played.");
+    if(t.length<2)t.push("This is about as optimized as custom apparel gets. Well played.");
     return t.slice(0,2);
   }
+  function score(){
+    if(sel.mth===0)return 34-sel.qty*9+sel.col*8+sel.loc*8+sel.gar*9+sel.spd*8;
+    if(sel.mth===1)return 33-sel.qty*4+sel.sti*14+sel.loc*8+sel.gar*7+sel.spd*8;
+    return 31-sel.qty*5+sel.loc*8+sel.gar*9+sel.spd*8;
+  }
   function render(){
-    var score=50-sel.qty*10+sel.col*8+sel.loc*8+sel.gar*9+sel.spd*8;
-    score=Math.max(6,Math.min(98,score));
-    fill.style.width=score+"%";
-    var name=BANDS[0][1];for(var i=0;i<BANDS.length;i++){if(score<BANDS[i][0]){name=BANDS[i][1];break;}}
+    gCol.style.display=sel.mth===0?"":"none";
+    gSti.style.display=sel.mth===1?"":"none";
+    nDtf.style.display=sel.mth===2?"":"none";
+    var s=Math.max(6,Math.min(98,score()));
+    fill.style.width=s+"%";
+    var name=BANDS[0][1];for(var i=0;i<BANDS.length;i++){if(s<BANDS[i][0]){name=BANDS[i][1];break;}}
     if(label.textContent!==name){label.textContent=name;label.classList.remove("bump");void label.offsetWidth;label.classList.add("bump");}
-    tips.innerHTML=tipList().map(function(s){return "<p>"+s+"</p>";}).join("");
+    tips.innerHTML=tipList().map(function(x){return "<p>"+x+"</p>";}).join("");
   }
   groups.forEach(function(g){
     var k=g.getAttribute("data-k"),btns=g.querySelectorAll("button");
@@ -732,7 +747,7 @@ def price_machine(dark=False):
   render();
 })();
 </script>"""
-    return block.replace("__QUOTE__", QUOTE_URL).replace("__TONE__", tone)
+    return block.replace("__QUOTE__", QUOTE_URL)
 
 # ---------------------------------------------------------------- PRICING
 def pricing():
@@ -800,14 +815,11 @@ def pricing():
 def flyover():
     path = "/flyover-con/"
     event_schema = {
-        "@context": "https://schema.org", "@type": "Event",
+        "@context": "https://schema.org", "@type": "EventSeries",
         "name": "Flyover Con",
-        "description": "An apparel decoration industry event held inside P&M Apparel's working print shop in Polk City, Iowa. Hands-on education, honest shop tours, live production, and real conversations. Built by printers, for printers. Attendance is free, made possible by sponsors.",
-        "startDate": FLYOVER_START, "endDate": FLYOVER_END,
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "description": "A recurring apparel decoration industry event held inside P&M Apparel's working print shop in Polk City, Iowa. Hands-on education, honest shop tours, live production, and real conversations. Built by printers, for printers. Attendance is free, made possible by sponsors. Held in 2024 and 2026.",
         "isAccessibleForFree": True,
-        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD",
-                   "availability": "https://schema.org/InStock", "url": BASE + path},
+        "url": BASE + path,
         "location": {"@type": "Place", "name": "P&M Apparel",
                      "address": {"@type": "PostalAddress", "streetAddress": ADDR,
                                  "addressLocality": CITY, "addressRegion": STATE,
@@ -817,11 +829,11 @@ def flyover():
     body = f"""
 <section class="texture hero" style="padding:84px 0 72px">
   <div class="wrap">
-    <h1 class="eyebrow">{FLYOVER_DATES_HUMAN} // p&m apparel // polk city, iowa</h1>
+    <h1 class="eyebrow">inside a working print shop // polk city, iowa</h1>
     <p class="mega">flyover con.</p>
     <p class="lead">Some of the best ideas in this industry don't come from the biggest cities or the biggest companies. They come from hardworking shops in the middle of the country that are willing to open their doors and share what they've learned. This is us, opening ours.</p>
     <div class="btn-row">
-      <a class="cta-btn" href="mailto:{EMAIL}?subject=Flyover%20Con">i want in.</a>
+      <a class="cta-btn" href="mailto:{EMAIL}?subject=Flyover%20Con">keep me in the loop.</a>
       <a class="cta-btn" style="background:transparent;color:#fff" href="mailto:{EMAIL}?subject=Flyover%20Con%20sponsorship">sponsor the education.</a>
     </div>
   </div>
@@ -831,14 +843,14 @@ def flyover():
     <h2>not another hotel ballroom.</h2>
     <p>You know the formula: convention center, carpet squares, badge scanners, a tote bag of brochures you'll never open. Flyover Con is intentionally none of that. It happens inside our working print shop in Polk City &mdash; presses running, dryers humming, real orders moving through the building while you're in it.</p>
     <p>It's designed to feel like an industry reunion inside a real production facility. Fewer sales pitches, more honest conversations. Hands-on demonstrations instead of PowerPoint. Small enough that everyone can actually meet everyone. And the goal for every attendee is the same: leave with things you can implement Monday morning.</p>
-    <p>Built by printers, for printers. Shop life is the attraction.</p>
+    <p>We've hosted it in 2024 and again in 2026, and each time the takeaway is the same: shop life is the attraction. Built by printers, for printers.</p>
   </div>
 </section>
 <section class="dark">
   <div class="wrap">
-    <h2>what you'll actually get.</h2>
+    <h2>what flyover con is.</h2>
     <div class="grid cols3">
-      <div class="cell"><h3>honest shop tours.</h3><p class="cellsub">No fake showroom, no staged demos. You'll walk an operating production floor and see the real workflow, mess and all.</p></div>
+      <div class="cell"><h3>honest shop tours.</h3><p class="cellsub">No fake showroom, no staged demos. You walk an operating production floor and see the real workflow, mess and all.</p></div>
       <div class="cell"><h3>live production.</h3><p class="cellsub">Equipment being used for actual orders, run by the people who run it every day. Ask them anything.</p></div>
       <div class="cell"><h3>practical sessions.</h3><p class="cellsub">Hands-on education from working decorators. Knowledge you'll use, not brochures you'll recycle.</p></div>
       <div class="cell"><h3>real conversations.</h3><p class="cellsub">Talk directly with owners and operators. No polished marketing talks, no scripts.</p></div>
@@ -849,19 +861,16 @@ def flyover():
 </section>
 <section>
   <div class="wrap prose">
-    <h2>on the program.</h2>
-    <p><b>Nicole Pape &mdash; buying and selling pre-loved equipment.</b> How to evaluate used equipment before you wire the money, what the listings don't tell you, and how to avoid the expensive mistakes decorators usually learn the hard way.</p>
-    <p>More sessions and demonstrations are added as they're confirmed. Every one follows the same rule: practical over polished.</p>
     <h2>free. on purpose.</h2>
     <p>Attendance costs nothing, and that's not a promotion &mdash; it's the point. Education in this industry shouldn't be gated behind a badge fee. Sponsors make that possible, and sponsoring Flyover Con isn't buying ad space: it's face-to-face time with working decorators, a seat inside an authentic community event, and a direct hand in keeping industry education accessible.</p>
     <p>If your company wants in on that, <a href="mailto:{EMAIL}?subject=Flyover%20Con%20sponsorship">let's talk sponsorship</a>.</p>
     <h2>why we host it.</h2>
-    <p>Flyover Con is what P&M stands for, turned into an event: generosity, education, transparency, and helping other decorators succeed. We'd rather grow the whole industry than guard our corner of it. Open doors beat closed playbooks.</p>
+    <p>Flyover Con is what P&amp;M stands for, turned into an event: generosity, education, transparency, and helping other decorators succeed. We'd rather grow the whole industry than guard our corner of it. Open doors beat closed playbooks.</p>
   </div>
 </section>
-{cta_band("want in?", "Email us with 'Flyover Con' in the subject line and we'll keep you in the loop on everything: " + EMAIL)}"""
+{cta_band("want in on the next one?", "Email us with 'Flyover Con' in the subject line and we'll keep you in the loop on everything: " + EMAIL)}"""
     title = "Flyover Con | An Industry Event Inside a Working Print Shop"
-    desc = f"Flyover Con: hands-on apparel decoration education inside P&M Apparel's working print shop in Polk City, Iowa. Honest shop tours, live production, real conversations. Free to attend."
+    desc = "Flyover Con: hands-on apparel decoration education inside P&M Apparel's working print shop in Polk City, Iowa. Honest shop tours, live production, real conversations. Free to attend."
     write(path, layout(path, title, desc, body,
                        [event_schema, breadcrumbs([("Home", "/"), ("Flyover Con", path)])]))
 
