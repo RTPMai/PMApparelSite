@@ -48,7 +48,7 @@ MEGAN_APPARELIST_URL = "https://www.apparelist.com/person/megan-griffith/"
 MEGAN_GP_AUTHOR_URL = "https://graphics-pro.com/author/megan-griffith/"
 MEGAN_CANVASREBEL_URL = "https://canvasrebel.com/meet-megan-griffith/"
 MEGAN_AWARD_URL = "https://screenprintingmag.com/here-are-the-winners-of-the-2024-women-in-screen-printing-awards/"
-MEGAN_RISING_STARS_URL = "https://screenprintingmag.com/meet-the-rising-stars-megan-griffith/"
+MEGAN_RISING_STARS_URL = "https://screenprintingmag.com/meet-the-rising-stars-megan-griffith/?highlight=Megan%20Griffith"
 RYAN_BOD_URL = "https://www.boardofdecorators.com/board-members/ryan-toney"
 
 LOCAL_BUSINESS = {
@@ -1385,7 +1385,7 @@ def press():
   <div class="wrap prose">
     <h2>recognition.</h2>
     <p>In 2024, Megan Griffith won the <a href="{MEGAN_AWARD_URL}" target="_blank" rel="noopener">Women in Screen Printing Award</a> from Screen Printing Mag. She was also part of the magazine's inaugural <a href="{MEGAN_RISING_STARS_URL}" target="_blank" rel="noopener">Rising Stars</a> class. She sits on the <a href="{MEGAN_APPARELIST_URL}" target="_blank" rel="noopener">Apparelist Advisory Board</a> and writes a recurring column for <a href="{MEGAN_GP_AUTHOR_URL}" target="_blank" rel="noopener">GRAPHICS PRO</a>.</p>
-    <p>Ryan Toney is a member of the <a href="{RYAN_BOD_URL}" target="_blank" rel="noopener">Board of Decorators</a> and co-founded <a href="/flyover-con/">Flyover Con</a>, a free industry conference hosted right on our production floor.</p>
+    <p>Ryan Toney was a member of the <a href="{RYAN_BOD_URL}" target="_blank" rel="noopener">Gildan Board of Decorators</a> and co-founded <a href="/flyover-con/">Flyover Con</a>, a free industry conference hosted right on our production floor. He currently serves on Chipply's Client Council and the Polk City Chamber of Commerce Board of Directors.</p>
   </div>
 </section>
 <section class="band">
@@ -1421,7 +1421,11 @@ def press():
          "sameAs": [MEGAN_APPARELIST_URL, MEGAN_GP_AUTHOR_URL, MEGAN_CANVASREBEL_URL]},
         {"@context": "https://schema.org", "@type": "Person", "name": "Ryan Toney",
          "jobTitle": "Owner", "worksFor": {"@id": BASE + "/#business"},
-         "sameAs": [RYAN_BOD_URL]},
+         "sameAs": [RYAN_BOD_URL],
+         "memberOf": [
+             {"@type": "Organization", "name": "Chipply Client Council"},
+             {"@type": "Organization", "name": "Polk City Chamber of Commerce Board of Directors"},
+         ]},
         breadcrumbs([("Home", "/"), ("Press & Recognition", path)]),
     ]
     write(path, layout(path, title, desc, body, schema))
