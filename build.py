@@ -780,7 +780,7 @@ def price_machine(dark=False):
       <div class="pb-tips" id="pb-tips"></div>
     </div>
     <p class="pb-cta"><a class="cta-btn inv" href="__QUOTE__">get the real number.</a></p>
-    <p class="pb-fine">This machine shows which way the number moves, not the number itself. For that, a human reads your actual art and order &mdash; and gets a quote back to you within about 24 hours.</p>
+    <p class="pb-fine">This machine shows which way the number moves, not the number itself. For that, a human reads your actual art and order and gets a quote back to you within about 24 hours.</p>
   </div>
 </div>
 <script>
@@ -791,7 +791,7 @@ def price_machine(dark=False):
   var fill=document.getElementById("pb-fill"),label=document.getElementById("pb-label"),tips=document.getElementById("pb-tips");
   var gCol=document.getElementById("pb-g-col"),gSti=document.getElementById("pb-g-sti"),nDtf=document.getElementById("pb-note-dtf");
   var BANDS=[[27,"budget sweet spot."],[45,"great value."],[65,"middle of the road."],[85,"premium territory."],[101,"top shelf."]];
-  var QTIP_S=["Under 12 pieces, screen printing carries a $35 per-screen charge \u2014 this is exactly where DTF shines instead.",
+  var QTIP_S=["Under 12 pieces, screen printing carries a $35 per-screen charge. This is exactly where DTF shines instead.",
               "Solid start. The next price break lands at 24 pieces.",
               "Nice. The per-piece math gets noticeably friendlier at 48.",
               "This is where per-piece pricing really starts working for you.",
@@ -803,15 +803,15 @@ def price_machine(dark=False):
       if(sel.col>0)t.push("Every ink color needs its own screen and its own setup. One-color designs are the oldest budget hack in the book.");
     }else if(sel.mth===1){
       if(sel.qty===0)t.push("Embroidery has a true 1-piece minimum. One jacket for the new hire? We're completely serious.");
-      else t.push("Embroidery cares less about quantity than screen printing does \u2014 but more pieces still spread the hooping time.");
+      else t.push("Embroidery cares less about quantity than screen printing does, but more pieces still spread the hooping time.");
       t.push(sel.sti===2?"Stitch count is embroidery's color count. A jacket-back design carries a lot more thread time than a chest logo.":"New logo? Digitizing is a one-time $35, then it's on file forever. Reorders never pay it again.");
     }else{
       if(sel.qty===0)t.push("DTF's 1-piece minimum and zero per-color setup make it the small-run champion.");
-      else if(sel.qty>=2)t.push("Heads up: every DTF piece is placed by hand, so there's no bulk discount. At this quantity, a simple design often screen-prints for less \u2014 ask us to quote it both ways.");
+      else if(sel.qty>=2)t.push("Heads up: every DTF piece is placed by hand, so there's no bulk discount. At this quantity, a simple design often screen-prints for less. Ask us to quote it both ways.");
       else t.push("Every DTF piece is placed by hand, one at a time, so per-piece price stays flat as your order grows. No bulk discount, no bulk penalty.");
     }
     if(sel.loc>0)t.push("Each location is a separate run. One strong spot often says more than two.");
-    if(sel.gar===2)t.push("The blank drives cost more than the decoration does \u2014 the garment can cost more than the art on it.");
+    if(sel.gar===2)t.push("The blank drives cost more than the decoration does. The garment can cost more than the art on it.");
     if(sel.spd===1)t.push("Rush is real (same-day if stock allows), but the standard timeline keeps the price standard.");
     if(t.length<2)t.push("This is about as optimized as custom apparel gets. Well played.");
     return t.slice(0,2);
@@ -849,7 +849,7 @@ def pricing():
     faqs = [
         ("Why doesn't P&M Apparel post prices online?", "Because a posted grid would be wrong within the week. Blank garment costs move constantly, and no two jobs share the same art, color count, locations, and quantity. Instead of a stale price list, we explain exactly what drives the number and return real quotes within about 24 hours."),
         ("What fees does P&M Apparel put in writing?", "A one-time $35 digitizing fee for new embroidery logos (then it's on file forever). Custom artwork at $100 per hour, with the first 30 minutes free on production orders. A 50% deposit sends your job into art. Quotes are free, and online team stores are free to set up."),
-        ("What's the cheapest way to print custom shirts?", "One ink color, one print location, a basic cotton tee, ordered at quantity on the standard 8-to-10-day timeline. Quantity is screen printing's biggest lever: per-piece pricing improves at 12, 24, 48, and 144 pieces. (DTF is the exception — it's hand-placed piece by piece, so its price stays flat at any quantity.)"),
+        ("What's the cheapest way to print custom shirts?", "One ink color, one print location, a basic cotton tee, ordered at quantity on the standard 8-to-10-day timeline. Quantity is screen printing's biggest lever: per-piece pricing improves at 12, 24, 48, and 144 pieces. (DTF is the exception: it's hand-placed piece by piece, so its price stays flat at any quantity.)"),
         ("Are there minimums?", "Screen printing minimums scale with color count: 12 pieces for 1 to 3 colors, 24 for 4 to 6, and 48 for 7 to 10. Embroidery and DTF have 1-piece minimums."),
         ("Is an instant online price accurate?", "Instant calculators quote a formula, not your order. They can't see that your art needs cleanup, that a different blank saves you money, or that DTF beats screens at your quantity. A human quote catches all three, and ours comes back in about 24 hours."),
     ]
@@ -860,20 +860,20 @@ def pricing():
 <section class="texture hero" style="padding:84px 0 72px">
   <div class="wrap">
     <h1>how pricing works.</h1>
-    <p class="lead">No mystery, no gotchas, no "call for pricing" runaround. Here's exactly what moves the number on your quote &mdash; and how to move it in your favor.</p>
+    <p class="lead">No mystery, no gotchas, no "call for pricing" runaround. Here's exactly what moves the number on your quote and how to move it in your favor.</p>
   </div>
 </section>
 <section>
   <div class="wrap prose">
     <h2>the honest part first.</h2>
-    <p>You won't find a price grid on this page, and here's the real reason: blank garment prices change constantly, and no two jobs are the same. A grid we posted today would quietly lie to you by Friday. What we can do &mdash; and what almost nobody in custom apparel does &mdash; is show you the whole machine: every variable that moves your per-piece price, which direction it moves it, and the handful of fees we're happy to put in writing.</p>
+    <p>You won't find a price grid on this page, and here's the real reason: blank garment prices change constantly, and no two jobs are the same. A grid we posted today would quietly lie to you by Friday. What we can do, and what almost nobody in custom apparel does, is show you the whole machine: every variable that moves your per-piece price, which direction it moves it, and the handful of fees we're happy to put in writing.</p>
     <p>Then, when you're ready, a human (not a formula) reads your actual art and your actual order and sends a real quote, usually within 24 hours.</p>
     <h2>the six things that move your price.</h2>
-    <p><b>1. Quantity.</b> The biggest lever by far &mdash; in screen printing. Setup work (burning screens, loading the press) costs the same whether we print 12 shirts or 400, so the more pieces that setup spreads across, the less each piece carries. Price breaks land at 12, 24, 48, and 144 pieces. The exception is <a href="/services/fusion/">DTF</a>: every piece is placed by hand, one at a time, so its per-piece price stays flat at any quantity &mdash; no bulk discount, no bulk penalty. That's exactly why big simple orders belong on the press and small detailed ones belong on DTF.</p>
+    <p><b>1. Quantity.</b> The biggest lever by far in screen printing. Setup work (burning screens, loading the press) costs the same whether we print 12 shirts or 400, so the more pieces that setup spreads across, the less each piece carries. Price breaks land at 12, 24, 48, and 144 pieces. The exception is <a href="/services/fusion/">DTF</a>: every piece is placed by hand, one at a time, so its per-piece price stays flat at any quantity, no bulk discount, no bulk penalty. That's exactly why big simple orders belong on the press and small detailed ones belong on DTF.</p>
     <p><b>2. Ink colors.</b> In screen printing, every color is its own screen, its own setup, and its own station on the press. A one-color design is the oldest budget trick in the book. (Under 12 pieces, full-color <a href="/services/fusion/">DTF</a> sidesteps color-count math entirely.)</p>
-    <p><b>3. Print locations.</b> Front, back, sleeve &mdash; each one is a separate run through the press. A single strong front print often beats front-and-back on both budget and design.</p>
+    <p><b>3. Print locations.</b> Front, back, sleeve: each one is a separate run through the press. A single strong front print often beats front-and-back on both budget and design.</p>
     <p><b>4. The garment itself.</b> The blank usually drives cost more than the decoration does. A basic tee, a retail-soft tee, and a hoodie can be the same print at three very different prices. We'll happily suggest a substitute blank that saves money without looking like it did.</p>
-    <p><b>5. Artwork.</b> Print-ready art costs nothing extra. Art that needs recreating or designing from scratch is billed at $100 per hour &mdash; and the first 30 minutes are free with any production order, which covers most cleanup jobs entirely.</p>
+    <p><b>5. Artwork.</b> Print-ready art costs nothing extra. Art that needs recreating or designing from scratch is billed at $100 per hour, and the first 30 minutes are free with any production order, which covers most cleanup jobs entirely.</p>
     <p><b>6. Timeline.</b> Standard turnaround is 8 to 10 business days after art approval. Rush is genuinely available (same day if garments are in stock), but the standard timeline keeps the price standard.</p>
     <h2>the fees we put in writing.</h2>
     <ul>
@@ -935,7 +935,7 @@ def flyover():
 <section>
   <div class="wrap prose">
     <h2>not another hotel ballroom.</h2>
-    <p>You know the formula: convention center, carpet squares, badge scanners, a tote bag of brochures you'll never open. Flyover Con is intentionally none of that. It happens inside our working print shop in Polk City &mdash; presses running, dryers humming, real orders moving through the building while you're in it.</p>
+    <p>You know the formula: convention center, carpet squares, badge scanners, a tote bag of brochures you'll never open. Flyover Con is intentionally none of that. It happens inside our working print shop in Polk City: presses running, dryers humming, real orders moving through the building while you're in it.</p>
     <p>It's designed to feel like an industry reunion inside a real production facility. Fewer sales pitches, more honest conversations. Hands-on demonstrations instead of PowerPoint. Small enough that everyone can actually meet everyone. And the goal for every attendee is the same: leave with things you can implement Monday morning.</p>
     <p>We've hosted it in 2024 and again in 2026, and each time the takeaway is the same: shop life is the attraction. Built by printers, for printers.</p>
   </div>
@@ -956,7 +956,7 @@ def flyover():
 <section>
   <div class="wrap prose">
     <h2>free. on purpose.</h2>
-    <p>Attendance costs nothing, and that's not a promotion &mdash; it's the point. Education in this industry shouldn't be gated behind a badge fee. Sponsors make that possible, and sponsoring Flyover Con isn't buying ad space: it's face-to-face time with working decorators, a seat inside an authentic community event, and a direct hand in keeping industry education accessible.</p>
+    <p>Attendance costs nothing, and that's not a promotion. It's the point. Education in this industry shouldn't be gated behind a badge fee. Sponsors make that possible, and sponsoring Flyover Con isn't buying ad space: it's face-to-face time with working decorators, a seat inside an authentic community event, and a direct hand in keeping industry education accessible.</p>
     <p>If your company wants in on that, <a href="mailto:{EMAIL}?subject=Flyover%20Con%20sponsorship">let's talk sponsorship</a>.</p>
     <h2>why we host it.</h2>
     <p>Flyover Con is what P&amp;M stands for, turned into an event: generosity, education, transparency, and helping other decorators succeed. We'd rather grow the whole industry than guard our corner of it. Open doors beat closed playbooks.</p>
@@ -1079,7 +1079,7 @@ def all_services():
   <div class="step"><h3>print.</h3><p>Your order runs on the press, color by color, then cures for maximum durability.</p></div>
   <div class="step"><h3>quality check.</h3><p>Every order is inspected, counted, and folded before pickup or shipping.</p></div>
 </div>
-<p>Who's it for? Schools and spirit wear, corporate and staff tees, event and fundraiser merch (see <a href="/shirts-for-scholarships/">Shirts for Scholarships</a>), and teams of every kind — pair it with an <a href="/services/e-commerce/">online team store</a> and let everyone order their own size.</p>
+<p>Who's it for? Schools and spirit wear, corporate and staff tees, event and fundraiser merch (see <a href="/shirts-for-scholarships/">Shirts for Scholarships</a>), and teams of every kind. Pair it with an <a href="/services/e-commerce/">online team store</a> and let everyone order their own size.</p>
 <h2>the work.</h2>
 <div class="photostrip">
   <figure><img src="/assets/photos/floor-three-working.jpg" alt="Three P&amp;M Apparel printers working the production floor" loading="lazy"><figcaption>on the floor.</figcaption></figure>
@@ -1531,8 +1531,8 @@ def iowa_on_demand():
   <div class="wrap prose">
     <p><a href="{IOD_URL}">Iowa On Demand</a> is P&amp;M Apparel's on-demand offshoot, built for local schools. Right now it serves 12 Iowa schools, with more joining all the time. The mission: make it easier to support your school with officially licensed spirit wear that's available year-round.</p>
     <h2>the schools.</h2>
-    <p>It started with six: {", ".join(IOD_FOUNDING[:-1])}, and {IOD_FOUNDING[-1]}. In 2026, six more joined: {", ".join(IOD_SCHOOLS[:-1])}, and {IOD_SCHOOLS[-1]} — bringing thousands more students, families, alumni, and fans on board. Twelve schools. One place.</p>
-    <p>That means school communities across Polk City, Alleman, Elkhart, Ankeny, Johnston, Grimes, Dallas Center, Bondurant, Woodward, Granger, Perry, Huxley, Slater, Cambridge, and Des Moines can grab officially licensed gear whenever the mood strikes — no order windows, no waiting for the next fundraiser.</p>
+    <p>It started with six: {", ".join(IOD_FOUNDING[:-1])}, and {IOD_FOUNDING[-1]}. In 2026, six more joined: {", ".join(IOD_SCHOOLS[:-1])}, and {IOD_SCHOOLS[-1]}, bringing thousands more students, families, alumni, and fans on board. Twelve schools. One place.</p>
+    <p>That means school communities across Polk City, Alleman, Elkhart, Ankeny, Johnston, Grimes, Dallas Center, Bondurant, Woodward, Granger, Perry, Huxley, Slater, Cambridge, and Des Moines can grab officially licensed gear whenever the mood strikes: no order windows, no waiting for the next fundraiser.</p>
     <h2>how it works.</h2>
     <p>Fans shop online whenever they want. Each item is produced as orders come in, decorated in-house by our team in Polk City, and shipped fast. No order windows. No leftover boxes in the booster club president's garage. Just school pride, ready when people want it.</p>
     <h2>get your district on board.</h2>
@@ -1632,7 +1632,7 @@ def contact():
       title="Map to P&amp;M Apparel, 1100 S 5th St, Polk City, Iowa"></iframe>
     <p style="margin-top:14px">Rated <b>&#9733; {GBP_RATING}</b> from {GBP_COUNT} Google reviews.
       <a href="{GBP_READ_URL}" rel="noopener">Read them</a> or
-      <a href="{GBP_WRITE_URL}" rel="noopener">leave one</a> — it means a lot to a family shop.</p>
+      <a href="{GBP_WRITE_URL}" rel="noopener">leave one</a>. It means a lot to a family shop.</p>
   </div>
 </section>
 <section class="dark">
@@ -1694,20 +1694,20 @@ def blog():
          """
 <p>Everyone asks us how much shirts cost. Almost nobody asks the better question: how do I make them cost less? Here are the seven levers that actually move the number, straight from the people who build the quotes. (For the full anatomy of a quote, see <a href="/pricing/">how pricing works</a>.)</p>
 <h3>1. order together, not in waves.</h3>
-<p>Quantity is the single biggest lever in screen printing. Setup costs the same for 12 shirts as for 400, so every extra piece spreads it thinner. Price breaks land at 12, 24, 48, and 144 pieces. Three separate orders of 20 will always cost more than one order of 60 &mdash; so if the marketing shirts, the event shirts, and the new-hire shirts share a design, order them in one run. (One honest exception: DTF is placed by hand, piece by piece, so its price stays flat at any quantity &mdash; which is why big orders usually move to the press.)</p>
+<p>Quantity is the single biggest lever in screen printing. Setup costs the same for 12 shirts as for 400, so every extra piece spreads it thinner. Price breaks land at 12, 24, 48, and 144 pieces. Three separate orders of 20 will always cost more than one order of 60, so if the marketing shirts, the event shirts, and the new-hire shirts share a design, order them in one run. (One honest exception: DTF is placed by hand, piece by piece, so its price stays flat at any quantity, which is why big orders usually move to the press.)</p>
 <h3>2. cut an ink color.</h3>
 <p>In screen printing, every color is its own screen, its own setup, and its own pass on the press. A three-color design reduced to one smart color doesn't just save money; it usually looks bolder, too. Great one-color design is the oldest budget hack in the industry.</p>
 <h3>3. skip the second location.</h3>
 <p>Front, back, and sleeve are each a separate trip through the press. One strong front print often communicates more than front-and-back, at a meaningfully lower price. If you need the second location, keep it to one color.</p>
 <h3>4. let the blank do the saving.</h3>
-<p>The garment usually drives cost more than the printing does. There's often a blank one shelf over that saves real money without looking like it did &mdash; and because we quote from live garment pricing, we'll tell you when a substitute makes sense. Just ask "is there a cheaper blank that still looks good?" We love that question.</p>
+<p>The garment usually drives cost more than the printing does. There's often a blank one shelf over that saves real money without looking like it did, and because we quote from live garment pricing, we'll tell you when a substitute makes sense. Just ask "is there a cheaper blank that still looks good?" We love that question.</p>
 <h3>5. send clean art (or keep it simple).</h3>
-<p>Print-ready vector art costs nothing extra, and the first 30 minutes of art time are free with a production order &mdash; which covers most cleanup. From-scratch design runs $100 per hour, so a simple concept described clearly beats a complicated one described vaguely.</p>
+<p>Print-ready vector art costs nothing extra, and the first 30 minutes of art time are free with a production order, which covers most cleanup. From-scratch design runs $100 per hour, so a simple concept described clearly beats a complicated one described vaguely.</p>
 <h3>6. ride the standard timeline.</h3>
 <p>Standard turnaround is 8 to 10 business days after art approval. Rush is genuinely available when you need it, but planning two weeks ahead keeps the price standard. Deadlines are the most expensive surprise in apparel.</p>
 <h3>7. reorder instead of reinventing.</h3>
 <p>Once your art is on file (embroidery digitizing is a one-time $35, forever), reorders skip the setup conversation entirely. Same goes for keeping a design consistent year to year: the second run is always the easy one.</p>
-<p>Not sure which levers apply to your order? That's literally our job. <a href="/services/">Pick a method</a>, play with the <a href="/pricing/">price machine</a>, or just ask &mdash; quotes are free and usually back within 24 hours.</p>"""),
+<p>Not sure which levers apply to your order? That's literally our job. <a href="/services/">Pick a method</a>, play with the <a href="/pricing/">price machine</a>, or just ask. Quotes are free and usually back within 24 hours.</p>"""),
         ("screen printing vs dtf: how to choose.", "/blog/screen-printing-vs-dtf/",
          "The honest decision guide: when screen printing's bulk economics win, when DTF's one-piece minimum and full-color detail win, and how to pick for your order.",
          """
@@ -1717,8 +1717,8 @@ def blog():
 <h3>choose dtf when flexibility is on yours.</h3>
 <p>DTF (direct-to-film, part of our fusion family) prints your design in full color onto a film, then heat-presses it onto the garment. There are no screens, so there's no color-count math and no real minimum: one piece is fine. It handles photo-real detail, gradients, and unlimited colors with a soft feel and strong durability. It's our go-to for small batches, one-offs, and player names and numbers.</p>
 <h3>the quick rules.</h3>
-<p>Under 12 pieces? DTF, almost always. Big order of a bold 1-to-3-color design? Screen printing, almost always. A design with dozens of colors or photographic detail? DTF unless the quantity is large enough that screen printing's setup still pays off. Personalized names on team gear? DTF, often combined with screen printing on the same garments — the front prints on the press, the names heat-press on the back.</p>
-<p>And if you're still not sure: that's literally our job. <a href="/services/screen-printing/">Read about screen printing</a>, <a href="/services/fusion/">read about fusion and DTF</a>, or just ask — quotes are usually back within 24 hours.</p>"""),
+<p>Under 12 pieces? DTF, almost always. Big order of a bold 1-to-3-color design? Screen printing, almost always. A design with dozens of colors or photographic detail? DTF unless the quantity is large enough that screen printing's setup still pays off. Personalized names on team gear? DTF, often combined with screen printing on the same garments: the front prints on the press, the names heat-press on the back.</p>
+<p>And if you're still not sure: that's literally our job. <a href="/services/screen-printing/">Read about screen printing</a>, <a href="/services/fusion/">read about fusion and DTF</a>, or just ask. Quotes are usually back within 24 hours.</p>"""),
         ("embroidery vs screen printing for company apparel.", "/blog/embroidery-vs-screen-printing/",
          "Polos and jackets or staff tees? A practical guide to when stitched logos beat printed ones, what setup actually costs, and how minimums differ.",
          """
@@ -1728,11 +1728,11 @@ def blog():
 <h3>screen printing: the bulk-order workhorse.</h3>
 <p>For staff t-shirts, event gear, and giveaways, screen printing wins on economics. Minimums start at 12 pieces (for 1 to 3 colors), and per-piece pricing improves as quantity grows. The prints are bold, vibrant, and extremely durable.</p>
 <h3>the practical split.</h3>
-<p>Most of our business clients land here: embroidery for the polished layer (polos, outerwear, hats — the things worn to meet customers), screen printing for the volume layer (staff tees, event shirts, giveaways). Structured items like hats and bags are embroidery territory almost by default; flat cotton at quantity is print territory. And if your logo has fine gradients or photographic detail that thread can't render, our <a href="/services/fusion/">fusion methods</a> fill the gap.</p>
-<p>One more thing worth knowing: you can bring us garments you already own. We decorate <a href="/customer-supplied-garments/">customer-supplied garments</a> all the time — we just ask for a short waiver first.</p>
+<p>Most of our business clients land here: embroidery for the polished layer (polos, outerwear, hats, the things worn to meet customers), screen printing for the volume layer (staff tees, event shirts, giveaways). Structured items like hats and bags are embroidery territory almost by default; flat cotton at quantity is print territory. And if your logo has fine gradients or photographic detail that thread can't render, our <a href="/services/fusion/">fusion methods</a> fill the gap.</p>
+<p>One more thing worth knowing: you can bring us garments you already own. We decorate <a href="/customer-supplied-garments/">customer-supplied garments</a> all the time. We just ask for a short waiver first.</p>
 <p>Details on both: <a href="/services/embroidery/">embroidery</a> and <a href="/services/screen-printing/">screen printing</a>. Quotes back within 24 hours.</p>"""),
         ("what is sublimation actually good for?", "/blog/what-is-sublimation-good-for/",
-         "Sublimation makes prints you can't feel — but only on the right garments. Where it shines, where it fails, and what to use instead.",
+         "Sublimation makes prints you can't feel, but only on the right garments. Where it shines, where it fails, and what to use instead.",
          """
 <p>Sublimation is the method behind prints you can't feel: the ink turns to gas under heat and bonds permanently with the fabric itself. No crack, no peel, no added weight, ever. It sounds like magic, and on the right garment it basically is. The catch is the phrase "the right garment."</p>
 <h3>where sublimation shines.</h3>
@@ -1743,7 +1743,7 @@ def blog():
 <p>For cotton or dark garments, <a href="/services/fusion/">DTF transfers</a> deliver similar full-color detail with a soft feel. For bold designs at quantity on any fabric, <a href="/services/screen-printing/">screen printing</a> is the workhorse. Part of what you get with a full-service shop is that we'll steer you to the right method for your actual garment instead of forcing your design into the wrong one.</p>
 <p>One-piece minimum, standard 8 to 10 business day turnaround. <a href="/services/sublimation/">More on sublimation here.</a></p>"""),
         ("what does custom apparel cost? how our quotes work.", "/blog/how-quotes-work/",
-         "We quote every job individually — here's exactly what moves the number: quantity breaks, color counts, setup fees, art time, and what happens after you say yes.",
+         "We quote every job individually. Here's exactly what moves the number: quantity breaks, color counts, setup fees, art time, and what happens after you say yes.",
          """
 <p>The honest answer to "what does a custom shirt cost?" is: it depends, and anyone who gives you one number without asking questions is guessing. Every job we run is quoted individually. But "it depends" is a lazy place to stop, so here is exactly what it depends on.</p>
 <h3>the variables that move your quote.</h3>
@@ -1752,10 +1752,10 @@ def blog():
 <p><b>The garment itself.</b> A basic Gildan tee and a Carhartt jacket are different starting points. We carry Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour, and more, at a range of price points.</p>
 <p><b>Method.</b> Screen printing wins at quantity, embroidery and DTF have one-piece minimums, and thread count matters for embroidery quotes.</p>
 <h3>the fixed fees, in plain sight.</h3>
-<p>Screen printing orders below minimum (12 pieces for 1 to 3 colors) carry a $35 per-screen charge. Embroidery has a one-time $35 digitizing setup fee, after which your logo is on file forever. Custom artwork runs $100 per hour, and the first 30 minutes is free when your order includes production. Rush fees depend on the timeline — except state tournament orders, which carry no rush fees at all.</p>
+<p>Screen printing orders below minimum (12 pieces for 1 to 3 colors) carry a $35 per-screen charge. Embroidery has a one-time $35 digitizing setup fee, after which your logo is on file forever. Custom artwork runs $100 per hour, and the first 30 minutes is free when your order includes production. Rush fees depend on the timeline, except state tournament orders, which carry no rush fees at all.</p>
 <h3>what happens when you ask.</h3>
 <p>Send us the idea however is easiest: walk in, call, email, or the quote form. Quotes are usually back within 24 hours. You approve the quote, a 50% deposit sends the job into art, you approve a proof, and nothing prints until you've signed off. Standard turnaround is 8 to 10 business days after art approval.</p>
-<p>Why don't we publish a price list? Because we'd rather ask you three questions and get the number right than publish a range that's wrong for your job in both directions. <a href="{QUOTE_URL}">Ask us</a> — it costs nothing and takes a day.</p>"""),
+<p>Why don't we publish a price list? Because we'd rather ask you three questions and get the number right than publish a range that's wrong for your job in both directions. <a href="{QUOTE_URL}">Ask us</a>. It costs nothing and takes a day.</p>"""),
         ("it's just a shirt.", "/blog/its-just-a-shirt/",
          "An ode to the easy stuff: why keeping the 'it's just a shirt' mentality keeps our heads cool and your order fixable.",
          """
@@ -1767,7 +1767,7 @@ def blog():
 <p>It's just a shirt, so when our team, that's very passionate and meticulous about everything they produce, has a human moment and messes up an order, it's not going to be life or death like on the operating table. We can simply order another shirt and fix it. It may set us back and cost more, but it's not too serious. There's an easy solution.</p>
 <p>Now that I've convinced you it's just a shirt, let's talk about when a shirt is not just a shirt. Hang tight, there's a <a href="/blog/its-not-just-a-shirt/">part 2</a>.</p>"""),
         ("it's not just a shirt.", "/blog/its-not-just-a-shirt/",
-         "An ode to the hard stuff: the teams, businesses, battles, and fundraisers a shirt can carry — and why we care so much.",
+         "An ode to the hard stuff: the teams, businesses, battles, and fundraisers a shirt can carry and why we care so much.",
          """
 <p class="lead"><em>an ode to the hard stuff.</em></p>
 <p>Okay but as soon as I convince you it's just a t-shirt, I'm flipping the switch. Because sometimes, a shirt is not just a shirt. And this is where our passion for this business shines.</p>
