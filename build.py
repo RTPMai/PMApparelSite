@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Static site generator for pmapparel.com. Outputs plain HTML into ./site."""
-import json, os, html, datetime
+import json, os, html, datetime, re
 
 BASE = "https://www.pmapparel.com"
 OUT = "site"
@@ -461,11 +461,27 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
 </body>
 </html>"""
 
+def _external_blank_target(content):
+    """Add target="_blank" rel="noopener" to any <a href="http..."> that
+    doesn't point at pmapparel.com. Internal links, mailto:, and tel: are untouched."""
+    def repl(m):
+        pre, url, post = m.group(1), m.group(2), m.group(3)
+        if "pmapparel.com" in url:
+            return m.group(0)
+        attrs = pre + post
+        if "target=" in attrs:
+            return m.group(0)
+        extra = ' target="_blank"' + ('' if "rel=" in attrs else ' rel="noopener"')
+        return f'<a {pre}href="{url}"{post}{extra}>'
+    return re.sub(r'<a\s+([^>]*?)href="(https?://[^"]+)"([^>]*)>', repl, content)
+
 def write(path, content):
     full = os.path.join(OUT, path.lstrip("/"))
     if path.endswith("/"):
         full = os.path.join(full, "index.html")
     os.makedirs(os.path.dirname(full), exist_ok=True)
+    if full.endswith(".html"):
+        content = _external_blank_target(content)
     with open(full, "w") as f:
         f.write(content)
 
@@ -1466,6 +1482,8 @@ def iowa_on_demand():
 
 def scholarships():
     path = "/shirts-for-scholarships/"
+    iod_all = IOD_FOUNDING + IOD_SCHOOLS
+    schools_html = ", ".join(f"<b>{s}</b>" for s in iod_all[:-1]) + f", and <b>{iod_all[-1]}</b>"
     body = f"""
 <section class="texture hero" style="padding:84px 0 72px">
   <div class="wrap">
@@ -1476,7 +1494,7 @@ def scholarships():
 <section>
   <div class="wrap prose">
     <h2>shirts for scholarships.</h2>
-    <p>The P&amp;M Apparel Shirts for Scholarships Fund is dedicated to helping youth in the <b>North Polk</b>, <b>Ankeny</b>, <b>Woodward-Granger</b>, and <b>Saydel</b> community school districts attend and succeed in the educational arena. Its vision: empowering Central Iowa youth with need-based educational resources.</p>
+    <p>The P&amp;M Apparel Shirts for Scholarships Fund is dedicated to helping youth in the school districts we serve through <a href="/iowa-on-demand/">Iowa On Demand</a>: {schools_html}. Its vision: empowering Central Iowa youth with need-based educational resources.</p>
     <p>Each year we award need-based scholarships to deserving graduating high school seniors pursuing a course of study at a two-year or four-year college, university, or trade program. Recipients are selected on need and program criteria, and funds are awarded after proof of enrollment.</p>
     <p><b>For 2026:</b> the fund's award ceiling is <b>$2,000</b>, with an individual maximum award of <b>$1,000</b>. Applications are due before <b>May 22 at 5:00 pm</b>. <a href="https://drive.google.com/file/d/1VTxwOn9fDHrAfLU10RGA2es_fbgbmrGE/view" rel="noopener">Download the application.</a></p>
     <h2>sponsorships and donations.</h2>
@@ -1490,7 +1508,7 @@ def scholarships():
   </div>
 </section>"""
     title = "Giving Back | Scholarships, Sponsorships & Donations | P&M Apparel"
-    desc = "How P&M Apparel gives back: need-based Shirts for Scholarships awards for graduating Iowa seniors, plus sponsorships and donations for local teams, events, and organizations."
+    desc = "How P&M Apparel gives back: need-based Shirts for Scholarships awards for graduating seniors in the Iowa On Demand school districts, plus sponsorships and donations for local teams, events, and organizations."
     write(path, layout(path, title, desc, body, breadcrumbs([("Home", "/"), ("Giving Back", path)])))
 
 def contact():
@@ -1753,6 +1771,7 @@ def notfound():
 </section>"""
     html_out = layout("/404.html", "Page Not Found | P&M Apparel",
                       "That page doesn't exist. Head back to the P&M Apparel homepage.", body)
+    html_out = _external_blank_target(html_out)
     with open(os.path.join(OUT, "404.html"), "w") as f:
         f.write(html_out)
 
