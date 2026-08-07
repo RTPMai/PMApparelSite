@@ -10,9 +10,9 @@ GBP_READ_URL = f"https://search.google.com/local/reviews?placeid={GBP_PLACE_ID}"
 GBP_WRITE_URL = f"https://search.google.com/local/writereview?placeid={GBP_PLACE_ID}"
 # Refresh these two occasionally (they change slowly) and re-run build.py:
 GBP_RATING = "4.9"
-GBP_COUNT = "323"
+GBP_COUNT = "328"
 
-TODAY = "2026-07-31"
+TODAY = "2026-08-07"
 
 # Flyover Con. When the dedicated flyovercon site launches, put its URL here
 # and the site's Flyover links can point to it.
@@ -396,10 +396,17 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:image" content="{BASE}/assets/logo-black.png">
+<meta property="og:image" content="{BASE}/assets/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:site_name" content="P&amp;M Apparel">
-<meta name="twitter:card" content="summary">
-<link rel="icon" href="/assets/logo-black.png" type="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{BASE}/assets/og-default.jpg">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/assets/icons/favicon-16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/styles.css">
 {ld}
 </head>
@@ -446,7 +453,7 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
         <li><a href="/pricing/">How pricing works</a></li>
         <li><a href="/flyover-con/">Flyover Con</a></li>
         <li><a href="{STORES_URL}">Online stores</a></li>
-        <li><a href="{IOD_URL}">Iowa On Demand</a></li>
+        <li><a href="/iowa-on-demand/">Iowa On Demand</a></li>
         <li><a href="/shirts-for-scholarships/">Shirts for Scholarships</a></li>
         <li><a href="/press/">Press &amp; recognition</a></li>
         <li><a href="{SPONSOR_URL}">Sponsorship requests</a></li>
@@ -455,7 +462,7 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
     </div>
   </div>
   <div class="wrap fine">
-    <p>Good People. Great Gear. &copy; 2026 P&amp;M Apparel. Woman-owned and family-run in Polk City, Iowa since 1987. Serving Ankeny, the Des Moines metro, and teams everywhere.</p>
+    <p>Good People. Great Gear. &copy; 2026 P&amp;M Apparel. Woman-owned and family-run in Polk City, Iowa since 1987. Serving Ankeny, the Des Moines metro, and teams everywhere. <a href="/privacy-policy/">Privacy Policy</a></p>
   </div>
 </footer>
 </body>
@@ -474,6 +481,63 @@ def _external_blank_target(content):
         extra = ' target="_blank"' + ('' if "rel=" in attrs else ' rel="noopener"')
         return f'<a {pre}href="{url}"{post}{extra}>'
     return re.sub(r'<a\s+([^>]*?)href="(https?://[^"]+)"([^>]*)>', repl, content)
+
+def generate_favicons():
+    """Regenerate favicon.ico, PNG icon set, and apple-touch-icon from the
+    source logo. Runs every build so the icons stay in sync with the logo
+    without living as untracked binary output."""
+    from PIL import Image
+    logo = Image.open(os.path.join(OUT, "assets/logo-black.png")).convert("RGBA")
+
+    def square_pad(im, size, bg=None):
+        im = im.copy()
+        im.thumbnail((size, size), Image.LANCZOS)
+        canvas = Image.new("RGBA", (size, size), bg or (0, 0, 0, 0))
+        canvas.paste(im, ((size - im.width) // 2, (size - im.height) // 2), im)
+        return canvas
+
+    icon_dir = os.path.join(OUT, "assets/icons")
+    os.makedirs(icon_dir, exist_ok=True)
+    for size in (16, 32, 48, 192, 512):
+        square_pad(logo, size).save(os.path.join(icon_dir, f"favicon-{size}.png"))
+
+    icon_sizes = [16, 32, 48]
+    imgs = [square_pad(logo, s) for s in icon_sizes]
+    imgs[0].save(os.path.join(OUT, "favicon.ico"), format="ICO", sizes=[(s, s) for s in icon_sizes])
+
+    # iOS ignores transparency and fills it black, so give the apple touch
+    # icon an explicit ink-black background with a white version of the mark.
+    apple = Image.new("RGBA", (180, 180), (26, 26, 26, 255))
+    mark = logo.copy()
+    mark.thumbnail((120, 120), Image.LANCZOS)
+    a = mark.split()[-1]
+    white_mark = Image.merge("RGBA", (Image.new("L", mark.size, 255),) * 3 + (a,))
+    apple.paste(white_mark, ((180 - white_mark.width) // 2, (180 - white_mark.height) // 2), white_mark)
+    apple.save(os.path.join(icon_dir, "apple-touch-icon.png"))
+
+    manifest = {
+        "name": "P&M Apparel", "short_name": "P&M Apparel",
+        "start_url": "/", "display": "standalone",
+        "background_color": "#ffffff", "theme_color": "#1a1a1a",
+        "icons": [
+            {"src": "/assets/icons/favicon-192.png", "sizes": "192x192", "type": "image/png"},
+            {"src": "/assets/icons/favicon-512.png", "sizes": "512x512", "type": "image/png"},
+        ],
+    }
+    with open(os.path.join(OUT, "site.webmanifest"), "w") as f:
+        json.dump(manifest, f, separators=(",", ":"))
+
+def generate_social_image():
+    """Build a 1200x630 default social-share image (JPEG) from the shop-floor
+    hero photo, for og:image / twitter:card. Regenerated every build."""
+    from PIL import Image
+    src = Image.open(os.path.join(OUT, "assets/photos/hero-floor.jpg")).convert("RGB")
+    target_w, target_h = 1200, 630
+    scale = target_w / src.width
+    resized = src.resize((target_w, round(src.height * scale)), Image.LANCZOS)
+    top = (resized.height - target_h) // 2
+    cropped = resized.crop((0, top, target_w, top + target_h))
+    cropped.save(os.path.join(OUT, "assets/og-default.jpg"), quality=82)
 
 def write(path, content):
     full = os.path.join(OUT, path.lstrip("/"))
@@ -1511,6 +1575,39 @@ def scholarships():
     desc = "How P&M Apparel gives back: need-based Shirts for Scholarships awards for graduating seniors in the Iowa On Demand school districts, plus sponsorships and donations for local teams, events, and organizations."
     write(path, layout(path, title, desc, body, breadcrumbs([("Home", "/"), ("Giving Back", path)])))
 
+def privacy():
+    path = "/privacy-policy/"
+    body = f"""
+<section class="texture hero" style="padding:84px 0 72px">
+  <div class="wrap">
+    <h1>privacy policy.</h1>
+    <p class="lead">Plain language, no fine-print games. Here's what we collect and what we do with it.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+  <div class="prose">
+    <h2>what we collect.</h2>
+    <p>When you request a quote, submit a sponsorship request, or reach out through a form on this site, we collect what you give us: your name, email, phone number, and details about your project or order. We don't collect anything beyond what's needed to get back to you and get your job done.</p>
+    <h2>how we use it.</h2>
+    <p>Your information is used to respond to your request, quote and produce your order, and keep you updated on its status. We don't sell your information, and we don't share it with anyone outside the vendors who help us run our business.</p>
+    <h2>who we share it with.</h2>
+    <p>Our quote and sponsorship forms are hosted by Jotform. Our online team stores run on Chipply. Payment processing for online stores is handled by Chipply's payment partners, not by us directly. We may also use analytics tools to understand how visitors use this site; these tools may use cookies or similar technology.</p>
+    <h2>your choices.</h2>
+    <p>You can ask us what information we have on file, ask us to correct it, or ask us to delete it, by emailing <a href="mailto:{EMAIL}">{EMAIL}</a>. We'll honor reasonable requests as quickly as we can.</p>
+    <h2>kids.</h2>
+    <p>This site isn't directed at children, and we don't knowingly collect information from anyone under 13.</p>
+    <h2>changes to this policy.</h2>
+    <p>If this policy changes, we'll update this page. Last updated {UPDATED_HUMAN}.</p>
+    <h2>questions?</h2>
+    <p><a href="{QUOTE_URL}">Reach out</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>, and we'll get back to you.</p>
+  </div>
+  </div>
+</section>"""
+    title = "Privacy Policy | P&M Apparel"
+    desc = "How P&M Apparel collects, uses, and protects the information you share with us through quote requests, sponsorship forms, and online team stores."
+    write(path, layout(path, title, desc, body, breadcrumbs([("Home", "/"), ("Privacy Policy", path)]), noindex=False))
+
 def contact():
     path = "/contact/"
     body = f"""
@@ -1781,6 +1878,7 @@ PAGE_PATHS = ["/", "/pricing/", "/flyover-con/", "/blog/how-to-lower-per-shirt-c
     "/services/fusion/", "/services/sublimation/", "/services/live-printing/",
     "/services/e-commerce/", "/services/state-shirts/", "/customer-supplied-garments/",
     "/iowa-on-demand/", "/about-us/", "/press/", "/faq/", "/contact/", "/shirts-for-scholarships/",
+    "/privacy-policy/",
     "/blog/", "/blog/screen-printing-vs-dtf/", "/blog/embroidery-vs-screen-printing/",
     "/blog/what-is-sublimation-good-for/", "/blog/how-quotes-work/",
     "/blog/its-just-a-shirt/", "/blog/its-not-just-a-shirt/",
@@ -1828,6 +1926,7 @@ Key facts: 12-piece recommended minimum for screen printing (1-piece minimums fo
 - [About]({BASE}/about-us/)
 - [Press & Recognition]({BASE}/press/): podcasts, articles, and industry recognition
 - [Contact]({BASE}/contact/)
+- [Privacy Policy]({BASE}/privacy-policy/)
 """)
 
 def readme():
@@ -1865,6 +1964,8 @@ Export web-size JPGs (1600px wide, ~200-400KB) from the Dropbox `Website Assets/
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
+    generate_favicons()
+    generate_social_image()
     home()
     services_index()
     pricing()
@@ -1875,6 +1976,7 @@ if __name__ == "__main__":
     press()
     iowa_on_demand()
     scholarships()
+    privacy()
     contact()
     faq_page()
     blog()
