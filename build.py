@@ -43,6 +43,14 @@ TT_URL = "https://www.tiktok.com/@p_mapparel"
 LI_URL = "https://www.linkedin.com/company/p-&-m-apparel"
 MAPS_URL = "https://www.google.com/maps/search/?api=1&query=P%26M+Apparel+1100+S+5th+St+Polk+City+IA+50226"
 
+# Press / bio profile URLs, reused in schema (sameAs) and on the press page.
+MEGAN_APPARELIST_URL = "https://www.apparelist.com/person/megan-griffith/"
+MEGAN_GP_AUTHOR_URL = "https://graphics-pro.com/author/megan-griffith/"
+MEGAN_CANVASREBEL_URL = "https://canvasrebel.com/meet-megan-griffith/"
+MEGAN_AWARD_URL = "https://screenprintingmag.com/here-are-the-winners-of-the-2024-women-in-screen-printing-awards/"
+MEGAN_RISING_STARS_URL = "https://screenprintingmag.com/meet-the-rising-stars-megan-griffith/"
+RYAN_BOD_URL = "https://www.boardofdecorators.com/board-members/ryan-toney"
+
 LOCAL_BUSINESS = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -435,6 +443,7 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
         <li><a href="{STORES_URL}">Online stores</a></li>
         <li><a href="{IOD_URL}">Iowa On Demand</a></li>
         <li><a href="/shirts-for-scholarships/">Shirts for Scholarships</a></li>
+        <li><a href="/press/">Press &amp; recognition</a></li>
         <li><a href="{SPONSOR_URL}">Sponsorship requests</a></li>
         <li><a href="{FB_URL}">Facebook</a> &middot; <a href="{IG_URL}">Instagram</a> &middot; <a href="{TT_URL}">TikTok</a></li>
       </ul>
@@ -1185,6 +1194,69 @@ def csg_page():
 # ---------------------------------------------------------------- OTHER PAGES
 # Each entry: (name, role, photo, [(question, answer), ...])
 # OWNER: paste new Q&As into each person's list; the card back renders all of them.
+# --- Press & recognition. Verified, third-party sources only. ---
+PRESS_PODCASTS = [
+    ("Apparelist Podcast: Inspiring Change in the Apparel Decorating Community",
+     "Recorded live at PRINTING United Expo 2024.",
+     "https://www.apparelist.com/podcast/apparelist/inspiring-change-in-the-apparel-decorating-community-with-megan-griffith-and-ryan-toney-of-pm-apparel/"),
+    ("Rhymes with Odd: Ryan & Megan",
+     "The origin story and how a basement operation became a full digital shop.",
+     "https://www.ryansnaadt.com/podcast"),
+    ("Last Call For Plastisol, Season 2 Ep. 5",
+     "Live from PRINTING United Expo in Las Vegas.",
+     "https://www.youtube.com/watch?v=4S9RpwBTsls"),
+    ("Last Call For Plastisol, Ep. 13",
+     "Megan and Ryan talk shop with the LCFP crew.",
+     "https://www.youtube.com/watch?v=PvaY91QKoZw"),
+    ("Last Call For Plastisol: Flyover Con Happy Hour",
+     "A toast to the first Flyover Con.",
+     "https://www.youtube.com/watch?v=Q1xPRlpnpLo"),
+    ("Shirt Show, Ep. 263",
+     "Megan and Ryan join the Shirt Show mic.",
+     "https://www.youtube.com/watch?v=vR3L9Nz4t8o"),
+    ("DTF Printing Podcast, Ep. 21",
+     "Megan goes solo to talk DTF, growth, and running a family shop.",
+     "https://www.youtube.com/watch?v=tDueYT1q6_4"),
+    ("The Business Spotlight: Our Unconventional Marketing Idea",
+     "How Flyover Con became P&M's biggest marketing move.",
+     "https://www.youtube.com/watch?v=yVnGAAzjGzk"),
+    ("Chipply Customer Stories: P&M Apparel",
+     "Ryan on why P&M runs its team stores through Chipply.",
+     "https://www.youtube.com/watch?v=dwQCjbrSD4M"),
+]
+PRESS_ARTICLES = [
+    ("Apparelist: P&M Apparel, Leading with Legacy",
+     "A longform look at three generations building one shop.",
+     "https://www.apparelist.com/longform/pm-apparel-leading-with-legacy/"),
+    ("Apparelist: Registration Now Open for Flyover Con 2026",
+     "Coverage of the third Flyover Con.",
+     "https://www.apparelist.com/2026/02/23/registration-now-open-for-flyover-con-2026/"),
+    ("Apparelist: P&M Apparel, Anatol to Host Flyover Con",
+     "The 2024 announcement that started it all.",
+     "https://www.apparelist.com/2024/03/18/pm-apparel-anatol-to-host-flyover-con/"),
+    ("Screen Printing Mag: Custom Apparel Without The Busywork",
+     "Ryan on how P&M uses AI to cut the busywork, not the craft.",
+     "https://screenprintingmag.com/custom-apparel-without-the-busywork/"),
+    (f"CanvasRebel: Meet Megan Griffith",
+     "A Q&A on building an inclusive shop floor.",
+     MEGAN_CANVASREBEL_URL),
+    ("CITY | Clean and Simple: A Seamless Apparel Process with P&M Apparel",
+     "An early look at how P&M runs a custom order start to finish.",
+     "https://www.citycleanandsimple.com/2018/03/19/seamless-apparel-process-pm-apparel-division-city/"),
+    ("CITYVIEW: P&M Apparel Breaks Ground on New Building",
+     "The new Polk City building, from the ground up.",
+     "https://www.dmcityview.com/just-released/2020/08/17/pm-apparel-breaks-ground-on-new-building-in-polk-city/"),
+]
+PRESS_COLUMN = [
+    ("Merch on demand in the event world", "April 2026", "https://graphics-pro.com/feature/merch-on-demand-in-the-event-world/"),
+    ("Building a workplace culture that actually cares", "February 2026", "https://graphics-pro.com/feature/building-workplace-culture-cares/"),
+    ("You can't boss like you used to", "January 2026", "https://graphics-pro.com/feature/you-cant-boss-like-you-used-to/"),
+    ("Passing down the family business", "November 2025", "https://graphics-pro.com/feature/passing-down-the-family-business/"),
+    ("Diversifying in the decorated apparel industry", "October 2025", "https://graphics-pro.com/feature/diversifying-decorated-apparel-industry/"),
+    ("We don't sell T-shirts here", "June 2025", "https://graphics-pro.com/feature/we-dont-sell-t-shirts-here/"),
+    ("Women in screen printing", "May 2025", "https://graphics-pro.com/feature/women-in-screen-printing/"),
+]
+
 TEAM = [
     ("Megan Griffith", "art director + owner", "megan", [("what would you say ya' do here?", "All things art, and I can dip into most of the production, administrative, and financial things as necessary.")]),
     ("Ryan Toney", "grand poobah of many hats + owner", "ryan", [("what would you say ya' do here?", "Webstores, social media, production, sales, a little bit of everything. Plus show tunes, performed without request.")]),
@@ -1222,6 +1294,7 @@ def about():
     <p>Great apparel builds belonging. Great service still matters. Fast answers matter. Keeping your word matters. That mindset has carried P&amp;M through decades of change while we keep evolving with better systems, stronger creativity, smarter technology, and a team that genuinely cares.</p>
     <p>We're not just decorators. We're problem solvers, idea generators, deadline hitters, and brand builders. We combine real production knowledge with practical business thinking, so you get solutions that work in the real world, not just on paper.</p>
     <p>90% of our business comes from referrals. That's not an accident. It's the relationships.</p>
+    <p>We've also had a few people outside our shop take notice. See what's been said in <a href="/press/">press &amp; recognition.</a></p>
   </div>
 </section>
 <section class="splitrow rev">
@@ -1268,7 +1341,90 @@ document.querySelectorAll(".flipcard").forEach(function(c){{
         "@context": "https://schema.org", "@type": "AboutPage",
         "url": BASE + path, "about": {"@id": BASE + "/#business"},
     }
-    write(path, layout(path, title, desc, body, [{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": BASE + "/#business", "employee": [{"@type": "Person", "name": n, "jobTitle": r, "image": BASE + "/assets/photos/team/" + p + ".jpg", "worksFor": {"@id": BASE + "/#business"}} for n, r, p, qa in TEAM]}] + [schema, breadcrumbs([("Home", "/"), ("About Us", path)])]))
+    PERSON_EXTRA = {
+        "Megan Griffith": {
+            "sameAs": [MEGAN_APPARELIST_URL, MEGAN_GP_AUTHOR_URL, MEGAN_CANVASREBEL_URL],
+            "award": "2024 Women in Screen Printing Award",
+        },
+        "Ryan Toney": {
+            "sameAs": [RYAN_BOD_URL],
+        },
+    }
+    employee_schema = []
+    for n, r, p, qa in TEAM:
+        entry = {"@type": "Person", "name": n, "jobTitle": r,
+                  "image": BASE + "/assets/photos/team/" + p + ".jpg",
+                  "worksFor": {"@id": BASE + "/#business"}}
+        entry.update(PERSON_EXTRA.get(n, {}))
+        employee_schema.append(entry)
+    write(path, layout(path, title, desc, body, [{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": BASE + "/#business", "employee": employee_schema}] + [schema, breadcrumbs([("Home", "/"), ("About Us", path)])]))
+
+def press():
+    path = "/press/"
+
+    def card_grid(items):
+        return '<div class="grid cols3">' + "".join(
+            f'<a class="cell" href="{u}" target="_blank" rel="noopener">'
+            f'<h3>{esc(t)}</h3><p class="cellsub">{esc(d)}</p></a>'
+            for t, d, u in items) + '</div>'
+
+    podcasts_html = card_grid(PRESS_PODCASTS)
+    articles_html = card_grid(PRESS_ARTICLES)
+    column_html = "<ul class=\"flist\" style=\"margin-left:0\">" + "".join(
+        f'<li><a href="{u}" target="_blank" rel="noopener">{esc(t)}</a> <span style="color:var(--gray)">({d})</span></li>'
+        for t, d, u in PRESS_COLUMN) + "</ul>"
+
+    body = f"""
+<section class="texture hero" style="padding:84px 0 72px">
+  <div class="wrap">
+    <h1>press &amp; recognition.</h1>
+    <p class="lead">Podcasts, articles, and a few nice things other people in the industry have said about us. We didn't write any of these.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap prose">
+    <h2>recognition.</h2>
+    <p>In 2024, Megan Griffith won the <a href="{MEGAN_AWARD_URL}" target="_blank" rel="noopener">Women in Screen Printing Award</a> from Screen Printing Mag. She was also part of the magazine's inaugural <a href="{MEGAN_RISING_STARS_URL}" target="_blank" rel="noopener">Rising Stars</a> class. She sits on the <a href="{MEGAN_APPARELIST_URL}" target="_blank" rel="noopener">Apparelist Advisory Board</a> and writes a recurring column for <a href="{MEGAN_GP_AUTHOR_URL}" target="_blank" rel="noopener">GRAPHICS PRO</a>.</p>
+    <p>Ryan Toney is a member of the <a href="{RYAN_BOD_URL}" target="_blank" rel="noopener">Board of Decorators</a> and co-founded <a href="/flyover-con/">Flyover Con</a>, a free industry conference hosted right on our production floor.</p>
+  </div>
+</section>
+<section class="band">
+  <div class="wrap">
+    <h2>Megan's column in GRAPHICS PRO.</h2>
+    <p style="max-width:60ch;margin-bottom:22px">A recurring column on running a shop, running a family business, and running both at once.</p>
+    {column_html}
+  </div>
+</section>
+<section class="band">
+  <div class="wrap">
+    <h2>podcasts &amp; video.</h2>
+    <p style="max-width:60ch;margin-bottom:22px">Conversations about the shop, the industry, and the occasional show tune.</p>
+    {podcasts_html}
+  </div>
+</section>
+<section class="band">
+  <div class="wrap">
+    <h2>articles &amp; features.</h2>
+    {articles_html}
+  </div>
+</section>
+{cta_band("want the story straight from us?", "Reach out and we'll point you to the right person.")}"""
+
+    title = "Press & Recognition | P&M Apparel"
+    desc = "Podcasts, articles, and industry recognition for P&M Apparel, Megan Griffith, and Ryan Toney, from GRAPHICS PRO, Apparelist, Screen Printing Mag, and more."
+    schema = [
+        {"@context": "https://schema.org", "@type": "CollectionPage",
+         "url": BASE + path, "name": title, "about": {"@id": BASE + "/#business"}},
+        {"@context": "https://schema.org", "@type": "Person", "name": "Megan Griffith",
+         "jobTitle": "Art Director & Owner", "worksFor": {"@id": BASE + "/#business"},
+         "award": "2024 Women in Screen Printing Award",
+         "sameAs": [MEGAN_APPARELIST_URL, MEGAN_GP_AUTHOR_URL, MEGAN_CANVASREBEL_URL]},
+        {"@context": "https://schema.org", "@type": "Person", "name": "Ryan Toney",
+         "jobTitle": "Owner", "worksFor": {"@id": BASE + "/#business"},
+         "sameAs": [RYAN_BOD_URL]},
+        breadcrumbs([("Home", "/"), ("Press & Recognition", path)]),
+    ]
+    write(path, layout(path, title, desc, body, schema))
 
 def iowa_on_demand():
     path = "/iowa-on-demand/"
@@ -1594,7 +1750,7 @@ PAGE_PATHS = ["/", "/pricing/", "/flyover-con/", "/blog/how-to-lower-per-shirt-c
     "/services/", "/services/screen-printing/", "/services/embroidery/",
     "/services/fusion/", "/services/sublimation/", "/services/live-printing/",
     "/services/e-commerce/", "/services/state-shirts/", "/customer-supplied-garments/",
-    "/iowa-on-demand/", "/about-us/", "/faq/", "/contact/", "/shirts-for-scholarships/",
+    "/iowa-on-demand/", "/about-us/", "/press/", "/faq/", "/contact/", "/shirts-for-scholarships/",
     "/blog/", "/blog/screen-printing-vs-dtf/", "/blog/embroidery-vs-screen-printing/",
     "/blog/what-is-sublimation-good-for/", "/blog/how-quotes-work/",
     "/blog/its-just-a-shirt/", "/blog/its-not-just-a-shirt/",
@@ -1640,6 +1796,7 @@ Key facts: 12-piece recommended minimum for screen printing (1-piece minimums fo
 - [Iowa On Demand]({BASE}/iowa-on-demand/)
 - [FAQ]({BASE}/faq/)
 - [About]({BASE}/about-us/)
+- [Press & Recognition]({BASE}/press/): podcasts, articles, and industry recognition
 - [Contact]({BASE}/contact/)
 """)
 
@@ -1685,6 +1842,7 @@ if __name__ == "__main__":
     all_services()
     csg_page()
     about()
+    press()
     iowa_on_demand()
     scholarships()
     contact()
