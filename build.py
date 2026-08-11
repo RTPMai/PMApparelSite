@@ -734,7 +734,7 @@ def home():
 </section>
 <section class="band" style="border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)">
   <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px">
-    <div><h2 style="margin-bottom:.2em">flyover con.</h2><p style="color:#555;margin:0">An apparel industry event inside our working print shop. Real production, honest tours, free to attend.</p></div>
+    <div><h2 style="margin-bottom:.2em">flyover con.</h2><p style="color:#555;margin:0">An apparel industry event inside our working print shop. Real production, honest tours, modest registration fee.</p></div>
     <a class="cta-btn inv" href="/flyover-con/">see the event.</a>
   </div>
 </section>
@@ -911,8 +911,7 @@ def flyover():
     event_schema = {
         "@context": "https://schema.org", "@type": "EventSeries",
         "name": "Flyover Con",
-        "description": "A recurring apparel decoration industry event held inside P&M Apparel's working print shop in Polk City, Iowa. Hands-on education, honest shop tours, live production, and real conversations. Built by printers, for printers. Attendance is free, made possible by sponsors. Held in 2024 and 2026.",
-        "isAccessibleForFree": True,
+        "description": "A recurring apparel decoration industry event held inside P&M Apparel's working print shop in Polk City, Iowa. Hands-on education, honest shop tours, live production, and real conversations. Built by printers, for printers. A modest registration fee keeps it accessible, with sponsors covering the rest. Held in 2024 and 2026.",
         "url": BASE + path,
         "location": {"@type": "Place", "name": "P&M Apparel",
                      "address": {"@type": "PostalAddress", "streetAddress": ADDR,
@@ -955,8 +954,8 @@ def flyover():
 </section>
 <section>
   <div class="wrap prose">
-    <h2>free. on purpose.</h2>
-    <p>Attendance costs nothing, and that's not a promotion. It's the point. Education in this industry shouldn't be gated behind a badge fee. Sponsors make that possible, and sponsoring Flyover Con isn't buying ad space: it's face-to-face time with working decorators, a seat inside an authentic community event, and a direct hand in keeping industry education accessible.</p>
+    <h2>accessible. on purpose.</h2>
+    <p>Registration is a modest fee, kept intentionally low. It's not how this event makes money; it's there for buy-in, so the room is full of people who actually want to be there. Sponsors cover the rest, and sponsoring Flyover Con isn't buying ad space: it's face-to-face time with working decorators, a seat inside an authentic community event, and a direct hand in keeping industry education accessible.</p>
     <p>If your company wants in on that, <a href="mailto:{EMAIL}?subject=Flyover%20Con%20sponsorship">let's talk sponsorship</a>.</p>
     <h2>why we host it.</h2>
     <p>Flyover Con is what P&amp;M stands for, turned into an event: generosity, education, transparency, and helping other decorators succeed. We'd rather grow the whole industry than guard our corner of it. Open doors beat closed playbooks.</p>
@@ -964,7 +963,7 @@ def flyover():
 </section>
 {cta_band("want in on the next one?", "Email us with 'Flyover Con' in the subject line and we'll keep you in the loop on everything: " + EMAIL)}"""
     title = "Flyover Con | An Industry Event Inside a Working Print Shop"
-    desc = "Flyover Con: hands-on apparel decoration education inside P&M Apparel's working print shop in Polk City, Iowa. Honest shop tours, live production, real conversations. Free to attend."
+    desc = "Flyover Con: hands-on apparel decoration education inside P&M Apparel's working print shop in Polk City, Iowa. Honest shop tours, live production, real conversations. Modest registration fee."
     write(path, layout(path, title, desc, body,
                        [event_schema, breadcrumbs([("Home", "/"), ("Flyover Con", path)])]))
 
@@ -1056,7 +1055,7 @@ def services_index():
 # ---------------------------------------------------------------- SERVICE PAGES
 def all_services():
     service_page(
-        "screen-printing", "screen printing in polk city &amp; des moines.",
+        "screen-printing", "screen printing in polk&nbsp;city &amp; des&nbsp;moines.",
         "Screen Printing in Des Moines & Polk City, IA | P&M Apparel",
         "Custom screen printing in Polk City, Iowa. Vibrant, durable prints for teams, schools, and businesses. 12-piece minimum, 8-10 day turnaround, quotes within 24 hours.",
         "The most cost-effective choice for larger quantities. Vibrant, durable prints that hold up to years of washing and everyday wear.",
@@ -1148,7 +1147,7 @@ def all_services():
     service_page(
         "sublimation", "sublimation.",
         "Sublimation Printing in Iowa | Full-Color Custom Apparel | P&M Apparel",
-        "Sublimation printing in Polk City, Iowa. Full-color, edge-to-edge designs on light polyester that never crack or peel. One-piece minimum. Quotes within 24 hours.",
+        "Sublimation printing in Polk City, Iowa. Full-color, edge-to-edge designs on light polyester that never crack or peel. One-piece minimum. 3 to 4 week turnaround. Quotes within 24 hours.",
         "Perfect for full-color, edge-to-edge designs on light-colored polyester garments. The ink becomes part of the fabric.",
         f"""
 <h2>ink that becomes fabric.</h2>
@@ -1156,7 +1155,7 @@ def all_services():
 <h2>when to choose it.</h2>
 <p>Choose sublimation for full-color, edge-to-edge designs on light-colored polyester. Athletic jerseys, all-over prints, and vibrant designs with gradients and photos are its sweet spot. Because the ink dyes the fabric itself, it needs polyester content and light base colors to work its magic.</p>
 <h2>the details.</h2>
-<p>One-piece minimum. Standard 8 to 10 business day turnaround after art approval. Pairs beautifully with fusion names and numbers for team uniforms.</p>""",
+<p>One-piece minimum. Standard 3 to 4 week turnaround after art approval. Pairs beautifully with fusion names and numbers for team uniforms.</p>""",
         faqs=[
             ("Will a sublimated print crack or fade?", "No. The ink becomes part of the fabric rather than sitting on top of it, so there's nothing to crack, peel, or feel."),
             ("Can you sublimate on cotton or dark shirts?", "Sublimation requires light-colored, high-polyester fabric. For cotton or dark garments, our fusion (DTF) method delivers similar full-color detail. We'll recommend the right method for your garment."),
@@ -1358,7 +1357,7 @@ TEAM = [
     ("Taylor Price", "embroidery tech", "taylor", [("what would you say ya' do here?", "I hoop garments and put them on a machine to get a brand new design.")]),
     ("Nicole Printy", "embroidery tech", "nicole", [("what would you say ya' do here?", "I work with the embroidery team to get the best designs onto each piece.")]),
     ("Tess Collins", "shipping specialist", "tess", [("what would you say ya' do here?", "In charge of checking in orders, compiling, and shipping them out.")]),
-    ("Quinn Taylor", "production assistant", "quinn", [("what would you say ya' do here?", "I help make shirts.")]),
+    ("Quinn Taylor", "press operator", "quinn", [("what would you say ya' do here?", "I help make shirts.")]),
 ]
 
 def about():
@@ -1392,7 +1391,7 @@ def about():
 <section>
   <div class="wrap">
     <h2>the crew.</h2>
-    <p style="max-width:60ch;margin-bottom:26px">Sixteen people who print it, stitch it, pack it, and answer the phone when you call. In their own words:</p>
+    <p style="max-width:60ch;margin-bottom:26px">Sixteen people who print it, stitch it, pack it, and answer the phone when you call. In their own&nbsp;words:</p>
     <div class="teamgrid">{"".join(
         f'<div class="teamcard flipcard" tabindex="0" role="button" aria-pressed="false" aria-label="Meet {n}, {r}">'
         f'<div class="flip-inner"><div class="flip-front">'
@@ -1412,7 +1411,7 @@ def about():
     <div class="stat"><b>100%</b><span>of our art is custom, made in-house</span></div>
   </div>
 </section>
-{cta_band("come say hi.", "1100 S 5th St in Polk City. Monday to Friday, 8am to 5pm.")}
+{cta_band("come say hi.", "1100 S 5th St in Polk City.<br><span style=\"white-space:nowrap\">Monday to Friday, 8am to 5pm.</span>")}
 <script>
 document.querySelectorAll(".flipcard").forEach(function(c){{
   function flip(){{var on=c.classList.toggle("flipped");c.setAttribute("aria-pressed",on);}}
@@ -1471,7 +1470,7 @@ def press():
   <div class="prose">
     <h2>recognition.</h2>
     <p>In 2024, Megan Griffith won the <a href="{MEGAN_AWARD_URL}" target="_blank" rel="noopener">Women in Screen Printing Award</a> from Screen Printing Mag. She was also part of the magazine's inaugural <a href="{MEGAN_RISING_STARS_URL}" target="_blank" rel="noopener">Rising Stars</a> class. She sits on the <a href="{MEGAN_APPARELIST_URL}" target="_blank" rel="noopener">Apparelist Advisory Board</a> and writes a recurring column for <a href="{MEGAN_GP_AUTHOR_URL}" target="_blank" rel="noopener">GRAPHICS PRO</a>.</p>
-    <p>Ryan Toney was a member of the <a href="{RYAN_BOD_URL}" target="_blank" rel="noopener">Gildan Board of Decorators</a> and founded <a href="/flyover-con/">Flyover Con</a>, a free industry conference hosted right on our production floor. He currently serves on Chipply's Client Council and the Polk City Chamber of Commerce Board of Directors.</p>
+    <p>Ryan Toney was a member of the <a href="{RYAN_BOD_URL}" target="_blank" rel="noopener">Gildan Board of Decorators</a> and founded <a href="/flyover-con/">Flyover Con</a>, an industry conference hosted right on our production floor. He currently serves on Chipply's Client Council and the Polk City Chamber of Commerce Board of Directors.</p>
   </div>
   </div>
 </section>
@@ -1522,8 +1521,8 @@ def iowa_on_demand():
     body = f"""
 <section class="texture hero" style="padding:84px 0 72px">
   <div class="wrap">
-    <h1>school pride, on demand.</h1>
-    <p class="lead">No bulk orders. No guessing sizes. No leftover boxes.</p>
+    <h1>school pride, on&nbsp;demand.</h1>
+    <p class="lead">No bulk orders. No guessing sizes. No leftover&nbsp;boxes.</p>
     <div class="btn-row"><a class="cta-btn" href="{IOD_URL}">shop iowa on demand.</a></div>
   </div>
 </section>
@@ -1741,7 +1740,7 @@ def blog():
 <p>Sublimation needs polyester content and a light base color. The ink bonds with polyester fibers, so cotton won't hold it, and because it dyes rather than covers, it can't print light designs on dark fabric. This isn't a quality tradeoff, it's chemistry.</p>
 <h3>what to use instead.</h3>
 <p>For cotton or dark garments, <a href="/services/fusion/">DTF transfers</a> deliver similar full-color detail with a soft feel. For bold designs at quantity on any fabric, <a href="/services/screen-printing/">screen printing</a> is the workhorse. Part of what you get with a full-service shop is that we'll steer you to the right method for your actual garment instead of forcing your design into the wrong one.</p>
-<p>One-piece minimum, standard 8 to 10 business day turnaround. <a href="/services/sublimation/">More on sublimation here.</a></p>"""),
+<p>One-piece minimum, standard 3 to 4 week turnaround. <a href="/services/sublimation/">More on sublimation here.</a></p>"""),
         ("what does custom apparel cost? how our quotes work.", "/blog/how-quotes-work/",
          "We quote every job individually. Here's exactly what moves the number: quantity breaks, color counts, setup fees, art time, and what happens after you say yes.",
          """
@@ -1908,11 +1907,11 @@ def site_files():
 
 Contact: {PHONE}, {EMAIL}, {ADDR}, {CITY}, {STATE} {ZIP}. Hours: Monday-Friday 8am-5pm.
 
-Key facts: 12-piece recommended minimum for screen printing (1-piece minimums for embroidery and DTF). Standard turnaround 8-10 business days after art approval. Rush available (same day if in stock). Quotes within 24 hours. One-time $35 embroidery setup. Custom art $100/hr, first 30 minutes free with production orders. Customer-supplied garments welcome with waiver. Free online team stores (Chipply). Pantone matching available. Brands: Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour.
+Key facts: 12-piece recommended minimum for screen printing (1-piece minimums for embroidery and DTF). Standard turnaround 8-10 business days after art approval for screen printing, embroidery, and DTF; sublimation runs 3-4 weeks. Rush available (same day if in stock). Quotes within 24 hours. One-time $35 embroidery setup. Custom art $100/hr, first 30 minutes free with production orders. Customer-supplied garments welcome with waiver. Free online team stores (Chipply). Pantone matching available. Brands: Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour.
 
 ## Pages
 - [How Pricing Works]({BASE}/pricing/): the six variables that move per-piece price, fees in writing
-- [Flyover Con]({BASE}/flyover-con/): free apparel industry event inside P&M's working print shop
+- [Flyover Con]({BASE}/flyover-con/): low-cost apparel industry event inside P&M's working print shop
 - [Services]({BASE}/services/): all decoration methods explained
 - [Screen Printing]({BASE}/services/screen-printing/)
 - [Embroidery]({BASE}/services/embroidery/)
