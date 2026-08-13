@@ -22,6 +22,9 @@ UPDATED_HUMAN = datetime.date.fromisoformat(TODAY).strftime("%B %Y")
 PHONE = "(515) 984-7740"
 PHONE_TEL = "+15159847740"
 EMAIL = "info@pmapparel.com"
+FLYOVER_EMAIL = "ryan@flyovercon.ink"
+# Alliteration MailMe signup page for the Flyover Con list (list key: "flyover-con").
+MAILME_URL = "https://alliteration-eight.vercel.app/flyover-con-signup.html"
 ADDR = "1100 S 5th St"
 CITY = "Polk City"
 STATE = "IA"
@@ -576,12 +579,12 @@ def breadcrumbs(items):
         ],
     }
 
-def cta_band(heading="ready when you are.", sub="Tell us what you're thinking. Quotes are usually back within 24 hours."):
+def cta_band(heading="ready when you are.", sub="Tell us what you're thinking. Quotes are usually back within 24 hours.", btns=None):
     return f"""
 <section class="texture band">
   <div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px">
     <div><h2 style="margin-bottom:.2em">{heading}</h2><p style="color:#dcdcdc;margin:0">{sub}</p></div>
-    <div class="btn-row" style="margin:0"><a class="cta-btn" href="{QUOTE_URL}">get a quote.</a><a class="cta-btn" style="background:transparent;color:#fff" href="tel:{PHONE_TEL}">call {PHONE}</a></div>
+    <div class="btn-row" style="margin:0">{btns or f'<a class="cta-btn" href="{QUOTE_URL}">get a quote.</a><a class="cta-btn" style="background:transparent;color:#fff" href="tel:{PHONE_TEL}">call {PHONE}</a>'}</div>
   </div>
 </section>"""
 
@@ -926,8 +929,8 @@ def flyover():
     <p class="mega">flyover con.</p>
     <p class="lead">Some of the best ideas in this industry don't come from the biggest cities or the biggest companies. They come from hardworking shops in the middle of the country that are willing to open their doors and share what they've learned. This is us, opening ours.</p>
     <div class="btn-row">
-      <a class="cta-btn" href="mailto:{EMAIL}?subject=Flyover%20Con">keep me in the loop.</a>
-      <a class="cta-btn" style="background:transparent;color:#fff" href="mailto:{EMAIL}?subject=Flyover%20Con%20sponsorship">sponsor the education.</a>
+      <a class="cta-btn" href="{MAILME_URL}" rel="noopener" target="_blank">keep me in the loop.</a>
+      <a class="cta-btn" style="background:transparent;color:#fff" href="mailto:{FLYOVER_EMAIL}?subject=Flyover%20Con%20sponsorship">sponsor the education.</a>
     </div>
   </div>
 </section>
@@ -956,12 +959,12 @@ def flyover():
   <div class="wrap prose">
     <h2>accessible. on purpose.</h2>
     <p>Registration is a modest fee, kept intentionally low. It's not how this event makes money; it's there for buy-in, so the room is full of people who actually want to be there. Sponsors cover the rest, and sponsoring Flyover Con isn't buying ad space: it's face-to-face time with working decorators, a seat inside an authentic community event, and a direct hand in keeping industry education accessible.</p>
-    <p>If your company wants in on that, <a href="mailto:{EMAIL}?subject=Flyover%20Con%20sponsorship">let's talk sponsorship</a>.</p>
+    <p>If your company wants in on that, <a href="mailto:{FLYOVER_EMAIL}?subject=Flyover%20Con%20sponsorship">let's talk sponsorship</a>.</p>
     <h2>why we host it.</h2>
     <p>Flyover Con is what P&amp;M stands for, turned into an event: generosity, education, transparency, and helping other decorators succeed. We'd rather grow the whole industry than guard our corner of it. Open doors beat closed playbooks.</p>
   </div>
 </section>
-{cta_band("want in on the next one?", "Email us with 'Flyover Con' in the subject line and we'll keep you in the loop on everything: " + EMAIL)}"""
+{cta_band("want in on the next one?", "Join the Flyover Con list and you'll hear about dates, speakers, and registration before anyone else.", btns=f'<a class="cta-btn" href="{MAILME_URL}" rel="noopener" target="_blank">join the list.</a><a class="cta-btn" style="background:transparent;color:#fff" href="mailto:{FLYOVER_EMAIL}?subject=Flyover%20Con">email flyover con.</a>')}"""
     title = "Flyover Con | An Industry Event Inside a Working Print Shop"
     desc = "Flyover Con: hands-on apparel decoration education inside P&M Apparel's working print shop in Polk City, Iowa. Honest shop tours, live production, real conversations. Modest registration fee."
     write(path, layout(path, title, desc, body,
