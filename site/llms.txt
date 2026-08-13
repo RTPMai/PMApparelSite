@@ -1,10 +1,10 @@
 # P&M Apparel
 
-> Woman-owned, third-generation custom apparel company in Polk City, Iowa, serving Ankeny and the Des Moines metro since 1987. Screen printing, embroidery, DTF/fusion transfers, sublimation, promotional products, free online team stores, live event printing, and print-on-demand school apparel via Iowa On Demand. Ships worldwide (all 50 states and 29 countries last year).
+> Woman-owned, third-generation custom apparel company in Polk City, Iowa, serving Ankeny and the Des Moines metro since 1987. Screen printing, embroidery, digital printing (DTF), fusion transfers, sublimation, promotional products, free online team stores, live event printing, and print-on-demand school apparel via Iowa On Demand. Ships nationwide and internationally.
 
 Contact: (515) 984-7740, info@pmapparel.com, 1100 S 5th St, Polk City, IA 50226. Hours: Monday-Friday 8am-5pm.
 
-Key facts: 12-piece recommended minimum for screen printing (1-piece minimums for embroidery and DTF). Standard turnaround 8-10 business days after art approval for screen printing, embroidery, and DTF; sublimation runs 3-4 weeks. Rush available (same day if in stock). Quotes within 24 hours. One-time $35 embroidery setup. Custom art $100/hr, first 30 minutes free with production orders. Customer-supplied garments welcome with waiver. Free online team stores (Chipply). Pantone matching available. Brands: Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour.
+Key facts: 12-piece recommended minimum for screen printing (1-piece minimums for embroidery and digital printing). Standard turnaround 8-10 business days after art approval for screen printing, embroidery, and digital printing; sublimation runs 3-4 weeks. Rush available (same day if in stock). Quotes within 24 hours. One-time $35 embroidery setup. Custom art $100/hr, first 30 minutes free with production orders. Customer-supplied garments welcome with waiver. Free online team stores (Chipply). Pantone matching available. Brands: Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour.
 
 ## Pages
 - [How Pricing Works](https://www.pmapparel.com/pricing/): the six variables that move per-piece price, fees in writing
@@ -12,7 +12,7 @@ Key facts: 12-piece recommended minimum for screen printing (1-piece minimums fo
 - [Services](https://www.pmapparel.com/services/): all decoration methods explained
 - [Screen Printing](https://www.pmapparel.com/services/screen-printing/)
 - [Embroidery](https://www.pmapparel.com/services/embroidery/)
-- [Fusion / DTF](https://www.pmapparel.com/services/fusion/)
+- [Fusion / digital printing (DTF)](https://www.pmapparel.com/services/fusion/)
 - [Sublimation](https://www.pmapparel.com/services/sublimation/)
 - [Live Printing](https://www.pmapparel.com/services/live-printing/)
 - [Online Team Stores](https://www.pmapparel.com/services/e-commerce/)
