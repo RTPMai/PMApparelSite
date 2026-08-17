@@ -291,8 +291,8 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .quiz-body{padding:26px 22px}
 .quiz h3{font-size:1.35rem;margin-bottom:18px}
 .quiz-opts{display:grid;gap:10px}
-.quiz-opts button{font-family:var(--head);font-size:.95rem;text-align:left;padding:14px 16px;background:#fff;border:2px solid var(--ink);cursor:pointer;transition:background .12s,color .12s}
-.quiz-opts button:hover,.quiz-opts button:focus{background:var(--ink);color:#fff}
+.quiz-opts button{font-family:var(--head);font-size:.95rem;text-align:left;padding:14px 16px;background:#fff;color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-appearance:none;appearance:none;border:2px solid var(--ink);border-radius:0;cursor:pointer;transition:background .12s,color .12s}
+.quiz-opts button:hover,.quiz-opts button:focus{background:var(--ink);color:#fff;-webkit-text-fill-color:#fff}
 .quiz-result h3{font-size:1.8rem}
 .quiz-result .cellsub{margin:10px 0 18px}
 .quiz-reset{font-family:var(--head);font-size:.8rem;background:none;border:none;color:#fff;cursor:pointer;text-decoration:underline}
@@ -330,9 +330,9 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .pb-group{margin-bottom:20px}
 .pb-group>b{font-family:var(--head);font-size:.78rem;letter-spacing:.06em;display:block;margin-bottom:8px}
 .pb-opts{display:flex;flex-wrap:wrap;gap:8px}
-.pb-opts button{font-family:var(--head);font-size:.8rem;padding:11px 14px;background:#fff;border:2px solid var(--ink);cursor:pointer;transition:background .12s,color .12s;min-height:44px}
-.pb-opts button:hover,.pb-opts button:focus{background:#efefef}
-.pb-opts button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.pb-opts button{font-family:var(--head);font-size:.8rem;padding:11px 14px;background:#fff;color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-appearance:none;appearance:none;border:2px solid var(--ink);border-radius:0;cursor:pointer;transition:background .12s,color .12s;min-height:44px}
+.pb-opts button:hover,.pb-opts button:focus{background:#efefef;color:var(--ink);-webkit-text-fill-color:var(--ink)}
+.pb-opts button[aria-pressed="true"]{background:var(--ink);color:#fff;-webkit-text-fill-color:#fff}
 .pmeter{margin:26px 0 6px}
 .pmeter-track{height:22px;border:2px solid var(--ink);background:#fff;position:relative;overflow:hidden}
 .pmeter-track i{display:block;height:100%;background:var(--ink);transition:width .45s cubic-bezier(.3,1.2,.4,1)}
