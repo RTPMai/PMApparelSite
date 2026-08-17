@@ -28,6 +28,9 @@ STATE = "IA"
 ZIP = "50226"
 
 QUOTE_URL = "https://wkf.ms/3WiETfm"
+# Dedicated intake form for state tournament / Drake Relays orders. Used on the
+# state shirts service page in place of the general quote form.
+STATE_SHIRTS_URL = "https://wkf.ms/4bh67cu"
 STORES_URL = "https://pmapparel.chipply.com/"
 PROMO_URL = "https://www.promoplace.com/pmapparel"
 # Flyover Con contact routing. Sponsorship and speaker outreach go to Ryan
@@ -602,8 +605,12 @@ def cta_band(heading="ready when you are.", sub="Tell us what you're thinking. Q
   </div>
 </section>"""
 
-def service_page(slug, h1, title, desc, when, body_html, faqs=None, img=None, img_alt="", name=None):
+def service_page(slug, h1, title, desc, when, body_html, faqs=None, img=None, img_alt="", name=None,
+                 cta_url=None, cta_label="get a quote."):
+    """cta_url: optional override for the hero and closing-band button. Defaults
+    to the general quote form; state shirts uses its own intake form."""
     path = f"/services/{slug}/"
+    cta_url = cta_url or QUOTE_URL
     name = name or h1.rstrip('.').title()
     schema = [service_schema(name, desc, path),
               breadcrumbs([("Home", "/"), ("Services", "/services/"), (name, path)]),
@@ -623,7 +630,7 @@ def service_page(slug, h1, title, desc, when, body_html, faqs=None, img=None, im
   <div class="hs-text">
     <h1>{h1}</h1>
     <p class="lead">{when}</p>
-    <div class="btn-row"><a class="cta-btn" href="{QUOTE_URL}">get a quote.</a></div>
+    <div class="btn-row"><a class="cta-btn" href="{cta_url}">{cta_label}</a></div>
   </div>
   <div class="hs-img"><img src="{img}" alt="{esc(img_alt)}"></div>
 </section>"""
@@ -633,7 +640,7 @@ def service_page(slug, h1, title, desc, when, body_html, faqs=None, img=None, im
   <div class="wrap">
     <h1>{h1}</h1>
     <p class="lead" style="font-size:1.2rem;max-width:58ch;color:#e8e8e8">{when}</p>
-    <div class="btn-row"><a class="cta-btn" href="{QUOTE_URL}">get a quote.</a></div>
+    <div class="btn-row"><a class="cta-btn" href="{cta_url}">{cta_label}</a></div>
   </div>
 </section>"""
     crumb_html = (f'<nav class="crumbs" aria-label="Breadcrumb">'
@@ -648,7 +655,8 @@ def service_page(slug, h1, title, desc, when, body_html, faqs=None, img=None, im
     {faq_html}
   </div>
 </section>
-{cta_band()}"""
+{cta_band(btns=f'<a class="cta-btn" href="{cta_url}">{cta_label}</a>'
+                f'<a class="cta-btn" style="background:transparent;color:#fff" href="tel:{PHONE_TEL}">call {PHONE}</a>')}"""
     write(path, layout(path, title, desc, body, schema))
 
 # ---------------------------------------------------------------- HOME
@@ -1233,7 +1241,7 @@ def all_services():
 <p>When your team qualifies for a state tournament, the window between "we're in!" and game day is tiny. State shirts are our rush specialty: quick turnarounds, online store capabilities, and <b>no rush fees</b>. Whether it's a state tournament or the Drake Relays, it's never too early to start preparing, and it has never been easier.</p>
 <h2>how it works.</h2>
 <div class="steps">
-  <div class="step"><h3>reach out.</h3><p>Use the <a href="{QUOTE_URL}" style="color:inherit">quote form</a> the moment you qualify (or before). It collects everything at once so you can turn your focus back to preparation, not the shirts.</p></div>
+  <div class="step"><h3>reach out.</h3><p>Use the <a href="{STATE_SHIRTS_URL}" style="color:inherit">state shirts request form</a> the moment you qualify (or before). It collects everything at once so you can turn your focus back to preparation, not the shirts.</p></div>
   <div class="step"><h3>we handle the art.</h3><p>With 30 minutes of free art time, the possibilities are endless. Our in-house art department turns your school, sport, and bracket run into a design; your approval is all we need.</p></div>
   <div class="step"><h3>store goes live when you win.</h3><p>If your sport's timeline allows, we build the <a href="/services/e-commerce/" style="color:inherit">online store</a> ahead of time and open it the day of your qualifying competition, ready for your team, families, fans, and school community. Store windows close quickly, so having it ready helps everyone.</p></div>
   <div class="step"><h3>we produce and pack.</h3><p>Once the store closes we get to work, producing everything and packaging it individually by order to make distribution easy. Pick up individually at our shop, send a representative for the whole batch, or ask about delivery options.</p></div>
@@ -1246,7 +1254,7 @@ def all_services():
             ("Do you do Drake Relays shirts?", "Yes. The same quick-turnaround, no-rush-fee process covers the Drake Relays and other qualifying meets, with an online store ready to open the moment your athletes punch their ticket."),
             ("Can fans and parents order their own shirts?", "Yes. We can spin up a quick online store so fans and parents pick their own sizes and pay online, with nothing for the booster club to collect, sort, or front."),
             ("Do you design the shirt for us?", "Yes. Our in-house art department turns your school, sport, and bracket run into a custom design. The first 30 minutes of art time is free when your order includes production."),
-        ])
+        ], cta_url=STATE_SHIRTS_URL, cta_label="request state shirts.")
 
 def csg_page():
     path = "/customer-supplied-garments/"
