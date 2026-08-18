@@ -816,7 +816,7 @@ def price_machine(dark=False):
   var fill=document.getElementById("pb-fill"),label=document.getElementById("pb-label"),tips=document.getElementById("pb-tips");
   var gCol=document.getElementById("pb-g-col"),gSti=document.getElementById("pb-g-sti"),nDtf=document.getElementById("pb-note-dtf");
   var BANDS=[[27,"budget sweet spot."],[45,"great value."],[65,"middle of the road."],[85,"premium territory."],[101,"top shelf."]];
-  var QTIP_S=["Under 12 pieces, screen printing carries a $35 per-screen charge. This is exactly where digital printing (DTF) shines instead.",
+  var QTIP_S=["Under 12 pieces, screen printing carries a $30 per-screen charge. This is exactly where digital printing (DTF) shines instead.",
               "Solid start. The next price break lands at 24 pieces.",
               "Nice. The per-piece math gets noticeably friendlier at 48.",
               "This is where per-piece pricing really starts working for you.",
@@ -1096,7 +1096,7 @@ def all_services():
 <tr><td>4 to 6 colors</td><td>24 pieces</td></tr>
 <tr><td>7 to 10 colors</td><td>48 pieces</td></tr>
 </table>
-<p>Under the minimum? We can still help. Orders below minimum carry a $35 per-screen charge, or our <a href="/services/fusion/">fusion methods</a> may fit small runs better. We'll point you the right way.</p>
+<p>Under the minimum? We can still help. Orders below minimum carry a $30 per-screen charge, or our <a href="/services/fusion/">fusion methods</a> may fit small runs better. We'll point you the right way.</p>
 <h2>how it works.</h2>
 <div class="steps">
   <div class="step"><h3>art.</h3><p>Send your logo or idea. Vector files are ideal; our in-house art department can clean up or recreate anything else.</p></div>
@@ -1118,7 +1118,7 @@ def all_services():
 <p class="updated">Minimums, turnaround, and pricing details current as of {UPDATED_HUMAN}.</p>""",
         faqs=[
             ("How much does screen printing cost?", "Every job is unique and quoted as such, based on quantity, number of colors and locations, and garment choice. Quotes are usually back within 24 hours. Bulk orders get better per-piece pricing."),
-            ("What is the minimum order for screen printing?", "12 pieces for designs with 1 to 3 colors, 24 pieces for 4 to 6 colors, and 48 pieces for 7 to 10 colors. Below-minimum orders carry a $35 per-screen charge."),
+            ("What is the minimum order for screen printing?", "12 pieces for designs with 1 to 3 colors, 24 pieces for 4 to 6 colors, and 48 pieces for 7 to 10 colors. Below-minimum orders carry a $30 per-screen charge."),
             ("How fast can I get my order?", "Standard turnaround is 8 to 10 business days after art approval. Rush orders are available: same day if we have the item in stock, generally next day if we need to order it."),
             ("Can you print my existing logo?", "Yes. Vector files (AI, EPS, PDF) are preferred and high-res PNGs are accepted. Our in-house art department can also clean up or recreate artwork at $100 per hour, with the first 30 minutes free on most orders."),
         ], img="/assets/photos/press-loading-pink.jpg", img_alt="Loading a shirt onto the press at P&M Apparel",
@@ -1680,7 +1680,7 @@ def faq_page():
         ("How long does an order take?", "Standard turnaround is 8 to 10 business days after art approval, up to 10 to 12 during peak season."),
         ("Do you do rush orders?", "Yes. If we have the item in stock, we can turn it same day. If we need to order it, generally next day. Rush fees depend on the timeline."),
         ("How much will my order cost?", "Every job is unique and quoted as such. Pricing depends on quantity, number of colors and locations, garment choice, thread count, and rush. Quotes are usually back within 24 hours, and bulk orders get better per-piece pricing."),
-        ("Are there setup fees?", "Screen printing orders below minimum carry a $35 per-screen charge. Embroidery has a one-time $35 digitizing setup fee. Promotional products are case by case."),
+        ("Are there setup fees?", "Screen printing orders below minimum carry a $30 per-screen charge. Embroidery has a one-time $35 digitizing setup fee. Promotional products are case by case."),
         ("Do you charge for artwork?", "Custom art is $100 per hour, and the first 30 minutes is free when your order includes production (like shirts). Every piece of our art is custom and made in-house. No judgment. We've printed Comic Sans before."),
         ("What file formats do you need for my logo?", "Vector files (AI, EPS, PDF) are preferred. High-resolution PNGs are accepted. Our art department can clean up or recreate artwork if needed."),
         ("Will I see a proof before you print?", "Yes. Every job gets a quote approval and a proof approval. Nothing prints until you've signed off."),
@@ -1778,7 +1778,7 @@ def blog():
 <p><b>The garment itself.</b> A basic Gildan tee and a Carhartt jacket are different starting points. We carry Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour, and more, at a range of price points.</p>
 <p><b>Method.</b> Screen printing wins at quantity, embroidery and digital printing (DTF) have one-piece minimums, and thread count matters for embroidery quotes.</p>
 <h3>the fixed fees, in plain sight.</h3>
-<p>Screen printing orders below minimum (12 pieces for 1 to 3 colors) carry a $35 per-screen charge. Embroidery has a one-time $35 digitizing setup fee, after which your logo is on file forever. Custom artwork runs $100 per hour, and the first 30 minutes is free when your order includes production. Rush fees depend on the timeline, except state tournament orders, which carry no rush fees at all.</p>
+<p>Screen printing orders below minimum (12 pieces for 1 to 3 colors) carry a $30 per-screen charge. Embroidery has a one-time $35 digitizing setup fee, after which your logo is on file forever. Custom artwork runs $100 per hour, and the first 30 minutes is free when your order includes production. Rush fees depend on the timeline, except state tournament orders, which carry no rush fees at all.</p>
 <h3>what happens when you ask.</h3>
 <p>Send us the idea however is easiest: walk in, call, email, or the quote form. Quotes are usually back within 24 hours. You approve the quote, a 50% deposit sends the job into art, you approve a proof, and nothing prints until you've signed off. Standard turnaround is 8 to 10 business days after art approval.</p>
 <p>Why don't we publish a price list? Because we'd rather ask you three questions and get the number right than publish a range that's wrong for your job in both directions. <a href="{QUOTE_URL}">Ask us</a>. It costs nothing and takes a day.</p>"""),
