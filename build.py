@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Static site generator for pmapparel.com. Outputs plain HTML into ./site."""
-import json, os, html, datetime, re
+import json, os, html, datetime, re, random
 
 BASE = "https://www.pmapparel.com"
 OUT = "site"
@@ -1387,8 +1387,231 @@ TEAM = [
     ("Quinn Taylor", "press operator", "quinn", [("what would you say ya' do here?", "I help make shirts.")]),
 ]
 
+ABOUT_EXTRAS = {
+    "tess": [
+        ("villain origin story?", "Sold as a baby to a foreign country, I grew up misunderstood and underrepresented."),
+        ("hill you'll die on that doesn't matter?", "Celery is useless, and not actually edible."),
+        ("how do you eat wrong?", "I crush dry ramen noodles and season them with the soup packet to eat them like chips."),
+        ("if you were a warning label?", "Shuts off when overwhelmed."),
+        ("walk-up song?", "Galactic Mermaid"),
+        ("clown college specialty?", "Stuffing myself in a small space for entertainment."),
+        ("dumbest way you've hurt yourself?", "Falling off a deck while sitting in a chair."),
+        ("your pet's google review?", "2 stars: Has hands and wet food but won't give me either at my demand. - Bear, the cat"),
+        ("memoir title?", "She Tried, Kinda"),
+        ("which kitchen appliance are you?", "Hand crank egg beater. I'm fun, but don't make much sense nowadays."),
+        ("never done it, but everyone assumes?", "Murder."),
+        ("worst thing a ghost could do?", "Perceive me."),
+        ("smell that transports you?", "Sesame oil."),
+        ("30 seconds of everyone's attention?", "Scream."),
+        ("iowa state fair strategy?", "Turkey leg."),
+        ("if we made a shirt about you?", "Front: SHIPPING. Back: I know where you live."),
+        ("sound that fills you with rage?", "A man complaining."),
+        ("weirdly competitive about?", "Being better than Noah at things."),
+    ],
+    "bailee": [
+        ("one movie's dialogue, forever?", "Harry Potter"),
+        ("how do you eat wrong?", "Kit Kats, layer by layer."),
+        ("walk-up song?", "Everything Is Awesome"),
+        ("clown college specialty?", "Fitting into the tiny car."),
+        ("scariest animal if it could talk?", "A lanternfish."),
+        ("dumbest way you've hurt yourself?", "Hit myself in the head with a car door while closing the door."),
+        ("wikipedia article from memory?", "Sourdough"),
+        ("conspiracy you think is true?", "Big Foot is out there."),
+        ("your pet's google review?", "3.5 stars. Always down to play but would love more treats and more food, more often."),
+        ("which kitchen appliance are you?", "KitchenAid mixer. Capable of doing most any task."),
+        ("irrational fear?", "Magicians"),
+        ("iowa state fair strategy?", "Avoid at all cost."),
+        ("lifetime supply of?", "Bread flour"),
+        ("weirdly competitive about?", "Setting up a big job as fast as I can."),
+    ],
+    "jacob": [
+        ("irrational fear?", "Mechanical dinosaurs"),
+        ("smell that transports you?", "Burnt diesel. Takes me to my grandpa's old garage."),
+        ("sound that fills you with rage?", "Nail clipping"),
+    ],
+    "kim": [
+        ("walk-up song?", "Barracuda"),
+        ("dumbest way you've hurt yourself?", "Stood up."),
+        ("irrational fear?", "Snakes"),
+        ("smell that transports you?", "Hog manure"),
+        ("if we made a shirt about you?", "I'm not as mean as I look."),
+        ("sound that fills you with rage?", "Whining"),
+    ],
+    "alexis": [
+        ("one movie's dialogue, forever?", "21/22 Jump Street"),
+        ("hill you'll die on that doesn't matter?", "Nicolas Cage is the worst actor ever."),
+        ("how do you eat wrong?", "I eat my Nutter Butters by layers."),
+        ("if you were a warning label?", "Warning: extremely nosey."),
+        ("walk-up song?", "Maneater by Nelly Furtado"),
+        ("clown college specialty?", "Balloon art."),
+        ("scariest animal if it could talk?", "Household pets, because they know all our secrets."),
+        ("your pet's google review?", "Madison, 4 stars. Really great, pretty and loving, but doesn't spend every waking moment giving me her undivided attention."),
+        ("memoir title?", "Oops, All Character Development"),
+        ("worst thing a ghost could do?", "Turn on the big light."),
+        ("irrational fear?", "Raccoons"),
+        ("30 seconds of everyone's attention?", "Feel extremely uncomfortable for 30 seconds."),
+        ("iowa state fair strategy?", "Avoiding it altogether."),
+        ("if we made a shirt about you?", "Got that dog in me."),
+        ("sound that fills you with rage?", "Repetitive tapping or gum chewing."),
+        ("lifetime supply of?", "Groceries"),
+    ],
+    "ryan": [
+        ("villain origin story?", "The AC being broken."),
+        ("hill you'll die on that doesn't matter?", "BLTs are almost a sandwich."),
+        ("how do you eat wrong?", "String cheese. Just bite into it."),
+        ("if you were a warning label?", "Noxious gas."),
+        ("walk-up song?", "Bleed It Out, Linkin Park"),
+        ("clown college specialty?", "Stilts"),
+        ("scariest animal if it could talk?", "Spiders"),
+        ("dumbest way you've hurt yourself?", "Making a birdhouse out of a pop can with an X-Acto knife."),
+        ("wikipedia article from memory?", "How to annoy your loved ones."),
+        ("memoir title?", "Why Is He Writing a Book? The Ryan Toney Tale"),
+        ("which kitchen appliance are you?", "Blender. I'm loud and like to mix it up."),
+        ("never done it, but everyone assumes?", "Broken a bone."),
+        ("worst thing a ghost could do?", "Hey, watch this! No, that wasn't it. Keep watching. On repeat, forever."),
+        ("irrational fear?", "Spiders"),
+        ("smell that transports you?", "Diesel on a cold morning and I'm 7 again on the school bus."),
+        ("30 seconds of everyone's attention?", "Tell my whale joke."),
+        ("iowa state fair strategy?", "Avoid it at all costs."),
+        ("sound that fills you with rage?", "Ice scraping"),
+        ("lifetime supply of?", "Love and admiration"),
+    ],
+    "hannah": [
+        ("villain origin story?", "Becoming the eldest daughter."),
+        ("one movie's dialogue, forever?", "Harry Potter and the Half-Blood Prince"),
+        ("hill you'll die on that doesn't matter?", "Cottage cheese is curdled milk and should not be consumed."),
+        ("how do you eat wrong?", "I like my steak well done."),
+        ("if you were a warning label?", "Warning: will say what everyone is thinking but doesn't want to be the one to say. Caution in conversation."),
+        ("walk-up song?", "Drunk and I Want to Go Home, and Girls in the Hood"),
+        ("clown college specialty?", "Face painting"),
+        ("scariest animal if it could talk?", "If my dogs and cats could talk and didn't know how to keep their mouths shut, I'd be screwed. That or birds."),
+        ("dumbest way you've hurt yourself?", "I gave myself a concussion because I was so excited to see a dog. I ran into a metal pole and knocked myself out."),
+        ("conspiracy you think is true?", "Elvis Presley is not dead."),
+        ("your pet's google review?", "Ruby, 4 stars: I love my mom, but she doesn't play fun like Dad. Lola, 5 stars: My mom is the absolute best, I'm so happy to be alive. Cooper, 3 stars: My food bowl should be overflowing, and it is not."),
+        ("memoir title?", "Unfiltered Truth"),
+        ("which kitchen appliance are you?", "Toaster oven. Slept on but have a lot to offer. Can fit a whole frozen pizza."),
+        ("never done it, but everyone assumes?", "Been to the farmers market."),
+        ("worst thing a ghost could do?", "Pants me."),
+        ("irrational fear?", "Bridges"),
+        ("smell that transports you?", "Butterscotch takes me back to a butterbeer at Universal Studios at the Three Broomsticks."),
+        ("iowa state fair strategy?", "Stay 10 miles away at all times."),
+        ("if we made a shirt about you?", "Yay, sports."),
+        ("sound that fills you with rage?", "A warning light coming on in my car."),
+        ("lifetime supply of?", "Food"),
+        ("weirdly competitive about?", "Being organized."),
+    ],
+    "megan": [
+        ("villain origin story?", "Being on sensory overload and overwhelmed by my to-do list at the same time."),
+        ("one movie's dialogue, forever?", "Ace Ventura"),
+        ("hill you'll die on that doesn't matter?", "The toilet paper goes over the roll, not under."),
+        ("how do you eat wrong?", "M&Ms: color coordinated, eaten by color and quantity in each pile."),
+        ("if you were a warning label?", "Looks scary, but friendly if you have snacks and speak sweetly to her."),
+        ("walk-up song?", "Usually an audiobook."),
+        ("clown college specialty?", "Oh, I'm dropping out. Miss me with being surrounded by clowns every day."),
+        ("scariest animal if it could talk?", "Star-nosed mole."),
+        ("dumbest way you've hurt yourself?", "My brother once broke my finger by yanking on an afghan my fingers were intertwined in."),
+        ("wikipedia article from memory?", "Susannah Martin"),
+        ("your pet's google review?", "4 stars: great with treats and scritches, but she never lets me lick her face even though it's all I want in the whole world."),
+        ("memoir title?", "I Could Have Been Way Meaner Than I Was, and for That, I Deserve a Little Treat"),
+        ("which kitchen appliance are you?", "KitchenAid mixer. I have to be presentable enough to be left out on the counter for guests, but also have to be a workforce that pulls everything together."),
+        ("worst thing a ghost could do?", "Whistle."),
+        ("irrational fear?", "Plane crash."),
+        ("iowa state fair strategy?", "Find all the GF foods. Ride the Sky Glider. Look at some animals. Leave early and get a foot massage."),
+        ("if we made a shirt about you?", "They already do, all the time."),
+        ("sound that fills you with rage?", "Whistling"),
+        ("lifetime supply of?", "Time"),
+        ("weirdly competitive about?", "Having the worst medical issues."),
+    ],
+    "margo": [
+        ("wikipedia article from memory?", "Left-handed people are better at adapting and often pick up processes quicker because they have had to their entire lives."),
+        ("conspiracy you think is true?", "The world is built for right-handed people."),
+        ("your pet's google review?", "She's the best. 5 stars."),
+        ("iowa state fair strategy?", "Don't go. I am not a fan of the fair."),
+        ("if we made a shirt about you?", "Just let me do it."),
+    ],
+    "taylor": [
+        ("villain origin story?", "It's a secret."),
+        ("one movie's dialogue, forever?", "Moulin Rouge. I know most of the lines, lol."),
+        ("hill you'll die on that doesn't matter?", "Pineapple doesn't belong on pizza."),
+        ("how do you eat wrong?", "Milk before cereal."),
+        ("if you were a warning label?", "Keep distance. Contents flammable."),
+        ("walk-up song?", "Alien Boy, Oliver Tree"),
+        ("clown college specialty?", "Scaring grown men."),
+        ("scariest animal if it could talk?", "Sharks or spiders."),
+        ("dumbest way you've hurt yourself?", "Bit the gym floor. Teeth broke off."),
+        ("wikipedia article from memory?", "None of them."),
+        ("your pet's google review?", "3 stars. Too many struggle cuddles. Not enough food."),
+        ("memoir title?", "Too early to tell, haha. I'm too young for a memoir."),
+        ("which kitchen appliance are you?", "Oven. I get heated easily. May burn you."),
+        ("worst thing a ghost could do?", "Not clean my house."),
+        ("irrational fear?", "Deep ocean is scary, and airplane crashes."),
+        ("smell that transports you?", "Coffee. Makes me feel calm. Reminds me of not being tired."),
+        ("30 seconds of everyone's attention?", "Throw up."),
+        ("iowa state fair strategy?", "Don't go."),
+        ("if we made a shirt about you?", "Local cryptid."),
+        ("sound that fills you with rage?", "Whistling, and a machine stopping for no reason."),
+        ("lifetime supply of?", "Freshly made lattes."),
+        ("weirdly competitive about?", "Fighting games."),
+    ],
+    "alex": [
+        ("villain origin story?", "Dropped on my head as a child."),
+        ("one movie's dialogue, forever?", "The Artist"),
+        ("hill you'll die on that doesn't matter?", "Bikes belong on sidewalks."),
+        ("how do you eat wrong?", "Turkey leg. Eat it with both hands."),
+        ("if you were a warning label?", "Warning."),
+        ("walk-up song?", "Mr. Boombastic, Shaggy"),
+        ("clown college specialty?", "Pulling a handkerchief out of my mouth."),
+        ("scariest animal if it could talk?", "My fish in its tank. It's seen some things."),
+        ("dumbest way you've hurt yourself?", "Punched a tree and broke my hand."),
+        ("wikipedia article from memory?", "How to make mac and cheese."),
+        ("your pet's google review?", "5 stars. He feeds me even after I bite him, he's pretty cool for that."),
+        ("memoir title?", "At Least He Tried"),
+        ("which kitchen appliance are you?", "Spoon, because it's the most useful utensil."),
+        ("never done it, but everyone assumes?", "Gotten a tattoo."),
+        ("worst thing a ghost could do?", "Boo... like, be an original ghost, you basic ghost."),
+        ("irrational fear?", "Badgers. Don't need a rationalization."),
+        ("smell that transports you?", "Pie on a windowsill. It transports me closer to the pie via floating pie wafts."),
+        ("30 seconds of everyone's attention?", "Magic trick."),
+        ("iowa state fair strategy?", "Not go."),
+        ("if we made a shirt about you?", "I'm with stupid, with an arrow pointing up."),
+        ("sound that fills you with rage?", "Dolores O'Riordan's singing voice."),
+        ("lifetime supply of?", "Gold"),
+        ("weirdly competitive about?", "Movie trivia."),
+    ],
+}
+
+# Extras come from the 2026 handwritten team questionnaires. The picker runs at
+# build time, so each build deals a fresh hand and the cards change on deploy.
+# Q1 is never randomized: it always comes from TEAM.
+ABOUT_EXTRAS_PER_CARD = 2
+ABOUT_EXTRA_MAX_LEN = 110   # keeps the flip side from needing a scrollbar
+
+
+def deal_extras(per_card=ABOUT_EXTRAS_PER_CARD):
+    """Pick `per_card` random extras for each team member, fresh every build.
+
+    Spreads questions so the same one does not land on many cards at once, and
+    prefers short answers so the back of the card stays readable.
+    """
+    usage = {}
+    dealt = {}
+    # Tightest forms first so people with few answers are not left with scraps.
+    for slug in sorted(ABOUT_EXTRAS, key=lambda s: len(ABOUT_EXTRAS[s])):
+        pool = list(ABOUT_EXTRAS[slug])
+        random.shuffle(pool)
+        short = [x for x in pool if len(x[1]) <= ABOUT_EXTRA_MAX_LEN]
+        pool = short + [x for x in pool if x not in short]
+        pool.sort(key=lambda x: usage.get(x[0], 0))
+        chosen = pool[:per_card]
+        for label, _ in chosen:
+            usage[label] = usage.get(label, 0) + 1
+        dealt[slug] = chosen
+    return dealt
+
+
 def about():
     path = "/about-us/"
+    _extras = deal_extras()
     body = f"""
 <section class="texture hero" style="padding:84px 0 72px">
   <div class="wrap">
@@ -1425,7 +1648,8 @@ def about():
         f'<img src="/assets/photos/team/{p}.jpg" alt="{n}, {r} at P&M Apparel" loading="lazy" width="240" height="240">'
         f'<h3>{n.lower()}.</h3><p><b>{r}</b></p><p class="fliphint">tap to meet me</p></div>'
         f'<div class="flip-back"><h3>{n.split()[0].lower()}.</h3>'
-        + "".join(f'<p class="q">{q}</p><p class="a">{a}</p>' for q, a in qa)
+        + "".join(f'<p class="q">{esc(q)}</p><p class="a">{esc(a)}</p>'
+                    for q, a in list(qa) + _extras.get(p, []))
         + '</div></div></div>'
         for n, r, p, qa in TEAM)}</div>
   </div>
