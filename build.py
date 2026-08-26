@@ -1379,12 +1379,12 @@ TEAM = [
     ("Alexis Davis", "account manager", "alexis", [("what would you say ya' do here?", "I help individuals and companies get apparel and swag they enjoy wearing.")]),
     ("Abby Penton", "account manager", "abby", [("what would you say ya' do here?", "I work with dance studios, churches, and all types of personal orders.")]),
     ("Alex Hernandez", "graphic designer", "alex", [("what would you say ya' do here?", "I design custom artwork and mockup proofs, plus video and social media design for P&M marketing.")]),
-    ("Maggie Barbour", "press operator", "maggie", [("what would you say ya' do here?", "I reclaim screens, coat them, and burn films. I also help on the embroidery side when needed.")]),
-    ("Bailee Bishop", "press operator", "bailee", [("what would you say ya' do here?", "Reclaiming, coating, and rinsing screens, plus pulling and boxing orders.")]),
+    ("Maggie Barbour", "screen printer", "maggie", [("what would you say ya' do here?", "I reclaim screens, coat them, and burn films. I also help on the embroidery side when needed.")]),
+    ("Bailee Bishop", "screen printer", "bailee", [("what would you say ya' do here?", "Reclaiming, coating, and rinsing screens, plus pulling and boxing orders.")]),
     ("Taylor Price", "embroidery tech", "taylor", [("what would you say ya' do here?", "I hoop garments and put them on a machine to get a brand new design.")]),
     ("Nicole Printy", "embroidery tech", "nicole", [("what would you say ya' do here?", "I work with the embroidery team to get the best designs onto each piece.")]),
     ("Tess Collins", "shipping specialist", "tess", [("what would you say ya' do here?", "In charge of checking in orders, compiling, and shipping them out.")]),
-    ("Quinn Taylor", "press operator", "quinn", [("what would you say ya' do here?", "I help make shirts.")]),
+    ("Quinn Taylor", "screen printer", "quinn", [("what would you say ya' do here?", "I help make shirts.")]),
 ]
 
 ABOUT_EXTRAS = {
