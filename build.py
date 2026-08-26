@@ -1388,6 +1388,19 @@ TEAM = [
 ]
 
 ABOUT_EXTRAS = {
+    "nicole": [
+        ("one movie's dialogue, forever?", "Star Wars"),
+        ("hill you'll die on that doesn't matter?", "Nuts of any kind do not belong in Jell-O."),
+        ("how do you eat wrong?", "Pineapple on pizza is good."),
+        ("clown college specialty?", "Trick riding and vaulting."),
+        ("scariest animal if it could talk?", "Humpback whale. So loud."),
+        ("conspiracy you think is true?", "Amelia Earhart survived."),
+        ("your pet's google review?", "3.5 stars. Decent care, but could offer more treats."),
+        ("worst thing a ghost could do?", "Move things to a 'safe place' where I would never find them again."),
+        ("sound that fills you with rage?", "Metal against ceramic. Knife on plate."),
+        ("lifetime supply of?", "Hay for my horse."),
+        ("weirdly competitive about?", "Cosplay and costume contests."),
+    ],
     "quinn": [
         ("villain origin story?", "An evil doppelganger murders my whole family."),
         ("one movie's dialogue, forever?", "Any Bollywood movie."),
