@@ -40,11 +40,15 @@ FOC_EMAIL = "ryan@flyovercon.ink"
 MAILME_URL = "https://alliteration-eight.vercel.app/flyover-con-signup.html"
 SPONSOR_URL = "https://form.jotform.com/231636854478064"
 IOD_URL = "https://www.iowaondemand.com/"
-# Schools on Iowa On Demand: six founding schools, then the six that joined in 2026.
+# Schools on Iowa On Demand: six founding schools, then the ones that joined in 2026.
 IOD_FOUNDING = ["North Polk", "Ankeny", "Ankeny Centennial", "Woodward-Granger",
                 "Ankeny Christian Academy", "Saydel"]
-IOD_SCHOOLS = ["Bondurant-Farrar", "Johnston", "Dallas Center-Grimes",
+IOD_SCHOOLS = ["Johnston", "Dallas Center-Grimes",
                "Roosevelt", "Perry", "Ballard"]
+NUM_WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven",
+             8: "eight", 9: "nine", 10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen",
+             14: "fourteen", 15: "fifteen", 16: "sixteen", 17: "seventeen", 18: "eighteen"}
+IOD_COUNT = len(IOD_FOUNDING) + len(IOD_SCHOOLS)
 FB_URL = "https://www.facebook.com/pmapparel"
 IG_URL = "https://www.instagram.com/p_mapparel/"
 TT_URL = "https://www.tiktok.com/@p_mapparel"
@@ -1856,10 +1860,10 @@ def iowa_on_demand():
 </section>
 <section>
   <div class="wrap prose">
-    <p><a href="{IOD_URL}">Iowa On Demand</a> is P&amp;M Apparel's on-demand offshoot, built for local schools. Right now it serves 12 Iowa schools, with more joining all the time. The mission: make it easier to support your school with officially licensed spirit wear that's available year-round.</p>
+    <p><a href="{IOD_URL}">Iowa On Demand</a> is P&amp;M Apparel's on-demand offshoot, built for local schools. Right now it serves {IOD_COUNT} Iowa schools, with more joining all the time. The mission: make it easier to support your school with officially licensed spirit wear that's available year-round.</p>
     <h2>the schools.</h2>
-    <p>It started with six: {", ".join(IOD_FOUNDING[:-1])}, and {IOD_FOUNDING[-1]}. In 2026, six more joined: {", ".join(IOD_SCHOOLS[:-1])}, and {IOD_SCHOOLS[-1]}, bringing thousands more students, families, alumni, and fans on board. Twelve schools. One place.</p>
-    <p>That means school communities across Polk City, Alleman, Elkhart, Ankeny, Johnston, Grimes, Dallas Center, Bondurant, Woodward, Granger, Perry, Huxley, Slater, Cambridge, and Des Moines can grab officially licensed gear whenever the mood strikes: no order windows, no waiting for the next fundraiser.</p>
+    <p>It started with six: {", ".join(IOD_FOUNDING[:-1])}, and {IOD_FOUNDING[-1]}. In 2026, {NUM_WORDS[len(IOD_SCHOOLS)]} more joined: {", ".join(IOD_SCHOOLS[:-1])}, and {IOD_SCHOOLS[-1]}, bringing thousands more students, families, alumni, and fans on board. {NUM_WORDS[IOD_COUNT].capitalize()} schools. One place.</p>
+    <p>That means school communities across Polk City, Alleman, Elkhart, Ankeny, Johnston, Grimes, Dallas Center, Woodward, Granger, Perry, Huxley, Slater, Cambridge, and Des Moines can grab officially licensed gear whenever the mood strikes: no order windows, no waiting for the next fundraiser.</p>
     <h2>how it works.</h2>
     <p>Fans shop online whenever they want. Each item is produced as orders come in, decorated in-house by our team in Polk City, and shipped fast. No order windows. No leftover boxes in the booster club president's garage. Just school pride, ready when people want it.</p>
     <h2>get your district on board.</h2>
@@ -1868,7 +1872,7 @@ def iowa_on_demand():
 </section>
 {cta_band()}"""
     title = "Iowa On Demand | On-Demand School Spirit Wear | P&M Apparel"
-    desc = "Iowa On Demand is P&M Apparel's print-on-demand offshoot serving 12 Iowa school districts. Fans shop anytime, gear is decorated in-house in Polk City and shipped fast."
+    desc = f"Iowa On Demand is P&M Apparel's print-on-demand offshoot serving {IOD_COUNT} Iowa school districts. Fans shop anytime, gear is decorated in-house in Polk City and shipped fast."
     write(path, layout(path, title, desc, body, breadcrumbs([("Home", "/"), ("Iowa On Demand", path)])))
 
 def scholarships():
