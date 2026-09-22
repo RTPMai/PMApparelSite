@@ -12,11 +12,13 @@ GBP_WRITE_URL = f"https://search.google.com/local/writereview?placeid={GBP_PLACE
 GBP_RATING = "4.9"
 GBP_COUNT = "328"
 
-TODAY = "2026-08-07"
+TODAY = "2026-09-22"
 
-# Flyover Con. When the dedicated flyovercon site launches, put its URL here
-# and the site's Flyover links can point to it.
-FLYOVER_URL = None
+# Flyover Con lives at its own domain. /flyover-con/ here is a short intro page
+# that links out to it.
+FLYOVER_URL = "https://www.flyovercon.ink/"
+FOC_NEXT = "FOC27"
+FOC_NEXT_DATES = "April 16 and 17, 2027"
 UPDATED_HUMAN = datetime.date.fromisoformat(TODAY).strftime("%B %Y")
 
 PHONE = "(515) 984-7740"
@@ -27,7 +29,11 @@ CITY = "Polk City"
 STATE = "IA"
 ZIP = "50226"
 
-QUOTE_URL = "https://wkf.ms/3WiETfm"
+# QUOTE_FORM is the real form. Every link on the site uses QUOTE_URL (/quote/),
+# which vercel.json redirects to QUOTE_FORM, so swapping forms is a one-line
+# change here with no link hunting.
+QUOTE_FORM = "https://wkf.ms/3WiETfm"
+QUOTE_URL = "/quote/"
 # Dedicated intake form for state tournament / Drake Relays orders. Used on the
 # state shirts service page in place of the general quote form.
 STATE_SHIRTS_URL = "https://wkf.ms/4bh67cu"
@@ -36,10 +42,17 @@ PROMO_URL = "https://www.promoplace.com/pmapparel"
 # Flyover Con contact routing. Sponsorship and speaker outreach go to Ryan
 # directly at the event domain, not the shop inbox.
 FOC_EMAIL = "ryan@flyovercon.ink"
-# Alliteration MailMe signup page for the Flyover Con list.
-MAILME_URL = "https://alliteration-eight.vercel.app/flyover-con-signup.html"
+# Flyover Con list signup. Lives on flyovercon.ink (writes to ConControl).
+MAILME_URL = "https://www.flyovercon.ink/notify"
 SPONSOR_URL = "https://form.jotform.com/231636854478064"
 IOD_URL = "https://www.iowaondemand.com/"
+# Add-a-school intake. Same form the IOD site uses.
+IOD_ADD_SCHOOL_URL = "https://form.jotform.com/243246726056054"
+# IOD school page slugs, keyed by the display names below.
+IOD_SLUGS = {"North Polk": "north-polk", "Ankeny": "ankeny", "Ankeny Centennial": "ankeny-centennial",
+             "Woodward-Granger": "woodward-granger", "Ankeny Christian Academy": "ankeny-christian-academy",
+             "Saydel": "saydel", "Johnston": "johnston", "Dallas Center-Grimes": "dallas-center-grimes",
+             "Roosevelt": "roosevelt", "Perry": "perry", "Ballard": "ballard"}
 # Schools on Iowa On Demand: six founding schools, then the ones that joined in 2026.
 IOD_FOUNDING = ["North Polk", "Ankeny", "Ankeny Centennial", "Woodward-Granger",
                 "Ankeny Christian Academy", "Saydel"]
@@ -94,6 +107,7 @@ LOCAL_BUSINESS = {
                    "Elkhart IA", "Sheldahl IA", "Johnston IA", "Grimes IA",
                    "Dallas Center IA", "Bondurant IA", "Woodward IA", "Granger IA",
                    "Perry IA", "Huxley IA", "Slater IA", "Cambridge IA",
+                   "Urbandale IA", "West Des Moines IA", "Waukee IA", "Clive IA", "Altoona IA",
                    "Central Iowa", "United States"],
     "sameAs": [FB_URL, IG_URL, TT_URL, LI_URL, GBP_MAP_URL],
     "hasMap": GBP_MAP_URL,
@@ -106,15 +120,14 @@ LOCAL_BUSINESS = {
 }
 
 NAV = [
-    ("home.", "/"),
     ("services.", "/services/"),
     ("pricing.", "/pricing/"),
     ("iowa on demand.", "/iowa-on-demand/"),
     ("about.", "/about-us/"),
     ("faq.", "/faq/"),
     ("blog.", "/blog/"),
-    ("giving back.", "/shirts-for-scholarships/"),
     ("contact.", "/contact/"),
+    ("online stores.", STORES_URL),
 ]
 
 SERVICES = [
@@ -125,7 +138,7 @@ SERVICES = [
     ("live printing.", "/services/live-printing/", "We bring the press to your event and print shirts while guests watch."),
     ("online team stores.", "/services/e-commerce/", "A custom storefront for your group. No forms, no chasing payments. Free to set up."),
     ("state shirts.", "/services/state-shirts/", "Your team qualified. Tournament gear turned fast, with no rush fees."),
-    ("promo products.", PROMO_URL, "Drinkware, banners, teddy bears, even toilet paper. You think it, we'll ink it."),
+    ("promo products.", PROMO_URL, "Drinkware, banners, teddy bears, even toilet paper. Browse the catalog on our promo site."),
 ]
 
 CSS = r"""
@@ -395,7 +408,7 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
     )
     canonical = BASE + path
     nav_links = "".join(f'<a href="{h}">{esc(t)}</a>' for t, h in NAV)
-    mnav_links = "".join(f'<a href="{h}">{esc(t)}</a>' for t, h in NAV)
+    mnav_links = "".join(f'<a href="{h}">{esc(t)}</a>' for t, h in [("home.", "/")] + NAV)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -439,7 +452,7 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
     <a class="cta-btn" href="{QUOTE_URL}">get a quote.</a>
     <details class="mnav">
       <summary aria-label="Menu">menu.</summary>
-      <div class="mnav-panel">{mnav_links}<a href="{STORES_URL}">online stores.</a></div>
+      <div class="mnav-panel">{mnav_links}</div>
     </details>
   </div>
 </header>
@@ -463,7 +476,7 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
         <li><a href="/services/sublimation/">Sublimation</a></li>
         <li><a href="/services/live-printing/">Live printing</a></li>
         <li><a href="/services/e-commerce/">Online team stores</a></li>
-        <li><a href="{PROMO_URL}">Promo products</a></li>
+        <li><a href="{PROMO_URL}">Promo products (catalog)</a></li>
       </ul>
     </div>
     <div>
@@ -476,7 +489,7 @@ def layout(path, title, desc, body, extra_schema=None, og_type="website", noinde
         <li><a href="/shirts-for-scholarships/">Shirts for Scholarships</a></li>
         <li><a href="/press/">Press &amp; recognition</a></li>
         <li><a href="{SPONSOR_URL}">Sponsorship requests</a></li>
-        <li><a href="/flyover-con/">Flyover Con</a></li>
+        <li><a href="{FLYOVER_URL}">Flyover Con</a></li>
         <li><a href="{FB_URL}">Facebook</a> &middot; <a href="{IG_URL}">Instagram</a> &middot; <a href="{TT_URL}">TikTok</a></li>
       </ul>
     </div>
@@ -745,7 +758,7 @@ def home():
       <div class="step"><h3>meet your account manager.</h3><p>One person guides your whole order: decoration method, blank garments, online stores, all of it.</p></div>
       <div class="step"><h3>approve your quote.</h3><p>Quotes are usually back within 24 hours. A 50% deposit sends your job into art.</p></div>
       <div class="step"><h3>approve your proof.</h3><p>Every job gets a proof. Nothing prints until you've signed off.</p></div>
-      <div class="step"><h3>pick up or ship.</h3><p>Standard turnaround is 8 to 10 business days after art approval. Pick up in Polk City or we ship it wherever it needs to go.</p></div>
+      <div class="step"><h3>pick up or ship.</h3><p>Standard turnaround is 8 to 10 business days after art approval, up to 12 in peak season. Pick up in Polk City or we ship it wherever it needs to go.</p></div>
     </div>
   </div>
 </section>
@@ -774,7 +787,7 @@ def home():
   </div>
 </section>
 {cta_band()}"""
-    title = "P&M Apparel | Screen Printing & Embroidery in Polk City, IA"
+    title = "P&M Apparel | Screen Printing & Embroidery | Polk City & Des Moines Metro, IA"
     desc = "Woman-owned, third-generation custom apparel shop serving Ankeny and the Des Moines metro since 1987. Screen printing, embroidery, digital printing (DTF), promo products, and free online team stores."
     write("/", layout("/", title, desc, body, [review_schema, website_schema]))
 
@@ -877,9 +890,9 @@ def pricing():
     path = "/pricing/"
     faqs = [
         ("Why doesn't P&M Apparel post prices online?", "Because a posted grid would be wrong within the week. Blank garment costs move constantly, and no two jobs share the same art, color count, locations, and quantity. Instead of a stale price list, we explain exactly what drives the number and return real quotes within about 24 hours."),
-        ("What fees does P&M Apparel put in writing?", "A one-time $35 digitizing fee for new embroidery logos (then it's on file forever). Custom artwork at $100 per hour, with the first 30 minutes free on production orders. A 50% deposit sends your job into art. Quotes are free, and online team stores are free to set up."),
+        ("What fees does P&M Apparel put in writing?", "A $30 per-screen charge on screen printing orders below minimum. A one-time $35 digitizing fee for new embroidery logos (then it's on file forever). Custom artwork at $100 per hour, with the first 30 minutes free on production orders. A 50% deposit sends your job into art. Quotes are free, and online team stores are free to set up."),
         ("What's the cheapest way to print custom shirts?", "One ink color, one print location, a basic cotton tee, ordered at quantity on the standard 8-to-10-day timeline. Quantity is screen printing's biggest lever: per-piece pricing improves at 12, 24, 48, and 144 pieces. (Digital printing, or DTF, is the exception: it's hand-placed piece by piece, so its price stays flat at any quantity.)"),
-        ("Are there minimums?", "Screen printing minimums scale with color count: 12 pieces for 1 to 3 colors, 24 for 4 to 6, and 48 for 7 to 10. Embroidery and digital printing (DTF) have 1-piece minimums."),
+        ("Are there minimums?", "Technically, one piece. Screen printing avoids setup charges at 12 pieces for 1 to 3 colors, 24 for 4 to 6, and 48 for 7 to 10; below that, each screen carries a $30 charge. Embroidery and digital printing (DTF) have true 1-piece minimums."),
         ("Is an instant online price accurate?", "Instant calculators quote a formula, not your order. They can't see that your art needs cleanup, that a different blank saves you money, or that digital printing beats screens at your quantity. A human quote catches all three, and ours comes back in about 24 hours."),
     ]
     faq_html = "".join(
@@ -903,10 +916,11 @@ def pricing():
     <p><b>3. Print locations.</b> Front, back, sleeve: each one is a separate run through the press. A single strong front print often beats front-and-back on both budget and design.</p>
     <p><b>4. The garment itself.</b> The blank usually drives cost more than the decoration does. A basic tee, a retail-soft tee, and a hoodie can be the same print at three very different prices. We'll happily suggest a substitute blank that saves money without looking like it did.</p>
     <p><b>5. Artwork.</b> Print-ready art costs nothing extra. Art that needs recreating or designing from scratch is billed at $100 per hour, and the first 30 minutes are free with any production order, which covers most cleanup jobs entirely.</p>
-    <p><b>6. Timeline.</b> Standard turnaround is 8 to 10 business days after art approval. Rush is genuinely available (same day if garments are in stock), but the standard timeline keeps the price standard.</p>
+    <p><b>6. Timeline.</b> Standard turnaround is 8 to 10 business days after art approval, up to 12 in peak season. Rush is genuinely available (same day if garments are in stock), but the standard timeline keeps the price standard.</p>
     <h2>the fees we put in writing.</h2>
     <ul>
       <li><b>Quotes: free.</b> Back to you in about 24 hours.</li>
+      <li><b>Screen charge: $30 per screen,</b> only on screen printing orders below minimum (12 pieces for 1 to 3 colors, 24 for 4 to 6, 48 for 7 to 10).</li>
       <li><b>Embroidery digitizing: $35, once.</b> Your logo goes on file forever; reorders never pay it again.</li>
       <li><b>Custom art: $100/hr,</b> first 30 minutes free with a production order.</li>
       <li><b>Deposit: 50%</b> sends your job into art. Nothing prints before you approve a proof.</li>
@@ -941,7 +955,7 @@ def flyover():
         "@context": "https://schema.org", "@type": "EventSeries",
         "name": "Flyover Con",
         "description": "A recurring apparel decoration industry event held inside P&M Apparel's working print shop in Polk City, Iowa. Hands-on education, honest shop tours, live production, and real conversations. Built by printers, for printers. A modest registration fee keeps it accessible, with sponsors covering the rest. Held in 2024 and 2026.",
-        "url": BASE + path,
+        "url": FLYOVER_URL,
         "location": {"@type": "Place", "name": "P&M Apparel",
                      "address": {"@type": "PostalAddress", "streetAddress": ADDR,
                                  "addressLocality": CITY, "addressRegion": STATE,
@@ -954,9 +968,10 @@ def flyover():
     <h1 class="eyebrow">inside a working print shop // polk city, iowa</h1>
     <p class="mega">flyover con.</p>
     <p class="lead">Some of the best ideas in this industry don't come from the biggest cities or the biggest companies. They come from hardworking shops in the middle of the country that are willing to open their doors and share what they've learned. This is us, opening ours.</p>
+    <p class="lead"><b>{FOC_NEXT} is {FOC_NEXT_DATES}.</b> Capped at 75. Full details at <a href="{FLYOVER_URL}" style="color:#fff">flyovercon.ink</a>.</p>
     <div class="btn-row">
-      <a class="cta-btn" href="{MAILME_URL}">keep me in the loop.</a>
-      <a class="cta-btn" style="background:transparent;color:#fff" href="mailto:{FOC_EMAIL}?subject=Flyover%20Con%20sponsorship">sponsor the education.</a>
+      <a class="cta-btn" href="{MAILME_URL}">get notified for {FOC_NEXT}.</a>
+      <a class="cta-btn" style="background:transparent;color:#fff" href="{FLYOVER_URL}">visit flyovercon.ink.</a>
     </div>
   </div>
 </section>
@@ -985,12 +1000,12 @@ def flyover():
   <div class="wrap prose">
     <h2>accessible. on purpose.</h2>
     <p>Registration is a modest fee, kept intentionally low. It's not how this event makes money; it's there for buy-in, so the room is full of people who actually want to be there. Sponsors cover the rest, and sponsoring Flyover Con isn't buying ad space: it's face-to-face time with working decorators, a seat inside an authentic community event, and a direct hand in keeping industry education accessible.</p>
-    <p>If your company wants in on that, <a href="mailto:{FOC_EMAIL}?subject=Flyover%20Con%20sponsorship">let's talk sponsorship</a>.</p>
+    <p>If your company wants in on that, see the <a href="{FLYOVER_URL}sponsor">sponsor levels</a> or <a href="mailto:{FOC_EMAIL}?subject=Flyover%20Con%20sponsorship">email Ryan</a>.</p>
     <h2>why we host it.</h2>
     <p>Flyover Con is what P&amp;M stands for, turned into an event: generosity, education, transparency, and helping other decorators succeed. We'd rather grow the whole industry than guard our corner of it. Open doors beat closed playbooks.</p>
   </div>
 </section>
-{cta_band("want in on the next one?", "Join the Flyover Con list and you'll hear about dates, speakers, and registration before anyone else.", btns=f'<a class="cta-btn" href="{MAILME_URL}">join the list.</a>'f'<a class="cta-btn" style="background:transparent;color:#fff" href="mailto:{FOC_EMAIL}?subject=Flyover%20Con">email flyover con.</a>')}"""
+{cta_band(f"{FOC_NEXT}: {FOC_NEXT_DATES}.", "Get on the list and you'll hear about speakers and registration before anyone else.", btns=f'<a class="cta-btn" href="{MAILME_URL}">get notified for {FOC_NEXT}.</a>'f'<a class="cta-btn" style="background:transparent;color:#fff" href="{FLYOVER_URL}">visit flyovercon.ink.</a>')}"""
     title = "Flyover Con | An Industry Event Inside a Working Print Shop"
     desc = "Flyover Con: hands-on apparel decoration education inside P&M Apparel's working print shop in Polk City, Iowa. Honest shop tours, live production, real conversations. Modest registration fee."
     write(path, layout(path, title, desc, body,
@@ -1088,7 +1103,7 @@ def all_services():
     service_page(
         "screen-printing", "screen printing in polk&nbsp;city &amp; des&nbsp;moines.",
         "Screen Printing in Des Moines & Polk City, IA | P&M Apparel",
-        "Custom screen printing in Polk City, Iowa. Vibrant, durable prints for teams, schools, and businesses. 12-piece minimum, 8-10 day turnaround, quotes within 24 hours.",
+        "Custom screen printing for Des Moines and the metro from Polk City, Iowa. Two automatic presses, up to 10 colors, 8-10 day turnaround, quotes within 24 hours.",
         "The most cost-effective choice for larger quantities. Vibrant, durable prints that hold up to years of washing and everyday wear.",
         f"""
 <h2>built for bulk. built to last.</h2>
@@ -1117,13 +1132,20 @@ def all_services():
   <figure><img src="/assets/photos/qc-two-inspect-shirt.jpg" alt="Two team members inspecting a finished screen printed shirt" loading="lazy"><figcaption>quality check.</figcaption></figure>
   <figure><img src="/assets/photos/packing-order-table.jpg" alt="Packing a finished screen printing order at the table" loading="lazy"><figcaption>packed to go.</figcaption></figure>
 </div>
+<h2>the shop.</h2>
+<p>Two automatic presses, an 11-head and a 7-head, carry the big runs. On a one-color job we've run 450 shirts in an hour. A 4-color manual press handles short runs and specialty work, and a <a href="/services/live-printing/">mobile press</a> goes to your event and prints on site. Designs run up to 10 colors. Screen printing, embroidery, digital printing, and sublimation are all decorated in-house in Polk City; promo products are sourced through our supplier partners.</p>
+<h2>screen printing for the des moines metro.</h2>
+<p>We're in Polk City, just north of Des Moines, and we've printed for the metro since 1987. Most of our orders come from Des Moines, Ankeny, Johnston, Urbandale, West Des Moines, Grimes, Waukee, Clive, and Altoona. Pick up at the shop, have it shipped, or ask about local delivery in the metro (generally for a fee).</p>
+<p>Through <a href="/iowa-on-demand/">Iowa On Demand</a> we run year-round spirit wear stores for {IOD_COUNT} area schools, including Ankeny, Johnston, Saydel, and Dallas Center-Grimes. Local customers like the Waukee Community Schools Foundation order from us again and again, and we hold a {GBP_RATING}-star rating across {GBP_COUNT} <a href="{GBP_READ_URL}">Google reviews</a>.</p>
 <h2>the details.</h2>
 <p>Standard turnaround is 8 to 10 business days after art approval (up to 12 in peak season). We print on Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour, and more. Pantone color matching available. Every job gets a quote approval and a proof approval before anything prints.</p>
 <p class="updated">Minimums, turnaround, and pricing details current as of {UPDATED_HUMAN}.</p>""",
         faqs=[
             ("How much does screen printing cost?", "Every job is unique and quoted as such, based on quantity, number of colors and locations, and garment choice. Quotes are usually back within 24 hours. Bulk orders get better per-piece pricing."),
             ("What is the minimum order for screen printing?", "12 pieces for designs with 1 to 3 colors, 24 pieces for 4 to 6 colors, and 48 pieces for 7 to 10 colors. Below-minimum orders carry a $30 per-screen charge."),
-            ("How fast can I get my order?", "Standard turnaround is 8 to 10 business days after art approval. Rush orders are available: same day if we have the item in stock, generally next day if we need to order it."),
+            ("How fast can I get my order?", "Standard turnaround is 8 to 10 business days after art approval, up to 12 in peak season. Rush orders are available: same day if we have the item in stock, generally next day if we need to order it."),
+            ("Do you screen print for customers in Des Moines?", "Yes. We're in Polk City, just north of Des Moines, and serve the whole metro: Des Moines, Ankeny, Johnston, Urbandale, West Des Moines, Grimes, Waukee, Clive, Altoona, and beyond. Pick up at the shop, ship it, or ask about local delivery (generally for a fee)."),
+            ("How many colors can you screen print?", "Up to 10 colors per design. We run two automatic presses (11-head and 7-head), a 4-color manual press for short runs, and a mobile press for live events."),
             ("Can you print my existing logo?", "Yes. Vector files (AI, EPS, PDF) are preferred and high-res PNGs are accepted. Our in-house art department can also clean up or recreate artwork at $100 per hour, with the first 30 minutes free on most orders."),
         ], img="/assets/photos/press-loading-pink.jpg", img_alt="Loading a shirt onto the press at P&M Apparel",
         name="Screen Printing")
@@ -1848,6 +1870,9 @@ def press():
     ]
     write(path, layout(path, title, desc, body, schema))
 
+def iod_link(name):
+    return f'<a href="{IOD_URL}schools/{IOD_SLUGS[name]}/">{esc(name)}</a>'
+
 def iowa_on_demand():
     path = "/iowa-on-demand/"
     body = f"""
@@ -1862,12 +1887,12 @@ def iowa_on_demand():
   <div class="wrap prose">
     <p><a href="{IOD_URL}">Iowa On Demand</a> is P&amp;M Apparel's on-demand offshoot, built for local schools. Right now it serves {IOD_COUNT} Iowa schools, with more joining all the time. The mission: make it easier to support your school with officially licensed spirit wear that's available year-round.</p>
     <h2>the schools.</h2>
-    <p>It started with six: {", ".join(IOD_FOUNDING[:-1])}, and {IOD_FOUNDING[-1]}. In 2026, {NUM_WORDS[len(IOD_SCHOOLS)]} more joined: {", ".join(IOD_SCHOOLS[:-1])}, and {IOD_SCHOOLS[-1]}, bringing thousands more students, families, alumni, and fans on board. {NUM_WORDS[IOD_COUNT].capitalize()} schools. One place.</p>
+    <p>It started with six: {", ".join(iod_link(n) for n in IOD_FOUNDING[:-1])}, and {iod_link(IOD_FOUNDING[-1])}. In 2026, {NUM_WORDS[len(IOD_SCHOOLS)]} more joined: {", ".join(iod_link(n) for n in IOD_SCHOOLS[:-1])}, and {iod_link(IOD_SCHOOLS[-1])}, bringing thousands more students, families, alumni, and fans on board. {NUM_WORDS[IOD_COUNT].capitalize()} schools. One place.</p>
     <p>That means school communities across Polk City, Alleman, Elkhart, Ankeny, Johnston, Grimes, Dallas Center, Woodward, Granger, Perry, Huxley, Slater, Cambridge, and Des Moines can grab officially licensed gear whenever the mood strikes: no order windows, no waiting for the next fundraiser.</p>
     <h2>how it works.</h2>
     <p>Fans shop online whenever they want. Each item is produced as orders come in, decorated in-house by our team in Polk City, and shipped fast. No order windows. No leftover boxes in the booster club president's garage. Just school pride, ready when people want it.</p>
     <h2>get your district on board.</h2>
-    <p>Want your district on Iowa On Demand? <a href="{QUOTE_URL}">Reach out.</a> We can do that.</p>
+    <p>Want your district on Iowa On Demand? <a href="{IOD_ADD_SCHOOL_URL}">Add your school.</a> There's no cost to get set up. We can do that.</p>
   </div>
 </section>
 {cta_band()}"""
@@ -1997,7 +2022,7 @@ def faq_page():
         ("Do you offer discounts for schools or nonprofits?", "We don't generally offer flat discounts, but bulk orders get better per-piece pricing, and we give back through our Shirts for Scholarships program and community sponsorships."),
     ]
     items = "".join(
-        f'<details class="faq"><summary><h3>{esc(q)}</h3></summary><div class="a"><p>{esc(a)}</p></div></details>'
+        f'<details class="faq"><summary><h3>{esc(q)}</h3></summary><div class="a"><p>{esc(a).replace("customer-supplied garments guide", '<a href="/customer-supplied-garments/">customer-supplied garments guide</a>')}</p></div></details>'
         for q, a in faqs)
     body = f"""
 <section class="texture hero" style="padding:84px 0 72px">
@@ -2215,9 +2240,29 @@ PAGE_PATHS = ["/", "/pricing/", "/flyover-con/", "/blog/how-to-lower-per-shirt-c
     "/blog/its-just-a-shirt/", "/blog/its-not-just-a-shirt/",
     "/blog/what-your-print-location-says-about-you/", "/blog/shirts-in-sync/"]
 
+VERCEL_CONFIG = {
+    "trailingSlash": True,
+    "redirects": [
+        {"source": "/home", "destination": "/", "permanent": True},
+        {"source": "/quote", "destination": QUOTE_FORM, "permanent": False},
+        {"source": "/quote/", "destination": QUOTE_FORM, "permanent": False},
+    ],
+    "headers": [
+        {"source": "/(.*)",
+         "has": [{"type": "host", "value": "(.*)\\.vercel\\.app"}],
+         "headers": [{"key": "X-Robots-Tag", "value": "noindex"}]},
+    ],
+}
+
 def site_files():
     with open(os.path.join(OUT, "styles.css"), "w") as f:
         f.write(CSS)
+    # Vercel reads site/vercel.json (Root Directory = site/). Write it here and
+    # mirror it to the repo root so the two can never drift.
+    for vpath in (os.path.join(OUT, "vercel.json"), "vercel.json"):
+        with open(vpath, "w") as f:
+            json.dump(VERCEL_CONFIG, f, indent=2)
+            f.write("\n")
     urls = "".join(
         f"<url><loc>{BASE}{p}</loc><lastmod>{TODAY}</lastmod></url>" for p in PAGE_PATHS)
     with open(os.path.join(OUT, "sitemap.xml"), "w") as f:
@@ -2239,11 +2284,11 @@ def site_files():
 
 Contact: {PHONE}, {EMAIL}, {ADDR}, {CITY}, {STATE} {ZIP}. Hours: Monday-Friday 8am-5pm.
 
-Key facts: 12-piece recommended minimum for screen printing (1-piece minimums for embroidery and digital printing). Standard turnaround 8-10 business days after art approval for screen printing, embroidery, and digital printing; sublimation runs 3-4 weeks. Rush available (same day if in stock). Quotes within 24 hours. One-time $35 embroidery setup. Custom art $100/hr, first 30 minutes free with production orders. Customer-supplied garments welcome with waiver. Free online team stores (Chipply). Pantone matching available. Brands: Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour.
+Key facts: 12-piece recommended minimum for screen printing ($30 per-screen charge below minimum; 1-piece minimums for embroidery and digital printing). Two automatic screen printing presses (11-head and 7-head), a 4-color manual press, and a mobile press for live events; up to 10 colors. Standard turnaround 8-10 business days after art approval (up to 12 in peak season) for screen printing, embroidery, and digital printing; sublimation runs 3-4 weeks. Rush available (same day if in stock). Quotes within 24 hours. One-time $35 embroidery setup. Custom art $100/hr, first 30 minutes free with production orders. Customer-supplied garments welcome with waiver. Free online team stores (Chipply). Pantone matching available. Brands: Gildan, Bella+Canvas, Comfort Colors, Carhartt, Nike, Adidas, Under Armour.
 
 ## Pages
 - [How Pricing Works]({BASE}/pricing/): the six variables that move per-piece price, fees in writing
-- [Flyover Con]({BASE}/flyover-con/): low-cost apparel industry event inside P&M's working print shop
+- [Flyover Con]({FLYOVER_URL}): apparel industry conference inside P&M's working print shop; FOC27 is April 16-17, 2027
 - [Services]({BASE}/services/): all decoration methods explained
 - [Screen Printing]({BASE}/services/screen-printing/)
 - [Embroidery]({BASE}/services/embroidery/)
