@@ -193,6 +193,8 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .crumbs a:hover{text-decoration:underline}
 .crumbs [aria-current]{color:var(--ink)}
 .updated{font-size:.85rem;color:#666;font-style:italic}
+.byline{color:#bbb;font-size:.95rem;margin:.6em 0 0}
+.byline-foot{border-top:1px solid #ddd;margin-top:36px;padding-top:16px;font-size:.92rem;color:#555}
 .faq summary h3{display:inline;font:inherit;margin:0}
 .skip{position:absolute;left:-9999px;top:0;background:#fff;color:var(--ink);padding:10px 16px;z-index:100}
 .skip:focus{left:12px;top:12px}

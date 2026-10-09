@@ -12,7 +12,7 @@ GBP_WRITE_URL = f"https://search.google.com/local/writereview?placeid={GBP_PLACE
 GBP_RATING = "4.9"
 GBP_COUNT = "328"
 
-TODAY = "2026-09-22"
+TODAY = "2026-10-09"
 
 # Flyover Con lives at its own domain. /flyover-con/ here is a short intro page
 # that links out to it.
@@ -338,6 +338,8 @@ footer.site .fine{color:#9a9a9a;font-size:.85rem;margin-top:34px;border-top:1px 
 .crumbs a:hover{text-decoration:underline}
 .crumbs [aria-current]{color:var(--ink)}
 .updated{font-size:.85rem;color:#666;font-style:italic}
+.byline{color:#bbb;font-size:.95rem;margin:.6em 0 0}
+.byline-foot{border-top:1px solid #ddd;margin-top:36px;padding-top:16px;font-size:.92rem;color:#555}
 .faq summary h3{display:inline;font:inherit;margin:0}
 .skip{position:absolute;left:-9999px;top:0;background:#fff;color:var(--ink);padding:10px 16px;z-index:100}
 .skip:focus{left:12px;top:12px}
@@ -1795,7 +1797,7 @@ document.querySelectorAll(".flipcard").forEach(function(c){{
     }
     employee_schema = []
     for n, r, p, qa in TEAM:
-        entry = {"@type": "Person", "name": n, "jobTitle": r,
+        entry = {"@type": "Person", "@id": f"{BASE}/about-us/#{p}", "name": n, "jobTitle": r,
                   "image": BASE + "/assets/photos/team/" + p + ".jpg",
                   "worksFor": {"@id": BASE + "/#business"}}
         entry.update(PERSON_EXTRA.get(n, {}))
@@ -2047,6 +2049,35 @@ def faq_page():
     desc = "Answers to the questions we hear most: order minimums, screen printing and embroidery pricing factors, turnaround times, rush orders, artwork files, shipping, and more."
     write(path, layout(path, title, desc, body, [faq_schema(faqs), breadcrumbs([("Home", "/"), ("FAQ", path)])]))
 
+# Blog bylines and dates. Author is a TEAM name (Person schema, linked to
+# the About page) or None for the house byline. Dates are month precision.
+BLOG_META = {
+    "/blog/how-to-lower-per-shirt-cost/": (None, "2026-09"),
+    "/blog/screen-printing-vs-dtf/": (None, "2026-09"),
+    "/blog/embroidery-vs-screen-printing/": (None, "2026-09"),
+    "/blog/what-is-sublimation-good-for/": (None, "2026-09"),
+    "/blog/how-quotes-work/": (None, "2026-09"),
+    "/blog/its-just-a-shirt/": ("Megan Griffith", "2025-02"),
+    "/blog/its-not-just-a-shirt/": ("Megan Griffith", "2025-03"),
+    "/blog/what-your-print-location-says-about-you/": ("Ryan Toney", "2025-04"),
+    "/blog/shirts-in-sync/": ("Megan Griffith", "2025-05"),
+}
+
+# Plain titles for author schema. The About page keeps the fun ones.
+AUTHOR_SCHEMA_TITLES = {"Megan Griffith": "Art Director and Co-Owner", "Ryan Toney": "Co-Owner"}
+
+def blog_author(u):
+    """Returns (schema author, display name, role or None, human date, iso date)."""
+    name, iso = BLOG_META[u]
+    human = datetime.date.fromisoformat(iso + "-01").strftime("%B %Y")
+    if not name:
+        return {"@id": BASE + "/#business"}, "P&M Apparel", None, human, iso + "-01"
+    role, slug = next((r, s) for n, r, s, _ in TEAM if n == name)
+    person = {"@type": "Person", "@id": f"{BASE}/about-us/#{slug}", "name": name,
+              "jobTitle": AUTHOR_SCHEMA_TITLES.get(name, role), "url": BASE + "/about-us/",
+              "worksFor": {"@id": BASE + "/#business"}}
+    return person, name, role, human, iso + "-01"
+
 def blog():
     path = "/blog/"
     posts = [
@@ -2196,11 +2227,17 @@ def blog():
                        [blog_schema, breadcrumbs([("Home", "/"), ("Blog", path)])]))
     for t, u, d, b in posts:
         b = b.replace("{QUOTE_URL}", QUOTE_URL)
+        author, aname, arole, human, iso = blog_author(u)
+        byline = f"by {esc(aname)}" + (f", {esc(arole)}" if arole else "") + f" &middot; {human}"
+        if arole:
+            about_line = f'<p class="byline-foot">Written by {esc(aname)}, {esc(arole)} at P&amp;M Apparel. <a href="/about-us/">Meet the crew.</a></p>'
+        else:
+            about_line = '<p class="byline-foot">Written by the P&amp;M Apparel crew in Polk City, Iowa, family-run since 1987. <a href="/about-us/">Meet the people behind it.</a></p>'
         post_schema = {
             "@context": "https://schema.org", "@type": "BlogPosting",
             "headline": t.rstrip('.'), "url": BASE + u, "description": d,
-            "dateModified": TODAY,
-            "author": {"@type": "Organization", "name": "P&M Apparel"},
+            "datePublished": iso, "dateModified": TODAY,
+            "author": author,
             "publisher": {"@id": BASE + "/#business"},
         }
         page = f"""
@@ -2208,10 +2245,12 @@ def blog():
   <div class="wrap">
     <nav class="crumbs" style="color:#bbb" aria-label="Breadcrumb"><a style="color:#bbb" href="/">home</a> &rsaquo; <a style="color:#bbb" href="/blog/">blog</a></nav>
     <h1>{esc(t)}</h1>
+    <p class="byline">{byline}</p>
   </div>
 </section>
 <section><div class="wrap prose" style="max-width:760px">
 {b}
+{about_line}
 </div></section>
 {cta_band()}"""
         tcase = " ".join(w[:1].upper() + w[1:] for w in t.rstrip('.').split())
