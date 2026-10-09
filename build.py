@@ -1390,6 +1390,12 @@ PRESS_ARTICLES = [
     ("CITYVIEW: P&M Apparel Breaks Ground on New Building",
      "The new Polk City building, from the ground up.",
      "https://www.dmcityview.com/just-released/2020/08/17/pm-apparel-breaks-ground-on-new-building-in-polk-city/"),
+    ("Ames Tribune: P&M Apparel",
+     "A 2017 feature on the Polk City shop.",
+     "https://www.amestrib.com/story/news/local/2017/06/29/p-m-apparel-8217-s/20409887007/"),
+    ("Des Moines Register: Polk City Spotlight, P&M Apparel",
+     "The Register's 2014 profile of the shop.",
+     "https://www.desmoinesregister.com/story/news/local/ankeny/2014/09/02/polk-city-spotlight-p-m-apparel/14918903/"),
 ]
 PRESS_COLUMN = [
     ("Merch on demand in the event world", "April 2026", "https://graphics-pro.com/feature/merch-on-demand-in-the-event-world/"),
@@ -1873,6 +1879,10 @@ def press():
              {"@type": "Organization", "name": "Chipply Client Council"},
              {"@type": "Organization", "name": "Polk City Chamber of Commerce Board of Directors"},
          ]},
+        {"@context": "https://schema.org", "@type": "LocalBusiness", "@id": BASE + "/#business",
+         "subjectOf": [{"@type": "Article", "headline": h.split(": ", 1)[-1], "url": u,
+                        "publisher": {"@type": "Organization", "name": h.split(": ", 1)[0]}}
+                       for h, _, u in PRESS_ARTICLES]},
         breadcrumbs([("Home", "/"), ("Press & Recognition", path)]),
     ]
     write(path, layout(path, title, desc, body, schema))
