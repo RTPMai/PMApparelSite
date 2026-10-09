@@ -2066,6 +2066,8 @@ BLOG_META = {
 # Plain titles for author schema. The About page keeps the fun ones.
 AUTHOR_SCHEMA_TITLES = {"Megan Griffith": "Art Director and Co-Owner", "Ryan Toney": "Co-Owner"}
 
+BLOG_INDEX = []  # filled by blog(), read by site_files() for llms.txt
+
 def blog_author(u):
     """Returns (schema author, display name, role or None, human date, iso date)."""
     name, iso = BLOG_META[u]
@@ -2199,6 +2201,7 @@ def blog():
 <p>With marching bands, I ask for a set list, costume inspiration, and then spend hours listening to the music, researching the background for their theme, and really tailoring the design to something personal. I want to pick out details of the way the music moves and communicates that the musicians who have invested so many hours memorizing and performing would recognize.</p>
 <p>I also like to play with a lot of special effects, if the theme calls for it. We've done glow in the dark, UV responsive ink (changes colors in the sun), foil, 3D puff, raised gloss, glitter, all kinds of fun effects that we don't get to tap into often enough. In a world where I've got a lot of constraints in the design being more reserved or the constraint of the garment itself, these projects tend to blow that out of the water and give my artist heart joy.</p>"""),
     ]
+    BLOG_INDEX[:] = [(t, u, d) for t, u, d, b in posts]
     tiles = "".join(
         f'<a class="cell" href="{u}"><h3>{esc(t)}</h3><p class="cellsub">{esc(d)}</p></a>'
         for t, u, d, b in posts)
@@ -2340,14 +2343,18 @@ Key facts: 12-piece recommended minimum for screen printing ($30 per-screen char
 - [Sublimation]({BASE}/services/sublimation/)
 - [Live Printing]({BASE}/services/live-printing/)
 - [Online Team Stores]({BASE}/services/e-commerce/)
+- [State Tournament Shirts]({BASE}/services/state-shirts/): fast-turn state and Drake Relays gear, no rush fees
 - [Customer-Supplied Garments Guide]({BASE}/customer-supplied-garments/)
 - [Iowa On Demand]({BASE}/iowa-on-demand/)
 - [FAQ]({BASE}/faq/)
 - [About]({BASE}/about-us/)
 - [Press & Recognition]({BASE}/press/): podcasts, articles, and industry recognition
+- [Shirts for Scholarships]({BASE}/shirts-for-scholarships/): scholarships for graduating seniors
 - [Contact]({BASE}/contact/)
 - [Privacy Policy]({BASE}/privacy-policy/)
-""")
+
+## Blog
+""" + "".join(f"- [{t.rstrip('.')}]({BASE}{u}): {d}\n" for t, u, d in BLOG_INDEX))
 
 def readme():
     with open("README.md", "w") as f:
