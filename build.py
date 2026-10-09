@@ -44,7 +44,9 @@ PROMO_URL = "https://www.promoplace.com/pmapparel"
 FOC_EMAIL = "ryan@flyovercon.ink"
 # Flyover Con list signup. Lives on flyovercon.ink (writes to ConControl).
 MAILME_URL = "https://www.flyovercon.ink/notify"
-SPONSOR_URL = "https://form.jotform.com/231636854478064"
+# Donation/sponsorship requests. FormFactory form in Alliteration (Oct 2026),
+# replacing the old Jotform.
+SPONSOR_URL = "https://alliteration.pmapparel.com/f/donation-sponsorship-request"
 IOD_URL = "https://www.iowaondemand.com/"
 # Add-a-school intake. Same form the IOD site uses.
 IOD_ADD_SCHOOL_URL = "https://form.jotform.com/243246726056054"
@@ -506,7 +508,10 @@ def _external_blank_target(content):
     doesn't point at pmapparel.com. Internal links, mailto:, and tel: are untouched."""
     def repl(m):
         pre, url, post = m.group(1), m.group(2), m.group(3)
-        if "pmapparel.com" in url:
+        # Only the main site counts as internal. Subdomains like
+        # alliteration.pmapparel.com are separate apps and open in a new tab.
+        host = re.sub(r'^https?://', '', url).split('/')[0].lower()
+        if host in ("pmapparel.com", "www.pmapparel.com"):
             return m.group(0)
         attrs = pre + post
         if "target=" in attrs:
@@ -1948,7 +1953,7 @@ def privacy():
     <h2>how we use it.</h2>
     <p>Your information is used to respond to your request, quote and produce your order, and keep you updated on its status. We don't sell your information, and we don't share it with anyone outside the vendors who help us run our business.</p>
     <h2>who we share it with.</h2>
-    <p>Our quote and sponsorship forms are hosted by Jotform. Our online team stores run on Chipply. Payment processing for online stores is handled by Chipply's payment partners, not by us directly. We may also use analytics tools to understand how visitors use this site; these tools may use cookies or similar technology.</p>
+    <p>Our quote form is hosted by a third-party form service, and donation requests come in through our own internal system. Our online team stores run on Chipply. Payment processing for online stores is handled by Chipply's payment partners, not by us directly. We may also use analytics tools to understand how visitors use this site; these tools may use cookies or similar technology.</p>
     <h2>your choices.</h2>
     <p>You can ask us what information we have on file, ask us to correct it, or ask us to delete it, by emailing <a href="mailto:{EMAIL}">{EMAIL}</a>. We'll honor reasonable requests as quickly as we can.</p>
     <h2>kids.</h2>
