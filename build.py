@@ -1385,7 +1385,7 @@ PRESS_ARTICLES = [
      "A Q&A on building an inclusive shop floor.",
      MEGAN_CANVASREBEL_URL),
     ("CITY | Clean and Simple: A Seamless Apparel Process with P&M Apparel",
-     "An early look at how P&M runs a custom order start to finish.",
+     "A 2018 profile: Melvin's first embroidery machine in 1987, fundraising stores, and charity 5Ks.",
      "https://www.citycleanandsimple.com/2018/03/19/seamless-apparel-process-pm-apparel-division-city/"),
     ("CITYVIEW: P&M Apparel Breaks Ground on New Building",
      "The new Polk City building, from the ground up.",
