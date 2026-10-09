@@ -1795,7 +1795,7 @@ document.querySelectorAll(".flipcard").forEach(function(c){{
     PERSON_EXTRA = {
         "Megan Griffith": {
             "sameAs": [MEGAN_APPARELIST_URL, MEGAN_GP_AUTHOR_URL, MEGAN_CANVASREBEL_URL],
-            "award": "2024 Women in Screen Printing Award",
+            "award": ["2024 Women in Screen Printing Award", "Polk City Business Person of the Year"],
         },
         "Ryan Toney": {
             "sameAs": [RYAN_BOD_URL],
@@ -1836,8 +1836,8 @@ def press():
   <div class="wrap">
   <div class="prose">
     <h2>recognition.</h2>
-    <p>In 2024, Megan Griffith won the <a href="{MEGAN_AWARD_URL}" target="_blank" rel="noopener">Women in Screen Printing Award</a> from Screen Printing Mag. She was also part of the magazine's inaugural <a href="{MEGAN_RISING_STARS_URL}" target="_blank" rel="noopener">Rising Stars</a> class. She sits on the <a href="{MEGAN_APPARELIST_URL}" target="_blank" rel="noopener">Apparelist Advisory Board</a> and writes a recurring column for <a href="{MEGAN_GP_AUTHOR_URL}" target="_blank" rel="noopener">GRAPHICS PRO</a>.</p>
-    <p>Ryan Toney was a member of the <a href="{RYAN_BOD_URL}" target="_blank" rel="noopener">Gildan Board of Decorators</a> and founded <a href="/flyover-con/">Flyover Con</a>, an industry conference hosted right on our production floor. He was named Polk City Business Person of the Year, and currently serves on Chipply's Client Council and the Polk City Chamber of Commerce Board of Directors.</p>
+    <p>In 2024, Megan Griffith won the <a href="{MEGAN_AWARD_URL}" target="_blank" rel="noopener">Women in Screen Printing Award</a> from Screen Printing Mag. She was also part of the magazine's inaugural <a href="{MEGAN_RISING_STARS_URL}" target="_blank" rel="noopener">Rising Stars</a> class. She sits on the <a href="{MEGAN_APPARELIST_URL}" target="_blank" rel="noopener">Apparelist Advisory Board</a> and writes a recurring column for <a href="{MEGAN_GP_AUTHOR_URL}" target="_blank" rel="noopener">GRAPHICS PRO</a>. She was also named Polk City Business Person of the Year.</p>
+    <p>Ryan Toney was a member of the <a href="{RYAN_BOD_URL}" target="_blank" rel="noopener">Gildan Board of Decorators</a> and founded <a href="/flyover-con/">Flyover Con</a>, an industry conference hosted right on our production floor. He currently serves on Chipply's Client Council and the Polk City Chamber of Commerce Board of Directors.</p>
   </div>
   </div>
 </section>
@@ -1870,7 +1870,7 @@ def press():
          "url": BASE + path, "name": title, "about": {"@id": BASE + "/#business"}},
         {"@context": "https://schema.org", "@type": "Person", "name": "Megan Griffith",
          "jobTitle": "Art Director & Owner", "worksFor": {"@id": BASE + "/#business"},
-         "award": "2024 Women in Screen Printing Award",
+         "award": ["2024 Women in Screen Printing Award", "Polk City Business Person of the Year"],
          "sameAs": [MEGAN_APPARELIST_URL, MEGAN_GP_AUTHOR_URL, MEGAN_CANVASREBEL_URL]},
         {"@context": "https://schema.org", "@type": "Person", "name": "Ryan Toney",
          "jobTitle": "Owner", "worksFor": {"@id": BASE + "/#business"},
