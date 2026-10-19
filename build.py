@@ -1981,6 +1981,77 @@ def privacy():
     desc = "How P&M Apparel collects, uses, and protects the information you share with us through quote requests, sponsorship forms, and online team stores."
     write(path, layout(path, title, desc, body, breadcrumbs([("Home", "/"), ("Privacy Policy", path)]), noindex=False))
 
+SMS_EFFECTIVE = "October 19, 2026"
+
+def sms_privacy():
+    # Hidden page: noindex, not in sitemap, llms.txt, nav, or footer.
+    # Exists for carrier / messaging platform (10DLC) registration.
+    path = "/SMS-Privacy/"
+    bullets = "".join(f"<li>{esc(b)}</li>" for b in [
+        "Responding to customer inquiries",
+        "Order status updates",
+        "Artwork, design, or proof coordination",
+        "Scheduling pickups, deliveries, or appointments",
+        "Product availability or production updates",
+        "Project and order coordination",
+        "Account-related communications",
+        "Customer service and support",
+        "Other routine business communications requested or expected by the recipient",
+    ])
+    body = f"""
+<section class="texture hero" style="padding:84px 0 72px">
+  <div class="wrap">
+    <h1>P&amp;M Apparel SMS Privacy Policy</h1>
+    <p class="lead">Effective Date: {SMS_EFFECTIVE}</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+  <div class="prose">
+    <p>P&amp;M Apparel (&ldquo;P&amp;M Apparel,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) respects the privacy of our customers, prospective customers, vendors, business contacts, and website visitors. This SMS Privacy Policy explains how we collect, use, and protect information associated with text messaging communications.</p>
+    <h2>Information We Collect</h2>
+    <p>When you communicate with P&amp;M Apparel by SMS or provide your mobile telephone number to us, we may collect information such as your name, mobile telephone number, business or organization name, order or project information, and the contents of communications exchanged with us.</p>
+    <p>We may also collect information necessary to respond to customer questions, coordinate orders, schedule pickups or deliveries, provide product or production updates, and manage our normal business relationship with you.</p>
+    <h2>How We Use SMS Information</h2>
+    <p>P&amp;M Apparel may use SMS messaging for individual, person-to-person business communications, including:</p>
+    <ul>{bullets}</ul>
+    <p>P&amp;M Apparel does not use this SMS program for unsolicited bulk marketing or mass promotional messaging.</p>
+    <p>Message frequency varies. Message and data rates may apply.</p>
+    <h2>Mobile Information and SMS Consent</h2>
+    <p>Mobile phone numbers, SMS opt-in information, and SMS consent information will not be sold, rented, or shared with third parties for their own marketing or promotional purposes.</p>
+    <p>We may provide information to telecommunications carriers, messaging platforms, technology providers, and other service providers only as reasonably necessary to operate and deliver our SMS messaging service.</p>
+    <p>SMS consent is not transferred to third parties for independent marketing purposes.</p>
+    <h2>Opting Out</h2>
+    <p>You may stop receiving SMS messages from P&amp;M Apparel at any time by replying STOP.</p>
+    <p>After an opt-out request is processed, you will no longer receive SMS messages from the applicable P&amp;M Apparel number unless you later provide consent to resume messaging.</p>
+    <p>You may reply HELP for assistance.</p>
+    <h2>Information Sharing</h2>
+    <p>P&amp;M Apparel does not sell personal information.</p>
+    <p>We may share limited information with service providers that assist us in operating our business, processing orders, delivering communications, providing technology services, or complying with legal requirements.</p>
+    <p>Information may also be disclosed when required by law, court order, legal process, or when reasonably necessary to protect P&amp;M Apparel, our customers, or others.</p>
+    <h2>Data Security</h2>
+    <p>P&amp;M Apparel uses reasonable administrative, technical, and organizational safeguards designed to protect information from unauthorized access, misuse, loss, disclosure, alteration, or destruction.</p>
+    <p>No method of electronic transmission or storage can be guaranteed to be completely secure.</p>
+    <h2>Data Retention</h2>
+    <p>We retain information only for as long as reasonably necessary to provide services, maintain business records, fulfill contractual obligations, resolve disputes, and comply with applicable legal or regulatory requirements.</p>
+    <h2>Changes to This Policy</h2>
+    <p>P&amp;M Apparel may update this SMS Privacy Policy periodically to reflect changes in our business practices, services, technology, or legal requirements.</p>
+    <p>The effective date above indicates when this policy was most recently updated.</p>
+    <h2>Contact P&amp;M Apparel</h2>
+    <p>For questions regarding this SMS Privacy Policy or P&amp;M Apparel SMS communications, contact:</p>
+    <p>P&amp;M Apparel<br>
+    {ADDR}<br>
+    {CITY}, {STATE} {ZIP}<br>
+    <a href="mailto:{EMAIL}">{EMAIL}</a><br>
+    <a href="tel:{PHONE_TEL}">{PHONE}</a><br>
+    <a href="/">www.pmapparel.com</a></p>
+  </div>
+  </div>
+</section>"""
+    title = "SMS Privacy Policy | P&M Apparel"
+    desc = "How P&M Apparel collects, uses, and protects information associated with SMS text messaging, including consent, opt-out, and sharing practices."
+    write(path, layout(path, title, desc, body, breadcrumbs([("Home", "/"), ("SMS Privacy Policy", path)]), noindex=True))
+
 def contact():
     path = "/contact/"
     body = f"""
@@ -2303,6 +2374,8 @@ VERCEL_CONFIG = {
         {"source": "/home", "destination": "/", "permanent": True},
         {"source": "/quote", "destination": QUOTE_FORM, "permanent": False},
         {"source": "/quote/", "destination": QUOTE_FORM, "permanent": False},
+        {"source": "/sms-privacy", "destination": "/SMS-Privacy/", "permanent": True},
+        {"source": "/sms-privacy/", "destination": "/SMS-Privacy/", "permanent": True},
     ],
     "headers": [
         {"source": "/(.*)",
@@ -2414,6 +2487,7 @@ if __name__ == "__main__":
     iowa_on_demand()
     scholarships()
     privacy()
+    sms_privacy()
     contact()
     faq_page()
     blog()

@@ -15,6 +15,16 @@
       "source": "/quote/",
       "destination": "https://wkf.ms/3WiETfm",
       "permanent": false
+    },
+    {
+      "source": "/sms-privacy",
+      "destination": "/SMS-Privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/sms-privacy/",
+      "destination": "/SMS-Privacy/",
+      "permanent": true
     }
   ],
   "headers": [

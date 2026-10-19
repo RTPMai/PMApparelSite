@@ -42,11 +42,15 @@ def url_for(path):
 
 titles, descs = defaultdict(list), defaultdict(list)
 built = set()
+noindexed = set()
 
 for path, html in pages():
     url = url_for(path)
     if not path.endswith("404.html"):
-        built.add(url)
+        if re.search(r'<meta name="robots" content="noindex">', html):
+            noindexed.add(url)   # hidden pages stay out of the sitemap
+        else:
+            built.add(url)
 
     # 1. placeholder links
     if re.search(r'href\s*=\s*"#"', html):
@@ -105,7 +109,9 @@ else:
     listed = {u.replace(BASE, "") or "/" for u in re.findall(r"<loc>(.*?)</loc>", sm)}
     for u in sorted(built - listed):
         fail(f"built but not in sitemap: {u}")
-    for u in sorted(listed - built):
+    for u in sorted(listed & noindexed):
+        fail(f"noindex page listed in sitemap: {u}")
+    for u in sorted(listed - built - noindexed):
         fail(f"in sitemap but not built: {u}")
 
 # also check non-html assets for em dashes
